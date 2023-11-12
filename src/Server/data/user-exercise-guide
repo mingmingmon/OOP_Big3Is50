@@ -3,10 +3,7 @@ line = file.readLine();
 
 string date
 string id
+int n;
 
-boolean cardio
-if(cardio)
-    speed, slope, time, cal
-
-while(!line.hasNext())
-    exerciseName, weight, count
+For(n)
+    exerciseType(유: 1, 무: 2), exerciseName, weight, count
