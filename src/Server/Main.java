@@ -21,6 +21,7 @@ public class Main {
             User user = new User();
             user.scan(file);
             userList.add(user);
+            System.out.println("asdf");
         }
     }
     void printUserList() {
