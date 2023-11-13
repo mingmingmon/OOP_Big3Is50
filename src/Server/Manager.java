@@ -7,6 +7,12 @@ import java.util.Scanner;
 public class Manager <T extends Data> {
     ArrayList<T> dataList = new ArrayList<>();
 
+    void scan(Scanner file, Factory<T> factory) {
+        T data = factory.create();
+        data.scan(file);
+        dataList.add(data);
+    }
+
     void scanAll(String relativePath, Factory<T> factory) {
         Scanner file = openFile(relativePath);
         while (file.hasNext()) {
@@ -17,7 +23,7 @@ public class Manager <T extends Data> {
     }
     void printAll() {
         for (T data : dataList)
-            System.out.println(data);
+            data.print();
     }
 
     Scanner openFile(String relativePath) {

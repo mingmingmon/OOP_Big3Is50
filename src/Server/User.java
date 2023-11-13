@@ -2,7 +2,7 @@ package Server;
 
 import java.util.Scanner;
 
-public class User implements Data{
+public class User implements Data {
     String id; // id가 기본키다.
     String password;
 
@@ -19,6 +19,11 @@ public class User implements Data{
         nickname = file.next();
         phone = file.next();
         gender = file.next().equals("1");
+    }
+    @Override
+    public void print() {
+        System.out.printf("%s %s %s %s %s %s\n",
+                id, password, name, nickname, phone, (gender ? "여성" : "남성"));
     }
     @Override
     public String toString() {

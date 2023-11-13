@@ -1,7 +1,7 @@
 한 줄당
-line = file.readLine();
 
-string date
+string logDate
+string logTime
 string id
 int n;
 
