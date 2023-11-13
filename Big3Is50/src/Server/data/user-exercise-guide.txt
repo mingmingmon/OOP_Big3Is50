@@ -1,0 +1,12 @@
+한 줄당
+line = file.readLine();
+
+string date
+string id
+
+boolean cardio
+if(cardio)
+    speed, slope, time, cal
+
+while(!line.hasNext())
+    exerciseName, weight, count
