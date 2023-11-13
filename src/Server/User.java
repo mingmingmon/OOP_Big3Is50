@@ -9,7 +9,7 @@ public class User implements Data {
     String name;
     String nickname;
     String phone;
-    boolean gender; // 남자 0, 여자 1
+    int gender; // 남자 0, 여자 1
 
     Manager<ExerciseLog> myExerciseLogManager = new Manager<>();
 
@@ -20,20 +20,21 @@ public class User implements Data {
         name = file.next();
         nickname = file.next();
         phone = file.next();
-        gender = file.next().equals("1");
+        gender = file.nextInt();
 
         Main.userHashMap.put(id, this);
     }
     @Override
     public void print() {
         System.out.printf("%s %s %s %s %s %s\n",
-                id, password, name, nickname, phone, (gender ? "여성" : "남성"));
+                id, password, name, nickname, phone, (gender == 0 ? "남성" : "여성"));
     }
     @Override
     public String toString() {
-        return String.format("%s %s %s %s %s %s",
-                id, password, name, nickname, phone, (gender ? "여성" : "남성"));
+        return String.format("%s %s %s %s %s %d",
+                id, password, name, nickname, phone, gender);
     }
+
     void PrintMyExerciseLog() {
         System.out.printf("%s 회원님의 운동 기록\n", nickname);
         myExerciseLogManager.printAll();
