@@ -1,4 +1,0 @@
-한 줄당
-date
-id
-weight muscle fat
