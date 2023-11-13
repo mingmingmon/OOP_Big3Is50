@@ -6,18 +6,16 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class Main {
-    HashMap<String, User> userHashMap = new HashMap<>();
-    Manager<User> userManager = new Manager<>();
-    Manager<ExerciseLog> exerciseLogManager = new Manager<>();
+    static HashMap<String, User> userHashMap = new HashMap<>();
+    Manager<User> userManager = new Manager<>("data/user-data.txt", () -> new User());
+    Manager<ExerciseLog> exerciseLogManager = new Manager<>("data/user-exercise-log.txt", () -> new ExerciseLog());
 
     void run() {
-        scanAllFile();
         userManager.printAll();
-        exerciseLogManager.printAll();
-    }
-    void scanAllFile() {
-        userManager.scanAll("data/user-data.txt", () -> new User());
-        exerciseLogManager.scanAll("data/user-exercise-log.txt", () -> new ExerciseLog());
+        for (String key : userHashMap.keySet()) {
+            User user = userHashMap.get(key);
+            user.PrintMyExerciseLog();
+        }
     }
 
     public static void main(String[] args) {
