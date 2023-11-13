@@ -7,28 +7,26 @@ import java.util.Scanner;
 
 public class Main {
     static HashMap<String, User> userHashMap = new HashMap<>();
-    Manager<User> userManager = new Manager<>("data\\user-data.txt", () -> new User());
+    Manager<UserData> userDataManager = new Manager<>("data\\user-data.txt", () -> new UserData());
     Manager<ExerciseLog> exerciseLogManager = new Manager<>("data\\user-exercise-log.txt", () -> new ExerciseLog());
+    Manager<Program> programManager = new Manager<>("data\\program-data.txt", () -> new Program());
 
     void run() {
-        //userManager.printAll();
-        for (String key : userHashMap.keySet()) {
+        System.out.println("---------회원정보-------------");
+        userDataManager.printAll();
+        System.out.println("---------운동기록-------------");
+        exerciseLogManager.printAll();
+        System.out.println("---------회원별 운동기록-------------");
+        for (String key : userHashMap.keySet()) { // 회원 별 운동 기록 출력. 회원 읽고 운동기록 읽어야 출력 가능.
             User user = userHashMap.get(key);
-            //user.PrintMyExerciseLog();
-
-            //System.out.println(user);
+            user.PrintMyExerciseLog();
         }
-
-        System.out.println(userManager);
-        System.out.println(exerciseLogManager);
-
-//        for (ExerciseLog exerciseLog : exerciseLogManager.dataList) {
-//            System.out.println(exerciseLog);
-//        }
+        System.out.println("---------프로그램정보-------------");
+        programManager.printAll();
         finishProgram();
     }
     void finishProgram() {
-        userManager.saveFile();
+        userDataManager.saveFile();
         exerciseLogManager.saveFile();
     }
     public static void main(String[] args) {
