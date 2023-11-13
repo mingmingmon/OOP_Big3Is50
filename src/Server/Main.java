@@ -5,40 +5,18 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
-    //Manager<User> userManager = new Manager<>();
-    ArrayList<User> userList = new ArrayList<>();
+    Manager<User> userManager = new Manager<>();
+    Manager<ExerciseLog> exerciseLogManager = new Manager<>();
 
     void run() {
         scanAllFile();
-        printUserList();
+        userManager.printAll();
     }
     void scanAllFile() {
-        scanUserFile();
-    }
-    void scanUserFile() {
-        Scanner file = openFile("data/user-data.txt");
-        while (file.hasNext()) {
-            User user = new User();
-            user.scan(file);
-            userList.add(user);
-        }
-    }
-    void printUserList() {
-        for (User user : userList)
-            System.out.println(user);
+        userManager.scanAll("data/user-data.txt", () -> new User());
+        exerciseLogManager.scanAll("data/user-exercise-log.txt", () -> new ExerciseLog());
     }
 
-    Scanner openFile(String relativePath) {
-        String absolutePath = Main.class.getResource("").getPath() + relativePath;
-        Scanner file = null;
-        try {
-            file = new Scanner(new File(absolutePath));
-        } catch (Exception e) {
-            System.out.printf("파일 오픈 실패: %s\n", absolutePath);
-            System.exit(0);
-        }
-        return file;
-    }
 
     public static void main(String[] args) {
         Main program = new Main();
