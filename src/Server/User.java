@@ -11,6 +11,8 @@ public class User implements Data {
     String phone;
     boolean gender; // 남자 0, 여자 1
 
+    Manager<ExerciseLog> myExerciseLogManager = new Manager<>();
+
     @Override
     public void scan(Scanner file) {
         id = file.next();
@@ -19,6 +21,8 @@ public class User implements Data {
         nickname = file.next();
         phone = file.next();
         gender = file.next().equals("1");
+
+        Main.userHashMap.put(id, this);
     }
     @Override
     public void print() {
@@ -29,5 +33,9 @@ public class User implements Data {
     public String toString() {
         return String.format("%s %s %s %s %s %s",
                 id, password, name, nickname, phone, (gender ? "여성" : "남성"));
+    }
+    void PrintMyExerciseLog() {
+        System.out.printf("%s 회원님의 운동 기록\n", nickname);
+        myExerciseLogManager.printAll();
     }
 }
