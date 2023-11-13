@@ -2,7 +2,7 @@ package Server;
 
 import java.util.Scanner;
 
-public interface Data{
+public interface Data {
     public void scan(Scanner scanner);
     public void print();
     // print()와 toString을 분리하자.

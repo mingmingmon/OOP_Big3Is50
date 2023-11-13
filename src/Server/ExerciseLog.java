@@ -13,8 +13,6 @@ public class ExerciseLog implements Data {
 
     Manager<Exercise> exerciseManager = new Manager<>();
 
-    //ArrayList<Exercise> exerciseList = new ArrayList<>();
-
     @Override
     public void scan(Scanner file) {
         logDate = file.next();
@@ -30,10 +28,18 @@ public class ExerciseLog implements Data {
         User user = Main.userHashMap.get(userID);
         user.myExerciseLogManager.dataList.add(this);
     }
-
     @Override
     public void print() {
         System.out.printf("%s %s %s\n", logDate, logTime, userID);
         exerciseManager.printAll();
+    }
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder();
+        result.append(String.format("%s %s %s %d", logDate, logTime, userID, n) + " ");
+        for (Exercise exercise : exerciseManager.dataList)
+            result.append(exercise + " ");
+        result.deleteCharAt(result.length() - 1);
+        return result.toString();
     }
 }

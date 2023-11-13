@@ -15,4 +15,8 @@ public class Exercise implements Data {
     public void print() {
         System.out.printf("%s %s\n", (exerciseType == 1 ? "유산소" : "무산소"), name);
     }
+    @Override
+    public String toString() {
+        return String.format("%d %s", exerciseType, name);
+    }
 }
