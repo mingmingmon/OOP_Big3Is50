@@ -11,7 +11,7 @@ public class Program implements Data{
     String endTime;
     int n;
 
-    Manager<User> members = new Manager<>();
+    Manager<User> membersManager = new Manager<>();
 
     @Override
     public void scan(Scanner file) {
@@ -23,13 +23,15 @@ public class Program implements Data{
         n = file.nextInt();
 
         for (int i = 0; i < n; i++) {
-            String userName = file.next();
+            String userID = file.next();
+            User user = Main.userHashMap.get(userID);
+            membersManager.dataList.add(user);
         }
-
     }
 
     @Override
     public void print() {
-
+        System.out.printf("%s %s %s %s\n", name, date, startTime, endTime);
+        membersManager.printAll();
     }
 }

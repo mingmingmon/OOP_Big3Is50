@@ -3,6 +3,8 @@ package Server;
 import java.util.Scanner;
 
 public class User implements Data {
+    int userType; //일반회원 1, 트레이너 2
+
     String id; // id가 기본키다.
     String password;
 
@@ -10,6 +12,10 @@ public class User implements Data {
     String nickname;
     String phone;
     boolean gender; // 남자 0, 여자 1
+
+
+    Manager<ExerciseLog> myExerciseLogManager = new Manager<>();
+    Manager<Program> myProgram = new Manager<>();
 
     @Override
     public void scan(Scanner file) {
@@ -29,5 +35,16 @@ public class User implements Data {
     public String toString() {
         return String.format("%s %s %s %s %s %s",
                 id, password, name, nickname, phone, (gender ? "여성" : "남성"));
+    }
+
+    void PrintMyExerciseLog() {
+        System.out.printf("%s 회원님의 운동 기록\n", nickname);
+        myExerciseLogManager.printAll();
+    }
+
+    public void printMyProgram(){
+        for(Program program : myProgram.dataList){
+            program.print();
+        }
     }
 }

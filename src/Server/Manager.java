@@ -7,6 +7,12 @@ import java.util.Scanner;
 public class Manager <T extends Data> {
     ArrayList<T> dataList = new ArrayList<>();
 
+    Manager() {
+
+    }
+    Manager(String relativePath, Factory<T> factory) {
+        scanAll(relativePath, factory);
+    }
     void scan(Scanner file, Factory<T> factory) {
         T data = factory.create();
         data.scan(file);

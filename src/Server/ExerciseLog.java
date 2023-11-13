@@ -13,8 +13,6 @@ public class ExerciseLog implements Data {
 
     Manager<Exercise> exerciseManager = new Manager<>();
 
-    //ArrayList<Exercise> exerciseList = new ArrayList<>();
-
     @Override
     public void scan(Scanner file) {
         logDate = file.next();
@@ -26,6 +24,9 @@ public class ExerciseLog implements Data {
             int exerciseType = file.nextInt();
             exerciseManager.scan(file, () -> (exerciseType == 1 ? new Cardio() : new Anaerobic()));
         }
+
+        User user = Main.userHashMap.get(userID);
+        user.myExerciseLogManager.dataList.add(this);
     }
 
     @Override
