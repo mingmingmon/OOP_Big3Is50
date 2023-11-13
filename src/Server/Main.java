@@ -9,6 +9,7 @@ public class Main {
     HashMap<String, User> userHashMap = new HashMap<>();
     Manager<User> userManager = new Manager<>();
     Manager<ExerciseLog> exerciseLogManager = new Manager<>();
+    Manager<Program> programManager = new Manager<>();
 
     void run() {
         scanAllFile();
@@ -18,6 +19,7 @@ public class Main {
     void scanAllFile() {
         userManager.scanAll("data/user-data.txt", () -> new User());
         exerciseLogManager.scanAll("data/user-exercise-log.txt", () -> new ExerciseLog());
+        programManager.scanAll("data/program-data.txt", () -> new Program());
     }
 
     public static void main(String[] args) {
