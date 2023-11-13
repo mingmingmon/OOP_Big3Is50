@@ -20,14 +20,17 @@ public class Trainer extends User implements Data {
     public void print(){
         super.print();
         for(String award : awards){
-            System.out.print(award + " ");
+            System.out.print("\t" + award + " ");
         }
         System.out.println("\n");
     }
 
-    public void printMyProgram(){
-        for(Program program : myProgram.dataList){
-            program.print();
+    boolean hasProgram(){
+        if(myProgram.dataList == null){
+            System.out.println("신청한 프로그램이 없습니다. 프로그램 신청페이지로 이동합니다.\n");
+            return false;
         }
+        printMyProgram();
+        return true;
     }
 }

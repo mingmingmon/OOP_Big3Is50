@@ -30,6 +30,7 @@ public class User implements Data {
     public void print() {
         System.out.printf("%s %s %s %s %s %s\n",
                 id, password, name, nickname, phone, (gender ? "여성" : "남성"));
+        printMyProgram();
     }
     @Override
     public String toString() {
@@ -37,14 +38,16 @@ public class User implements Data {
                 id, password, name, nickname, phone, (gender ? "여성" : "남성"));
     }
 
-    void PrintMyExerciseLog() {
+    public void PrintMyExerciseLog() {
         System.out.printf("%s 회원님의 운동 기록\n", nickname);
         myExerciseLogManager.printAll();
     }
 
     public void printMyProgram(){
         for(Program program : myProgram.dataList){
-            program.print();
+            //program.print(); 이거 하면 스택 오버플로우 남.
+            System.out.printf("\t");
+            System.out.println(program.name + " " + program.date);
         }
     }
 }
