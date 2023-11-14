@@ -1,17 +1,14 @@
 package Server;
 
-import java.io.File;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Scanner;
 
 public class Main {
     static String today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd")).toString();
 
     static HashMap<String, User> userHashMap = new HashMap<>();
-    static Ranking ranking = new Ranking();
+    static Ranking rankingSystem = new Ranking();
 
     Manager<UserData> userDataManager = new Manager<>("data\\user-data.txt", () -> new UserData());
     Manager<ExerciseLog> exerciseLogManager = new Manager<>("data\\user-exercise-log.txt", () -> new ExerciseLog());
@@ -21,8 +18,6 @@ public class Main {
     //Me me = new Me("..\\Client\\my-info.txt");
 
     void run() {
-        ranking.sort();
-        ranking.printBig3();
 //        System.out.println("---------회원정보-------------");
 //        userDataManager.printAll();
 //        System.out.println("---------운동기록-------------");
