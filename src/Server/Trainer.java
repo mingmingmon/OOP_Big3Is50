@@ -37,10 +37,4 @@ public class Trainer extends User implements Data {
         result.deleteCharAt(result.length() - 1);
         return result.toString();
     }
-
-    public void printMyProgram(){
-        for(Program program : myProgram.dataList){
-            program.print();
-        }
-    }
 }

@@ -27,12 +27,21 @@ public class Program implements Data {
             String userID = file.next();
             User user = Main.userHashMap.get(userID);
             membersManager.dataList.add(user);
+            user.myProgramManager.dataList.add(this);
         }
     }
-
     @Override
     public void print() {
         System.out.printf("%s %s %s %s\n", name, date, startTime, endTime);
         membersManager.printAll();
+    }
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder();
+        result.append(String.format("%s %s %s %s %d ", name, date, startTime, endTime, n));
+        for(User user : membersManager.dataList)
+            result.append(user.id + " ");
+        result.deleteCharAt(result.length() - 1);
+        return result.toString();
     }
 }

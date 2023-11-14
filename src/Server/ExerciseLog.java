@@ -30,7 +30,7 @@ public class ExerciseLog implements Data {
     }
     @Override
     public void print() {
-        System.out.printf("%s %s %s\n", logDate, logTime, userID);
+        System.out.printf("[%s] %s %s\n", logDate, logTime, userID);
         exerciseManager.printAll();
     }
     @Override

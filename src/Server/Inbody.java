@@ -20,11 +20,17 @@ public class Inbody implements Data {
         weight = file.nextInt();
         muscle = file.nextInt();
         fat = file.nextInt();
+
+        User user = Main.userHashMap.get(userID);
+        user.myInbodyManager.dataList.add(this);
     }
     @Override
     public void print() {
         System.out.printf("%s %s %s\n 체중: %d\n골격근량: %d\n지방: %d\n",
                 date, time, userID, weight, muscle, fat);
     }
-
+    @Override
+    public String toString() {
+        return String.format("%s %s %s %d %d %d", date, time, userID, weight, muscle, fat);
+    }
 }

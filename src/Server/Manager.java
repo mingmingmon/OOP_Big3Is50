@@ -39,7 +39,9 @@ public class Manager <T extends Data> {
         StringBuilder result = new StringBuilder();
         for (T data : dataList)
             result.append(data + "\n");
-        result.deleteCharAt(result.length() - 1);
+
+        if(!result.isEmpty())
+            result.deleteCharAt(result.length() - 1);
         return result.toString();
     }
 
@@ -56,7 +58,7 @@ public class Manager <T extends Data> {
         }
     }
 
-    String getAbsolutePath(String relativePath) {
+    static String getAbsolutePath(String relativePath) {
         return System.getProperty("user.dir") + "\\src\\Server\\" + relativePath;
     }
 

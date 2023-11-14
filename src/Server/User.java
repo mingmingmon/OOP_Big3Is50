@@ -14,7 +14,8 @@ public class User implements Data {
     int gender; // 남자 0, 여자 1
 
     Manager<ExerciseLog> myExerciseLogManager = new Manager<>();
-    Manager<Program> myProgram = new Manager<>();
+    Manager<Inbody> myInbodyManager = new Manager<>();
+    Manager<Program> myProgramManager = new Manager<>();
 
     @Override
     public void scan(Scanner file) {
@@ -26,6 +27,7 @@ public class User implements Data {
         gender = file.nextInt();
 
         Main.userHashMap.put(id, this);
+        Main.ranking.addUser(this);
     }
     @Override
     public void print() {
@@ -43,8 +45,30 @@ public class User implements Data {
         myExerciseLogManager.printAll();
     }
     public void printMyProgram(){
-        for(Program program : myProgram.dataList){
+        for(Program program : myProgramManager.dataList){
             program.print();
         }
     }
+
+    public int getBig3() {
+        int squat = 0;
+        int benchPress = 0;
+        int deadLift = 0;
+
+        for (ExerciseLog exerciseLog : myExerciseLogManager.dataList) {
+            if(!Main.isThisMonth(exerciseLog.logDate))
+                continue;
+
+            for (Exercise exercise : exerciseLog.exerciseManager.dataList) {
+                if (exercise.name.contentEquals("스쿼트"))
+                    squat = Math.max(squat, ((Anaerobic)exercise).kg);
+                if (exercise.name.contentEquals("벤치프레스"))
+                    benchPress = Math.max(squat, ((Anaerobic)exercise).kg);
+                if (exercise.name.contentEquals("데드리프트"))
+                    deadLift = Math.max(squat, ((Anaerobic)exercise).kg);
+            }
+        }
+        return squat + benchPress + deadLift;
+    }
+
 }
