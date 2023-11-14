@@ -26,7 +26,7 @@ public class Inbody implements Data {
     }
     @Override
     public void print() {
-        System.out.printf("%s %s %s\n 체중: %d\n골격근량: %d\n지방: %d\n",
+        System.out.printf("[%s] %s %s 체중(%dkg) 골격근량(%dkg) 체지방량(%dkg)\n",
                 date, time, userID, weight, muscle, fat);
     }
     @Override

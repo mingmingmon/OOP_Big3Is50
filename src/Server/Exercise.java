@@ -13,7 +13,7 @@ public class Exercise implements Data {
     }
     @Override
     public void print() {
-        System.out.printf("%s %s\n", (exerciseType == 1 ? "유산소" : "무산소"), name);
+        System.out.printf("[%s산소] %s: ", (exerciseType == 1 ? "유" : "무"), name);
     }
     @Override
     public String toString() {

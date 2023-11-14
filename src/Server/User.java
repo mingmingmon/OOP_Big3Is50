@@ -1,6 +1,7 @@
 package Server;
 
-import java.util.Scanner;
+import javax.swing.*;
+import java.util.*;
 
 public class User implements Data {
     int userType;
@@ -17,6 +18,8 @@ public class User implements Data {
     Manager<Inbody> myInbodyManager = new Manager<>();
     Manager<Program> myProgramManager = new Manager<>();
 
+    HashMap<String, Integer> rankValue = new HashMap<>();
+
     @Override
     public void scan(Scanner file) {
         id = file.next();
@@ -27,12 +30,16 @@ public class User implements Data {
         gender = file.nextInt();
 
         Main.userHashMap.put(id, this);
-        Main.ranking.addUser(this);
+        Main.rankingSystem.addUser(this);
     }
     @Override
     public void print() {
-        System.out.printf("%s %s %s %s %s %s\n",
-                id, password, name, nickname, phone, (gender == 0 ? "남성" : "여성"));
+        System.out.printf("[%s] %s %s %s %s %s %s\n",
+                (userType == 1 ? "일반 회원" : "트레이너"), id, password,
+                name, nickname, phone, (gender == 0 ? "남성" : "여성"));
+        printMyExerciseLog();
+        printMyInbodyLog();
+        printMyProgram();
     }
     @Override
     public String toString() {
@@ -40,14 +47,17 @@ public class User implements Data {
                 userType, id, password, name, nickname, phone, gender);
     }
 
-    void PrintMyExerciseLog() {
+    void printMyExerciseLog() {
         System.out.printf("%s 회원님의 운동 기록\n", nickname);
         myExerciseLogManager.printAll();
     }
+    void printMyInbodyLog() {
+        System.out.printf("%s 회원님의 운동 기록\n", nickname);
+        myInbodyManager.printAll();
+    }
     public void printMyProgram(){
-        for(Program program : myProgramManager.dataList){
-            program.print();
-        }
+        System.out.printf("%s 회원님의  기록\n", nickname);
+        myProgramManager.printAll();
     }
 
     public int getBig3() {
@@ -68,7 +78,66 @@ public class User implements Data {
                     deadLift = Math.max(squat, ((Anaerobic)exercise).kg);
             }
         }
-        return squat + benchPress + deadLift;
+        int result = squat + benchPress + deadLift;
+        rankValue.put("3대왕", result);
+        return result;
     }
+    public int getPowerUp() {
+        int firstMuscle = -1;
+        int lastMuscle = 0;
 
+        for (Inbody inbody : myInbodyManager.dataList) {
+            if(!Main.isThisMonth(inbody.date))
+                continue;
+
+            if (firstMuscle == -1)
+                firstMuscle = inbody.muscle;
+            lastMuscle = inbody.muscle;
+        }
+
+        int result = (firstMuscle == -1 ? 0 : lastMuscle - firstMuscle);
+        rankValue.put("득근왕", result);
+        return result;
+    }
+    public int getBurnFat() {
+        int firstFat = -1;
+        int lastFat = 0;
+
+        for (Inbody inbody : myInbodyManager.dataList) {
+            if(!Main.isThisMonth(inbody.date))
+                continue;
+
+            if (firstFat == -1)
+                firstFat = inbody.fat;
+            lastFat = inbody.fat;
+        }
+
+        int result = (firstFat == -1 ? 0 : firstFat - lastFat);
+        rankValue.put("연소왕", result);
+        return result;
+    }
+    public int getSincerity() {
+        ArrayList<Boolean> isVisited = new ArrayList<>(32);
+        for (int i = 0; i < 32; i++)
+            isVisited.add(false);
+
+        for (ExerciseLog exerciseLog : myExerciseLogManager.dataList)
+        {
+            if(Main.isThisMonth(exerciseLog.logDate))
+                isVisited.set(Integer.parseInt(exerciseLog.logDate.substring(8, 10)), true);
+        }
+        for (Inbody inbody : myInbodyManager.dataList)
+        {
+            if(Main.isThisMonth(inbody.date))
+                isVisited.set(Integer.parseInt(inbody.date.substring(8, 10)), true);
+        }
+
+        int result = 0;
+        for (int i = 1; i <= 31; i++) {
+            if(isVisited.get(i))
+                result++;
+        }
+        rankValue.put("출석왕", result);
+        return result;
+    }
 }

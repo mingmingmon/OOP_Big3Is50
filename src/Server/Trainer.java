@@ -21,12 +21,17 @@ public class Trainer extends User implements Data {
         }
     }
     @Override
-    public void print(){
+    public void print() {
         super.print();
-        for(String award : awards){
+
+        if(!awards.isEmpty())
+            System.out.print("\t");
+
+        for(String award : awards)
             System.out.print(award + " ");
-        }
-        System.out.println("\n");
+
+        if(!awards.isEmpty())
+            System.out.println();
     }
     @Override
     public String toString() {
