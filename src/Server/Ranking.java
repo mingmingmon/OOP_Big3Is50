@@ -11,10 +11,10 @@ public class Ranking {
     static HashMap<String, Comparator<User>> standHashMap = new HashMap<>();
 
     Ranking() {
-        rankList.add(new Rank("3대왕", Comparator.comparingInt(User::getBig3).reversed()));
-        rankList.add(new Rank("득근왕", Comparator.comparingInt(User::getPowerUp).reversed()));
-        rankList.add(new Rank("연소왕", Comparator.comparingInt(User::getBurnFat).reversed()));
-        rankList.add(new Rank("출석왕", Comparator.comparingInt(User::getSincerity).reversed()));
+        rankList.add(new Rank("3대왕", "3대", "kg 달성",Comparator.comparingInt(User::getBig3).reversed()));
+        rankList.add(new Rank("득근왕", "골격근", "kg 증량", Comparator.comparingInt(User::getPowerUp).reversed()));
+        rankList.add(new Rank("연소왕", "체지방", "kg 감량",Comparator.comparingInt(User::getBurnFat).reversed()));
+        rankList.add(new Rank("출석왕", "총", "일 출석", Comparator.comparingInt(User::getSincerity).reversed()));
     }
     void addUser(User user)
     {

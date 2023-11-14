@@ -32,6 +32,7 @@ public class Trainer extends User implements Data {
 
         if(!awards.isEmpty())
             System.out.println();
+        printMyInfo();
     }
     @Override
     public String toString() {

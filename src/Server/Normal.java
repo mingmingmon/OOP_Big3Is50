@@ -12,6 +12,7 @@ public class Normal extends User implements Data {
     @Override
     public void print() {
         super.print();
+        printMyInfo();
     }
     @Override
     public String toString() {

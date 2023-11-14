@@ -37,9 +37,6 @@ public class User implements Data {
         System.out.printf("[%s] %s %s %s %s %s %s\n",
                 (userType == 1 ? "일반 회원" : "트레이너"), id, password,
                 name, nickname, phone, (gender == 0 ? "남성" : "여성"));
-        printMyExerciseLog();
-        printMyInbodyLog();
-        printMyProgram();
     }
     @Override
     public String toString() {
@@ -47,16 +44,21 @@ public class User implements Data {
                 userType, id, password, name, nickname, phone, gender);
     }
 
+    void printMyInfo() {
+        printMyExerciseLog();
+        printMyInbodyLog();
+        printMyProgram();
+    }
     void printMyExerciseLog() {
         System.out.printf("%s 회원님의 운동 기록\n", nickname);
         myExerciseLogManager.printAll();
     }
     void printMyInbodyLog() {
-        System.out.printf("%s 회원님의 운동 기록\n", nickname);
+        System.out.printf("%s 회원님의 인바디 기록\n", nickname);
         myInbodyManager.printAll();
     }
     public void printMyProgram(){
-        System.out.printf("%s 회원님의  기록\n", nickname);
+        System.out.printf("%s 회원님의 프로그램\n", nickname);
         myProgramManager.printAll();
     }
 

@@ -33,8 +33,9 @@ public class Program implements Data {
     @Override
     public void print() {
         System.out.printf("%s %s %s %s\n", name, date, startTime, endTime);
+        System.out.print("참여자: ");
         for (User user : membersManager.dataList)
-            System.out.printf("%s ", user.name);
+            System.out.printf("%s ", user.nickname);
         System.out.println();
     }
     @Override
