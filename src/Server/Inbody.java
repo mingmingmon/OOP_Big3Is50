@@ -21,7 +21,7 @@ public class Inbody implements Data {
         muscle = file.nextInt();
         fat = file.nextInt();
 
-        User user = Main.userHashMap.get(userID);
+        User user = ServerComputer.userHashMap.get(userID);
         user.myInbodyManager.dataList.add(this);
     }
     @Override

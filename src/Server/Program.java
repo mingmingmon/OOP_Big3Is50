@@ -25,7 +25,7 @@ public class Program implements Data {
 
         for (int i = 0; i < n; i++) {
             String userID = file.next();
-            User user = Main.userHashMap.get(userID);
+            User user = ServerComputer.userHashMap.get(userID);
             membersManager.dataList.add(user);
             user.myProgramManager.dataList.add(this);
         }

@@ -23,7 +23,7 @@ public class Manager <T extends Data> {
         dataList.add(data);
     }
     void scanAll(String relativePath, Factory<T> factory) {
-        Scanner file = openFile(relativePath);
+        Scanner file = ServerComputer.openFile(relativePath);
         while (file.hasNext()) {
             T data = factory.create();
             data.scan(file);
@@ -46,7 +46,7 @@ public class Manager <T extends Data> {
     }
 
     void saveFile() {
-        String absolutePath = getAbsolutePath(relativePath);
+        String absolutePath = ServerComputer.getAbsolutePath(relativePath);
         FileWriter fileWriter = null;
         try {
             fileWriter = new FileWriter(absolutePath);
@@ -56,21 +56,5 @@ public class Manager <T extends Data> {
             System.out.printf("파일 오픈 실패: %s\n", absolutePath);
             System.exit(0);
         }
-    }
-
-    static String getAbsolutePath(String relativePath) {
-        return System.getProperty("user.dir") + "\\src\\Server\\" + relativePath;
-    }
-
-    Scanner openFile(String relativePath) {
-        String absolutePath = getAbsolutePath(relativePath);
-        Scanner file = null;
-        try {
-            file = new Scanner(new File(absolutePath));
-        } catch (Exception e) {
-            System.out.printf("파일 오픈 실패: %s\n", absolutePath);
-            System.exit(0);
-        }
-        return file;
     }
 }

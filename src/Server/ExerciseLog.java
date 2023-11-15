@@ -1,9 +1,6 @@
 package Server;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.StringTokenizer;
 
 public class ExerciseLog implements Data {
     String logDate;
@@ -25,7 +22,7 @@ public class ExerciseLog implements Data {
             exerciseManager.scan(file, () -> (exerciseType == 1 ? new Cardio() : new Anaerobic()));
         }
 
-        User user = Main.userHashMap.get(userID);
+        User user = ServerComputer.userHashMap.get(userID);
         user.myExerciseLogManager.dataList.add(this);
     }
     @Override

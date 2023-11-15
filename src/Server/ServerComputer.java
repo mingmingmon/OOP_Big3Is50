@@ -1,11 +1,11 @@
 package Server;
 
+import java.io.File;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class Main {
+public class ServerComputer {
     static Scanner scanner = new Scanner(System.in);
 
     static String today = LocalDate.now().toString();
@@ -20,9 +20,13 @@ public class Main {
 
     //Me me = new Me("..\\Client\\my-info.txt");
 
-    void run() {
+    public ServerComputer() {
         startProgram();
+    }
+    public void run() {
         runProgram();
+    }
+    public void close() {
         finishProgram();
     }
     void startProgram() {
@@ -61,9 +65,18 @@ public class Main {
     static boolean isThisMonth(String date) {
         return today.substring(0, 7).contentEquals(date.substring(0, 7));
     }
-
-    public static void main(String[] args) {
-        Main program = new Main();
-        program.run();
+    static String getAbsolutePath(String relativePath) {
+        return System.getProperty("user.dir") + "\\src\\Server\\" + relativePath;
+    }
+    static Scanner openFile(String relativePath) {
+        String absolutePath = getAbsolutePath(relativePath);
+        Scanner file = null;
+        try {
+            file = new Scanner(new File(absolutePath));
+        } catch (Exception e) {
+            System.out.printf("파일 오픈 실패: %s\n", absolutePath);
+            System.exit(0);
+        }
+        return file;
     }
 }

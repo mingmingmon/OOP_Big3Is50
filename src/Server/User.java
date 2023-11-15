@@ -1,6 +1,5 @@
 package Server;
 
-import javax.swing.*;
 import java.util.*;
 
 public class User implements Data {
@@ -29,8 +28,8 @@ public class User implements Data {
         phone = file.next();
         gender = file.nextInt();
 
-        Main.userHashMap.put(id, this);
-        Main.rankingSystem.addUser(this);
+        ServerComputer.userHashMap.put(id, this);
+        ServerComputer.rankingSystem.addUser(this);
     }
     @Override
     public void print() {
@@ -68,7 +67,7 @@ public class User implements Data {
         int deadLift = 0;
 
         for (ExerciseLog exerciseLog : myExerciseLogManager.dataList) {
-            if(!Main.isThisMonth(exerciseLog.logDate))
+            if(!ServerComputer.isThisMonth(exerciseLog.logDate))
                 continue;
 
             for (Exercise exercise : exerciseLog.exerciseManager.dataList) {
@@ -89,7 +88,7 @@ public class User implements Data {
         int lastMuscle = 0;
 
         for (Inbody inbody : myInbodyManager.dataList) {
-            if(!Main.isThisMonth(inbody.date))
+            if(!ServerComputer.isThisMonth(inbody.date))
                 continue;
 
             if (firstMuscle == -1)
@@ -106,7 +105,7 @@ public class User implements Data {
         int lastFat = 0;
 
         for (Inbody inbody : myInbodyManager.dataList) {
-            if(!Main.isThisMonth(inbody.date))
+            if(!ServerComputer.isThisMonth(inbody.date))
                 continue;
 
             if (firstFat == -1)
@@ -125,12 +124,12 @@ public class User implements Data {
 
         for (ExerciseLog exerciseLog : myExerciseLogManager.dataList)
         {
-            if(Main.isThisMonth(exerciseLog.logDate))
+            if(ServerComputer.isThisMonth(exerciseLog.logDate))
                 isVisited.set(Integer.parseInt(exerciseLog.logDate.substring(8, 10)), true);
         }
         for (Inbody inbody : myInbodyManager.dataList)
         {
-            if(Main.isThisMonth(inbody.date))
+            if(ServerComputer.isThisMonth(inbody.date))
                 isVisited.set(Integer.parseInt(inbody.date.substring(8, 10)), true);
         }
 
