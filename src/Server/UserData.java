@@ -1,4 +1,7 @@
 package Server;
+import Server.GenericManager.Data;
+import Server.GenericManager.Manager;
+
 import java.util.*;
 
 public class UserData implements Data {

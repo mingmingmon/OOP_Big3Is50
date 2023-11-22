@@ -1,5 +1,7 @@
 package Server;
 
+import Server.GenericManager.Manager;
+
 import java.io.File;
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -65,10 +67,10 @@ public class ServerComputer {
     static boolean isThisMonth(String date) {
         return today.substring(0, 7).contentEquals(date.substring(0, 7));
     }
-    static String getAbsolutePath(String relativePath) {
+    public static String getAbsolutePath(String relativePath) {
         return System.getProperty("user.dir") + "\\src\\Server\\" + relativePath;
     }
-    static Scanner openFile(String relativePath) {
+    public static Scanner openFile(String relativePath) {
         String absolutePath = getAbsolutePath(relativePath);
         Scanner file = null;
         try {

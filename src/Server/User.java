@@ -1,5 +1,8 @@
 package Server;
 
+import Server.GenericManager.Data;
+import Server.GenericManager.Manager;
+
 import java.util.*;
 
 public class User implements Data {
@@ -41,6 +44,14 @@ public class User implements Data {
     public String toString() {
         return String.format("%d %s %s %s %s %s %d",
                 userType, id, password, name, nickname, phone, gender);
+    }
+    @Override
+    public boolean matches(String keyword) {
+        if(id.contains(keyword) || name.contains(keyword) || nickname.contains(keyword))
+            return true;
+        if(phone.contains(keyword) || (gender == 0 ? "남자" : "여자").contains(keyword))
+            return true;
+        return false;
     }
 
     void printMyInfo() {

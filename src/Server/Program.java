@@ -1,5 +1,8 @@
 package Server;
 
+import Server.GenericManager.Data;
+import Server.GenericManager.Manager;
+
 import java.util.*;
 
 public class Program implements Data {
@@ -46,5 +49,17 @@ public class Program implements Data {
             result.append(user.id + " ");
         result.deleteCharAt(result.length() - 1);
         return result.toString();
+    }
+    @Override
+    public boolean matches(String keyword) {
+        if(String.valueOf(id).contentEquals(keyword))
+            return true;
+        if(name.contains(keyword))
+            return true;
+        if(date.contains(keyword))
+            return true;
+        if(startTime.compareTo(keyword) >= 0 && endTime.compareTo(keyword) <= 0)
+            return true;
+        return false;
     }
 }

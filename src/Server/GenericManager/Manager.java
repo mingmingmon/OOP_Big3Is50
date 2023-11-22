@@ -1,23 +1,22 @@
-package Server;
+package Server.GenericManager;
 
-import java.io.File;
+import Server.ServerComputer;
+
 import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Manager <T extends Data> {
-    ArrayList<T> dataList = new ArrayList<>();
+    public ArrayList<T> dataList = new ArrayList<>();
     String relativePath;
-    Manager() {
+    public Manager() {
 
     }
-    Manager(String relativePath, Factory<T> factory) {
+    public  Manager(String relativePath, Factory<T> factory) {
         this.relativePath = relativePath;
         scanAll(relativePath, factory);
     }
-    void scan(Scanner file, Factory<T> factory) {
+    public void scan(Scanner file, Factory<T> factory) {
         T data = factory.create();
         data.scan(file);
         dataList.add(data);
@@ -30,7 +29,7 @@ public class Manager <T extends Data> {
             dataList.add(data);
         }
     }
-    void printAll() {
+    public void printAll() {
         for (T data : dataList)
             data.print();
     }
@@ -45,7 +44,23 @@ public class Manager <T extends Data> {
         return result.toString();
     }
 
-    void saveFile() {
+    public T find(String keyword) {
+        for (T data : dataList) {
+            if(data.matches(keyword))
+                return data;
+        }
+        return null;
+    }
+    public ArrayList<T> findAll(String keyword) {
+        ArrayList<T> result = new ArrayList<>();
+        for (T data : dataList) {
+            if(data.matches(keyword))
+                result.add(data);
+        }
+        return result;
+    }
+
+    public void saveFile() {
         String absolutePath = ServerComputer.getAbsolutePath(relativePath);
         FileWriter fileWriter = null;
         try {

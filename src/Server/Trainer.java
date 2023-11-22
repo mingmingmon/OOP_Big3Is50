@@ -1,9 +1,7 @@
 package Server;
 
-import Server.Data;
-import Server.Manager;
-import Server.Program;
-import Server.User;
+import Server.GenericManager.Data;
+
 import java.util.*;
 
 public class Trainer extends User implements Data {

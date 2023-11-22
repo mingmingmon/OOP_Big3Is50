@@ -1,5 +1,7 @@
 package Server;
 
+import Server.GenericManager.Data;
+
 import java.util.Scanner;
 
 public class Exercise implements Data {
@@ -18,5 +20,11 @@ public class Exercise implements Data {
     @Override
     public String toString() {
         return String.format("%d %s", exerciseType, name);
+    }
+    @Override
+    public boolean matches(String keyword) {
+        if((exerciseType == 1 ? "유산소" : "무산소").contains(keyword))
+            return true;
+        return name.contains(keyword);
     }
 }

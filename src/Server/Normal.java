@@ -1,5 +1,7 @@
 package Server;
 
+import Server.GenericManager.Data;
+
 import java.util.Scanner;
 
 public class Normal extends User implements Data {

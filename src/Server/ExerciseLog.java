@@ -1,5 +1,8 @@
 package Server;
 
+import Server.GenericManager.Data;
+import Server.GenericManager.Manager;
+
 import java.util.Scanner;
 
 public class ExerciseLog implements Data {
@@ -38,5 +41,13 @@ public class ExerciseLog implements Data {
             result.append(exercise + " ");
         result.deleteCharAt(result.length() - 1);
         return result.toString();
+    }
+    @Override
+    public boolean matches(String keyword) {
+        if(logDate.contains(keyword) || logTime.contains(keyword))
+            return true;
+
+        User user = ServerComputer.userHashMap.get(userID);
+        return user.matches(keyword);
     }
 }

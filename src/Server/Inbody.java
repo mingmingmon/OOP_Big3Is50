@@ -1,5 +1,7 @@
 package Server;
 
+import Server.GenericManager.Data;
+
 import java.util.Scanner;
 
 public class Inbody implements Data {
@@ -32,5 +34,13 @@ public class Inbody implements Data {
     @Override
     public String toString() {
         return String.format("%s %s %s %d %d %d", date, time, userID, weight, muscle, fat);
+    }
+    @Override
+    public boolean matches(String keyword) {
+        if(date.contains(keyword) || time.contains(keyword))
+            return true;
+
+        User user = ServerComputer.userHashMap.get(userID);
+        return user.matches(keyword);
     }
 }
