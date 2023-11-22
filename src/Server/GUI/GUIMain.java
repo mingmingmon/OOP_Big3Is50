@@ -9,7 +9,7 @@ public class GUIMain {
     private static GUIMain guiMain = null;
     private GUIMain(){}
     public static GUIMain getInstance(){
-        if (guiMain== null)
+        if (guiMain == null)
             guiMain = new GUIMain();
         return guiMain;
     }
@@ -22,18 +22,17 @@ public class GUIMain {
         });
     }
 
-    private JFrame mainFrame = new JFrame("3대50 헬스장");
-
+    static JFrame mainFrame = new JFrame("3대50 헬스장");
     private void createAndShowGUI() {
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // 탭을 생성하고 home, ranking, program, trainer, myPage 총 5개 패널 추가
         JTabbedPane topTab = new JTabbedPane();
 
         setupHomePane();
-        setUpRankingPane();
-        setUpProgramPane();
-        setUpTrainerPane();
-        setUpMypagePane();
+        setupRankingPane();
+        setupProgramPane();
+        setupTrainerPane();
+        setupMyPagePane();
 
         topTab.add("홈", homePane);
         topTab.add("랭킹", rankingPane);
@@ -45,7 +44,6 @@ public class GUIMain {
         mainFrame.pack();
         mainFrame.setSize(400, 700);
         mainFrame.setVisible(true);
-
     }
 
     private JPanel homePane;
@@ -58,23 +56,43 @@ public class GUIMain {
     }
 
     private JPanel rankingPane;
-    private void setUpRankingPane(){
+    private void setupRankingPane(){
         rankingPane = new JPanel(new BorderLayout());
     }
 
     private JPanel programPane;
-    private void setUpProgramPane(){
+    TableSection programTable = new TableSection();
+    TopPanel programTopPanel = new TopPanel();
+    private void setupProgramPane(){
         //BorderLayout은 화면을 동서남북, 중아으로 나누고 각 영역에 BorderLayout.NORTH로 컴포넌트를 배치할 수 있음
         programPane = new JPanel(new BorderLayout());
+
+        programTable.tableTitle = "Program";
+
+        programTable.addComponentsToPane(ProgramGUIManager.getInstance(), "!pt");
+        programPane.add(programTable, BorderLayout.CENTER);
+
+        programTopPanel.setupTopPane(programTable);
+        programPane.add(programTopPanel, BorderLayout.NORTH);
     }
 
     private JPanel trainerPane;
-    private void setUpTrainerPane(){
+    TableSection trainerTable = new TableSection();
+    TopPanel trainerTopPanel = new TopPanel();
+    private void setupTrainerPane(){
         trainerPane = new JPanel(new BorderLayout());
+
+        trainerTable.tableTitle = "PT";
+
+        trainerTable.addComponentsToPane(ProgramGUIManager.getInstance(), "pt");
+        trainerPane.add(trainerTable, BorderLayout.CENTER);
+
+        trainerTopPanel.setupTopPane(trainerTable);
+        trainerPane.add(trainerTopPanel, BorderLayout.NORTH);
     }
 
     private JPanel myPagePane;
-    private void setUpMypagePane(){
+    private void setupMyPagePane(){
         myPagePane = new JPanel(new BorderLayout());
     }
 }

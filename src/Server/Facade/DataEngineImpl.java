@@ -8,11 +8,11 @@ import Server.GenericManager.Data;
 public abstract class DataEngineImpl<T extends Data> extends Manager<T>
 									implements IDataEngine<T> {
 	String[] labels = null;
+
 	public void setLabels(String[] labels) {
 		this.labels = labels;
 	}
-
-	@Override 
+	@Override
 	public int getColumnCount() {
 		return labels.length;
 	}

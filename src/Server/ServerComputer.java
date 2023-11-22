@@ -1,6 +1,7 @@
 package Server;
 
 import Server.GenericManager.Manager;
+import Server.GUI.*;
 
 import java.io.File;
 import java.time.LocalDate;
@@ -15,11 +16,6 @@ public class ServerComputer {
     static HashMap<String, User> userHashMap = new HashMap<>();
     static Ranking rankingSystem = new Ranking();
 
-    Manager<UserData> userDataManager = new Manager<>("data\\user-data.txt", () -> new UserData());
-    Manager<ExerciseLog> exerciseLogManager = new Manager<>("data\\user-exercise-log.txt", () -> new ExerciseLog());
-    Manager<Inbody> inbodyManager = new Manager<>("data\\user-inbody.txt", () -> new Inbody());
-    Manager<Program> programManager = new Manager<>("data\\program-data.txt", () -> new Program());
-
     //Me me = new Me("..\\Client\\my-info.txt");
 
     public ServerComputer() {
@@ -32,6 +28,10 @@ public class ServerComputer {
         finishProgram();
     }
     void startProgram() {
+        UserDataGUIManager.getInstance().scanAll("data\\user-data.txt", () -> new UserData());
+        ExerciseLogGUIManager.getInstance().scanAll("data\\user-exercise-log.txt", () -> new ExerciseLog());
+        InbodyGUIManager.getInstance().scanAll("data\\user-inbody.txt", () -> new Inbody());
+        ProgramGUIManager.getInstance().scanAll("data\\program-data.txt", () -> new Program());
         rankingSystem.sort();
     }
     void runProgram() {
@@ -53,10 +53,10 @@ public class ServerComputer {
         }*/
     }
     void finishProgram() {
-        userDataManager.saveFile();
-        exerciseLogManager.saveFile();
-        inbodyManager.saveFile();
-        programManager.saveFile();
+        UserDataGUIManager.getInstance().saveFile();
+        ExerciseLogGUIManager.getInstance().saveFile();
+        InbodyGUIManager.getInstance().saveFile();
+        ProgramGUIManager.getInstance().saveFile();
     }
 
     static String input(String comment) {
