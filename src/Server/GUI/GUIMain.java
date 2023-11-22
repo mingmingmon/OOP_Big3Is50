@@ -1,81 +1,187 @@
 package Server.GUI;
 
-import GUI_store.store.ItemMgr;
-import GUI_store.store.OrderMgr;
-import GUI_store.store.OrderedItemMgr;
-
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class GUIMain {
-	// 싱글톤 패턴 적용 부분
-	private static GUIMain main = null;
-	private GUIMain() {}
-	public static GUIMain getInstance() {
-		if (main == null)
-			main = new GUIMain();
-		return main;
-	}
-	// 엔진의 인스턴스를 편리를 위해 변수에 저장한다
-    public static void startGUI() {
-        // 이벤트 처리 스레드를 만들고 
-        // 거기서 GUI를 생성하고 보여준다.
+    private static GUIMain guiMain = null;
+    private GUIMain(){}
+    public static GUIMain getInstance(){
+        if (guiMain== null)
+            guiMain = new GUIMain();
+        return guiMain;
+    }
+
+    public static void startGUI(){
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 GUIMain.getInstance().createAndShowGUI();
             }
         });
     }
-    /**
-     * GUI를 생성하여 보여준다. 스레드 안전을 위하여
-     * 이 메소드는 이벤트 처리 스레드에서 불려져야 한다.
-     */
-	static JFrame mainFrame = new JFrame("TableSelectionDemo");
+
+    private JFrame mainFrame = new JFrame("3대50 헬스장");
+
     private void createAndShowGUI() {
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        // 탭을 생성하고 두개 패널을 추가한다.
-        JTabbedPane jtab = new JTabbedPane();
-        
-        setupItemPane();
-        setupOrderPane();
-        // 아이템 리스트 탭과 주문 탭 두 개의 패널을 가지는 탭 패널
-        jtab.add("아이템", itemPane);
-        jtab.add("주문", orderPane);
-        mainFrame.getContentPane().add(jtab);
-        //Display the window.
-        mainFrame.pack();
-        mainFrame.setVisible(true);
-    }
-    // 상품을 보여주는 패널 부분 - 탑과 JTable 포함
-    private JPanel itemPane;
-    TableSelectionDemo itemTable = new TableSelectionDemo();
-    ItemTopPanel itemTop = new ItemTopPanel();  // 검색과 상세보기 버튼을 가진 패널
-    private void setupItemPane() {
-    	itemPane = new JPanel(new BorderLayout());
-        // Create and set up the content pane.
-        itemTable.tableTitle = "item";
-        itemTable.addComponentsToPane(ItemMgr.getInstance());  // 싱글톤
-        itemTop.setupTopPane(itemTable);
-        itemPane.add(itemTop, BorderLayout.NORTH);
-        itemPane.add(itemTable, BorderLayout.CENTER);
-    }
-    // 상품을 보여주는 패널 부분 - 위에는 주문 JTable, 아래 패널은 장바구니와 버튼
-    private JPanel orderPane;
-    TableSelectionDemo orderTable = new TableSelectionDemo();
-    BasketTableDemo basketTable = new BasketTableDemo();
-    private void setupOrderPane() {
-    	orderPane = new JPanel(new BorderLayout());
-        orderTable.tableTitle = "order";
-        orderTable.addComponentsToPane(OrderMgr.getInstance());
-        orderPane.add(orderTable, BorderLayout.CENTER);
-        // 아래쪽은 장바구니 테이블과 라벨로 나누기 위해 패널 추가
-        JPanel bottom = new JPanel();  // 디폴트 플로우레이아웃
-        basketTable.tableTitle = "basket";
-        basketTable.addComponentsToPane(OrderedItemMgr.getInstance());
+        // 탭을 생성하고 home, ranking, program, trainer, myPage 총 5개 패널 추가
+        JTabbedPane topTab = new JTabbedPane();
 
-        bottom.add(basketTable, BorderLayout.CENTER);
-        // 여기에 여러 가지 버튼을 넣을 수 있음 - 결재, 취소, 추가, 변경 등
-        bottom.add(new JLabel("장바구니 테스트"), BorderLayout.LINE_END);
-        orderPane.add(bottom, BorderLayout.SOUTH);
+        setupHomePane();
+        setUpRankingPane();
+        setUpProgramPane();
+        setUpTrainerPane();
+        setUpMypagePane();
+
+        topTab.add("홈", homePane);
+        topTab.add("랭킹", rankingPane);
+        topTab.add("프로그램", programPane);
+        topTab.add("트레이너", trainerPane);
+        topTab.add("마이페이지", myPagePane);
+
+        mainFrame.getContentPane().add(topTab);
+        mainFrame.pack();
+        mainFrame.setSize(400, 700);
+        mainFrame.setVisible(true);
+
+    }
+
+    private JPanel homePane;
+    private void setupHomePane(){
+        // 홈화면은 맨 위에 home이라는 글자 있는 배너 (JLabel)
+        // 중간에 사진이랑 이름, 운동 몇 일 째 정보 하나의 pane
+        // 나의 인바디, 나의 운동기록 임티랑 글씨 하나의 pane
+        // 체중, 운동기록, 골격근량, 나의 프로그램, 체지방량, 나의 트레이너 부분 하나의 pane (그리드layout)
+        homePane = new JPanel();
+    }
+
+    private JPanel rankingPane;
+    private void setUpRankingPane(){
+        rankingPane = new JPanel(new BorderLayout());
+    }
+
+    private JPanel programPane;
+    private void setUpProgramPane(){
+        //BorderLayout은 화면을 동서남북, 중아으로 나누고 각 영역에 BorderLayout.NORTH로 컴포넌트를 배치할 수 있음
+        programPane = new JPanel(new BorderLayout());
+    }
+
+    private JPanel trainerPane;
+    private void setUpTrainerPane(){
+        trainerPane = new JPanel(new BorderLayout());
+    }
+
+    private JPanel myPagePane;
+    private void setUpMypagePane(){
+        myPagePane = new JPanel(new BorderLayout());
     }
 }
+
+/* cardLayout = new CardLayout();
+        cardPanel = new JPanel(cardLayout);
+
+        // 홈 화면
+        JPanel homePanel = new JPanel();
+        homePanel.add(new JLabel("홈화면"));
+
+        JButton rankingButton = new JButton("랭킹보기");
+        JButton myPageButton = new JButton("마이페이지");
+        JButton programListButton = new JButton("프로그램 리스트");
+        JButton trainerListButton = new JButton("트레이너 리스트");
+
+        rankingButton.setBounds(30,170,122,30);
+        myPageButton.setBounds(182,170,122,30);
+
+
+        rankingButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(cardPanel, "랭킹보기");
+            }
+        });
+        myPageButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(cardPanel, "마이페이지");
+            }
+        });
+        programListButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(cardPanel, "프로그램 리스트");
+            }
+        });
+        trainerListButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(cardPanel, "트레이너 리스트");
+            }
+        });
+
+        homePanel.add(rankingButton);
+        homePanel.add(myPageButton);
+        homePanel.add(programListButton);
+        homePanel.add(trainerListButton);
+
+        // 랭킹 화면
+        JPanel rankingPanel = new JPanel();
+        rankingPanel.add(new JLabel("랭킹보기"));
+        JButton switchBackButton = new JButton("홈화면으로 돌아가기");
+        switchBackButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(cardPanel, "홈화면");
+            }
+        });
+        rankingPanel.add(switchBackButton);
+
+        // 마이페이지 화면
+        JPanel myPagePanel = new JPanel();
+        myPagePanel.add(new JLabel("마이페이지보기"));
+        switchBackButton = new JButton("홈화면으로 돌아가기");
+        switchBackButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(cardPanel, "홈화면");
+            }
+        });
+        myPagePanel.add(switchBackButton);
+
+        // 프로그램 화면
+        JPanel programListPanel = new JPanel();
+        programListPanel.add(new JLabel("프로그램 리스트"));
+        switchBackButton = new JButton("홈화면으로 돌아가기");
+        switchBackButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(cardPanel, "홈화면");
+            }
+        });
+        programListPanel.add(switchBackButton);
+
+        // 프로그램 화면
+        JPanel trainerListPanel = new JPanel();
+        trainerListPanel.add(new JLabel("트레이너 리스트"));
+        switchBackButton = new JButton("홈화면으로 돌아가기");
+        switchBackButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(cardPanel, "홈화면");
+            }
+        });
+        trainerListPanel.add(switchBackButton);
+
+        cardPanel.add(homePanel, "홈화면");
+        cardPanel.add(rankingPanel, "랭킹보기");
+        cardPanel.add(myPagePanel, "마이페이지");
+        cardPanel.add(programListPanel, "프로그램 리스트");
+        cardPanel.add(trainerListPanel, "트레이너 리스트");
+
+        frame.add(cardPanel);
+
+        frame.setSize(400, 700);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+    }*/

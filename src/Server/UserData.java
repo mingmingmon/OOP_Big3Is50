@@ -23,4 +23,8 @@ public class UserData implements Data {
         result.deleteCharAt(result.length() - 1);
         return result.toString();
     }
+    @Override
+    public boolean matches(String keyword) {
+        return true;
+    }
 }

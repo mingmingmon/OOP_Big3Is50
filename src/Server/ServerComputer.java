@@ -36,7 +36,7 @@ public class ServerComputer {
     }
     void runProgram() {
         boolean isRunning = true;
-        while (isRunning) {
+        /*while (isRunning) {
             System.out.println("1. 유저 출력  2. 운동 기록 출력");
             System.out.println("3. 인바디 기록 출력  4. 프로그램 출력");
             System.out.println("5. 이 달의 랭킹  0. 종료");
@@ -50,7 +50,7 @@ public class ServerComputer {
                 case 5 -> rankingSystem.print();
                 case 0 -> isRunning = false;
             }
-        }
+        }*/
     }
     void finishProgram() {
         userDataManager.saveFile();
