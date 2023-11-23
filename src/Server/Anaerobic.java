@@ -16,6 +16,12 @@ public class Anaerobic extends Exercise {
     @Override
     public void print() {
         super.print();
-        System.out.printf("%dkg으로 %d번하여 태운 칼로리: %d\n", kg, count, cal);
+        System.out.printf("%dkg %d번\n", kg, count, cal);
+    }
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder();
+        result.append(super.toString() + " " + String.format("%d %d", kg, count));
+        return result.toString();
     }
 }

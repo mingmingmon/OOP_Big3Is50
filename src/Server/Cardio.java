@@ -15,6 +15,12 @@ public class Cardio extends Exercise {
     @Override
     public void print() {
         super.print();
-        System.out.printf("%dkm/h로 %d분동안 태운 칼로리: %d\n", speed, time, cal);
+        System.out.printf("%dkm/h %d분\n", speed, time, cal);
+    }
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder();
+        result.append(super.toString() + " " + String.format("%d %d", speed, time));
+        return result.toString();
     }
 }

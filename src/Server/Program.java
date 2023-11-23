@@ -1,10 +1,15 @@
 package Server;
 
+import Server.Facade.UIData;
+import Server.GenericManager.Data;
+import Server.GenericManager.Manager;
+
 import java.util.*;
 
-public class Program implements Data{
+public class Program implements Data, UIData {
     static int count = 0;
     int id;
+    boolean isPT;
     String name;
     String date;
     String startTime;
@@ -16,28 +21,79 @@ public class Program implements Data{
     @Override
     public void scan(Scanner file) {
         id = ++count;
+
+        isPT = (file.nextInt() == 1);
         name = file.next();
         date = file.next();
         startTime = file.next();
         endTime = file.next();
+
         n = file.nextInt();
 
         for (int i = 0; i < n; i++) {
             String userID = file.next();
-            User normal = Main.userHashMap.get(userID);
-            membersManager.dataList.add(normal);
-            normal.myProgram.dataList.add(this);
+            User user = ServerComputer.userHashMap.get(userID);
+            membersManager.dataList.add(user);
+            user.myProgramManager.dataList.add(this);
         }
-
-        /*if(name.contains("PT")){
-            User trainer = Main.userHashMap.get(name.substring());
-            trainer.myProgram.dataList.add(this);
-        }*/
     }
-
     @Override
     public void print() {
         System.out.printf("%s %s %s %s\n", name, date, startTime, endTime);
-        membersManager.printAll();
+        System.out.print("참여자: ");
+        for (User user : membersManager.dataList)
+            System.out.printf("%s ", user.nickname);
+        System.out.println();
+    }
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder();
+        result.append(String.format("%d %s %s %s %s %d ", (isPT ? 1 : 0), name, date, startTime, endTime, n));
+        for(User user : membersManager.dataList)
+            result.append(user.id + " ");
+        result.deleteCharAt(result.length() - 1);
+        return result.toString();
+    }
+    @Override
+    public boolean matches(String keyword) {
+        if(keyword.contentEquals("pt") && isPT)
+            return true;
+        if(String.valueOf(id).contentEquals(keyword))
+            return true;
+        if(name.contains(keyword))
+            return true;
+        if(date.contains(keyword))
+            return true;
+        if(startTime.compareTo(keyword) >= 0 && endTime.compareTo(keyword) <= 0)
+            return true;
+        return false;
+    }
+    @Override
+    public void set(Object[] uitexts) {
+        // TODO Auto-generated method stub
+    }
+    @Override
+    public String[] getSimpleData() {
+        String[] result = new String[4];
+        result[0] = name;
+        result[1] = date;
+        result[2] = startTime;
+        result[3] = endTime;
+        return result;
+    }
+    @Override
+    public String[] getDetailData() {
+        String[] result = new String[6 + n];
+        result[0] = String.valueOf(id);
+        result[1] = isPT ? "PT" : name;
+        result[2] = name;
+        result[3] = date;
+        result[4] = startTime;
+        result[5] = endTime;
+
+        for (int i = 0; i < n; i++)
+            result[5 + i] = membersManager.dataList.get(i).nickname;
+
+        return result;
     }
 }
