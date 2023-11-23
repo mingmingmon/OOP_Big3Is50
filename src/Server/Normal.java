@@ -1,5 +1,7 @@
 package Server;
 
+import Server.GenericManager.Data;
+
 import java.util.Scanner;
 
 public class Normal extends User implements Data {
@@ -12,6 +14,7 @@ public class Normal extends User implements Data {
     @Override
     public void print() {
         super.print();
+        printMyInfo();
     }
     @Override
     public String toString() {

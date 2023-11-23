@@ -1,9 +1,9 @@
 package Server;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
+import Server.GenericManager.Data;
+import Server.GenericManager.Manager;
+
 import java.util.Scanner;
-import java.util.StringTokenizer;
 
 public class ExerciseLog implements Data {
     String logDate;
@@ -25,12 +25,12 @@ public class ExerciseLog implements Data {
             exerciseManager.scan(file, () -> (exerciseType == 1 ? new Cardio() : new Anaerobic()));
         }
 
-        User user = Main.userHashMap.get(userID);
+        User user = ServerComputer.userHashMap.get(userID);
         user.myExerciseLogManager.dataList.add(this);
     }
     @Override
     public void print() {
-        System.out.printf("%s %s %s\n", logDate, logTime, userID);
+        System.out.printf("[%s] %s %s\n", logDate, logTime, userID);
         exerciseManager.printAll();
     }
     @Override
@@ -41,5 +41,13 @@ public class ExerciseLog implements Data {
             result.append(exercise + " ");
         result.deleteCharAt(result.length() - 1);
         return result.toString();
+    }
+    @Override
+    public boolean matches(String keyword) {
+        if(logDate.contains(keyword) || logTime.contains(keyword))
+            return true;
+
+        User user = ServerComputer.userHashMap.get(userID);
+        return user.matches(keyword);
     }
 }

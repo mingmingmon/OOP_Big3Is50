@@ -1,9 +1,7 @@
 package Server;
 
-import Server.Data;
-import Server.Manager;
-import Server.Program;
-import Server.User;
+import Server.GenericManager.Data;
+
 import java.util.*;
 
 public class Trainer extends User implements Data {
@@ -21,12 +19,18 @@ public class Trainer extends User implements Data {
         }
     }
     @Override
-    public void print(){
+    public void print() {
         super.print();
-        for(String award : awards){
+
+        if(!awards.isEmpty())
+            System.out.print("\t");
+
+        for(String award : awards)
             System.out.print(award + " ");
-        }
-        System.out.println("\n");
+
+        if(!awards.isEmpty())
+            System.out.println();
+        printMyInfo();
     }
     @Override
     public String toString() {
@@ -36,11 +40,5 @@ public class Trainer extends User implements Data {
             result.append(award + " ");
         result.deleteCharAt(result.length() - 1);
         return result.toString();
-    }
-
-    public void printMyProgram(){
-        for(Program program : myProgram.dataList){
-            program.print();
-        }
     }
 }

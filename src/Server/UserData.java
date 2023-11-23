@@ -1,4 +1,8 @@
 package Server;
+import Server.Facade.UIData;
+import Server.GenericManager.Data;
+import Server.GenericManager.Manager;
+
 import java.util.*;
 
 public class UserData implements Data {
@@ -19,5 +23,9 @@ public class UserData implements Data {
             result.append(user + "\n");
         result.deleteCharAt(result.length() - 1);
         return result.toString();
+    }
+    @Override
+    public boolean matches(String keyword) {
+        return true;
     }
 }

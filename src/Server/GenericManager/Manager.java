@@ -1,36 +1,37 @@
-package Server;
+package Server.GenericManager;
 
-import java.io.File;
+import Server.ServerComputer;
+
 import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Manager <T extends Data> {
-    ArrayList<T> dataList = new ArrayList<>();
+    public ArrayList<T> dataList = new ArrayList<>();
     String relativePath;
-    Manager() {
+    public Manager() {
 
     }
-    Manager(String relativePath, Factory<T> factory) {
+
+    public Manager(String relativePath, Factory<T> factory) {
         this.relativePath = relativePath;
         scanAll(relativePath, factory);
     }
-    void scan(Scanner file, Factory<T> factory) {
+    public void scan(Scanner file, Factory<T> factory) {
         T data = factory.create();
         data.scan(file);
         dataList.add(data);
     }
-    void scanAll(String relativePath, Factory<T> factory) {
-        Scanner file = openFile(relativePath);
+    public void scanAll(String relativePath, Factory<T> factory) {
+        this.relativePath = relativePath;
+        Scanner file = ServerComputer.openFile(relativePath);
         while (file.hasNext()) {
             T data = factory.create();
             data.scan(file);
             dataList.add(data);
         }
     }
-    void printAll() {
+    public void printAll() {
         for (T data : dataList)
             data.print();
     }
@@ -39,12 +40,30 @@ public class Manager <T extends Data> {
         StringBuilder result = new StringBuilder();
         for (T data : dataList)
             result.append(data + "\n");
-        result.deleteCharAt(result.length() - 1);
+
+        if(!result.isEmpty())
+            result.deleteCharAt(result.length() - 1);
         return result.toString();
     }
 
-    void saveFile() {
-        String absolutePath = getAbsolutePath(relativePath);
+    public T find(String keyword) {
+        for (T data : dataList) {
+            if(data.matches(keyword))
+                return data;
+        }
+        return null;
+    }
+    public ArrayList<T> findAll(String keyword) {
+        ArrayList<T> result = new ArrayList<>();
+        for (T data : dataList) {
+            if(data.matches(keyword))
+                result.add(data);
+        }
+        return result;
+    }
+
+    public void saveFile() {
+        String absolutePath = ServerComputer.getAbsolutePath(relativePath);
         FileWriter fileWriter = null;
         try {
             fileWriter = new FileWriter(absolutePath);
@@ -54,21 +73,5 @@ public class Manager <T extends Data> {
             System.out.printf("파일 오픈 실패: %s\n", absolutePath);
             System.exit(0);
         }
-    }
-
-    String getAbsolutePath(String relativePath) {
-        return System.getProperty("user.dir") + "\\src\\Server\\" + relativePath;
-    }
-
-    Scanner openFile(String relativePath) {
-        String absolutePath = getAbsolutePath(relativePath);
-        Scanner file = null;
-        try {
-            file = new Scanner(new File(absolutePath));
-        } catch (Exception e) {
-            System.out.printf("파일 오픈 실패: %s\n", absolutePath);
-            System.exit(0);
-        }
-        return file;
     }
 }
