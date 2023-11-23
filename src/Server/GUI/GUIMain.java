@@ -56,8 +56,18 @@ public class GUIMain {
     }
 
     private JPanel rankingPane;
+    private CardLayout cards;
+    RankingCardPanel rankingCardPanel = new RankingCardPanel();
+    RankingBottomPanel rankingBottomPanel = new RankingBottomPanel();
     private void setupRankingPane(){
         rankingPane = new JPanel(new BorderLayout());
+        cards = new CardLayout();
+        JPanel cardPanel = new JPanel(cards);
+        rankingCardPanel.setup(cardPanel);
+        rankingBottomPanel.setUp(cards, rankingPane);
+
+        rankingPane.add(rankingBottomPanel, BorderLayout.SOUTH);
+        rankingPane.add(cardPanel, BorderLayout.CENTER);
     }
 
     private JPanel programPane;
