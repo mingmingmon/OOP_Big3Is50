@@ -18,12 +18,22 @@ public class GUIMain {
     public static void startGUI(){
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                GUIMain.getInstance().createAndShowGUI();
+                //GUIMain.getInstance().createAndShowGUI();
+                GUIMain.getInstance().logIn();
             }
         });
     }
 
     static JFrame mainFrame = new JFrame("3대50 헬스장");
+    private JPanel logInPane;
+
+    private void logIn(){
+
+
+        createAndShowGUI();
+    }
+
+
     private void createAndShowGUI() {
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // 탭을 생성하고 home, ranking, program, trainer, myPage 총 5개 패널 추가
@@ -43,21 +53,23 @@ public class GUIMain {
 
         mainFrame.getContentPane().add(topTab);
         mainFrame.pack();
-        mainFrame.setSize(400, 700);
+        mainFrame.setSize(600, 1000);
+        //mainFrame.setResizable(false);
         mainFrame.setVisible(true);
     }
 
     private JPanel homePane;
+    private TopBanner topBanner = new TopBanner();
     private void setupHomePane(){
         // 홈화면은 맨 위에 home이라는 글자 있는 배너 (JLabel)
         // 중간에 사진이랑 이름, 운동 몇 일 째 정보 하나의 pane
         // 나의 인바디, 나의 운동기록 임티랑 글씨 하나의 pane
         // 체중, 운동기록, 골격근량, 나의 프로그램, 체지방량, 나의 트레이너 부분 하나의 pane (그리드layout)
-        homePane = new JPanel();
+        homePane = new JPanel(new BorderLayout());
+        homePane.add(topBanner, BorderLayout.NORTH);
     }
 
-    private static JPanel rankingPane = null;
-
+    private JPanel rankingPane;
     private CardLayout rankingCards;
     RankingCardPanel rankingCardPanel = new RankingCardPanel();
     RankingBottomPanel rankingBottomPanel = new RankingBottomPanel();
@@ -66,7 +78,7 @@ public class GUIMain {
         rankingCards = new CardLayout();
         JPanel cardPanel = new JPanel(rankingCards);
         rankingCardPanel.setup(cardPanel);
-        rankingBottomPanel.setup(rankingCards, cardPanel);
+        rankingBottomPanel.setup(rankingCards, rankingPane);
 
         rankingPane.add(rankingBottomPanel, BorderLayout.SOUTH);
         rankingPane.add(cardPanel, BorderLayout.CENTER);
@@ -81,9 +93,8 @@ public class GUIMain {
         //BorderLayout은 화면을 동서남북, 중앙으로 나누고 각 영역에 BorderLayout.NORTH로 컴포넌트를 배치할 수 있음
         programPane = new JPanel(new BorderLayout());
         programCards = new CardLayout();
-        //cardPanel이 cardlayout의 부모 컨테이너
         JPanel cardPanel = new JPanel(programCards);
-        programCardPanel.setup(cardPanel, programCards, programPane);
+        programCardPanel.setup(cardPanel, programCards, "!pt");
 
         programPane.add(cardPanel, BorderLayout.CENTER);
         /*programTable.tableTitle = "Program";

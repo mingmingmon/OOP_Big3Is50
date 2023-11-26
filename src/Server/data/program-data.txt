@@ -1,7 +1,35 @@
 0 줌바댄스 월 09:00 11:00 2 areian0511 mingmingmon
-0 요가 월 10:00 12:00 2 parkSeunghyeon sdfpyj4885
-1 PT-김종국 화 18:00 20:00 2 areian0511 kimEgg
-1 PT-김종국 화 20:00 22:00 2 dong82821234 chj990101
-1 PT-박승현 금 18:00 20:00 1 mingmingmon
-1 PT-박승현 금 20:00 22:00 3 kimJongKook jeondog0987 chj990101
-0 싸이클 수 12:00 13:00 10 areian0511 mingmingmon parkSeunghyeon kimJongKook kimEgg sdfpyj4885 jeondog0987 dong82821234 chj990101 hdy930405
+0 줌바댄스 월 13:00 15:00 2 areian0511 mingmingmon
+0 줌바댄스 월 19:00 21:00 2 areian0511 mingmingmon
+0 줌바댄스 수 09:00 11:00 2 areian0511 mingmingmon
+0 줌바댄스 수 13:00 15:00 2 areian0511 mingmingmon
+0 줌바댄스 수 19:00 21:00 2 areian0511 mingmingmon
+0 줌바댄스 금 09:00 11:00 2 areian0511 mingmingmon
+0 줌바댄스 금 13:00 15:00 2 areian0511 mingmingmon
+0 줌바댄스 금 19:00 21:00 2 areian0511 mingmingmon
+0 요가 월 10:00 12:00 1 sdfpyj4885
+0 요가 월 15:00 17:00 1 sdfpyj4885
+0 요가 수 10:00 12:00 1 sdfpyj4885
+0 요가 수 15:00 17:00 1 sdfpyj4885
+0 요가 금 10:00 12:00 1 sdfpyj4885
+0 요가 금 15:00 17:00 1 sdfpyj4885
+0 싸이클 화 12:00 13:00 6 areian0511 mingmingmon jeondog0987 dong82821234 chj990101 hdy930405
+0 싸이클 화 14:00 15:00 6 areian0511 mingmingmon jeondog0987 dong82821234 chj990101 hdy930405
+0 싸이클 화 17:00 18:00 6 areian0511 mingmingmon jeondog0987 dong82821234 chj990101 hdy930405
+0 싸이클 목 12:00 13:00 6 areian0511 mingmingmon jeondog0987 dong82821234 chj990101 hdy930405
+0 싸이클 목 14:00 15:00 6 areian0511 mingmingmon jeondog0987 dong82821234 chj990101 hdy930405
+0 싸이클 목 17:00 18:00 6 areian0511 mingmingmon jeondog0987 dong82821234 chj990101 hdy930405
+0 점핑머신 화 12:00 13:00 2 areian0511 mingmingmon
+0 점핑머신 화 14:00 15:00 2 areian0511 mingmingmon
+0 점핑머신 화 16:00 17:00 2 areian0511 mingmingmon
+0 점핑머신 화 18:00 19:00 2 areian0511 mingmingmon
+0 점핑머신 목 12:00 13:00 2 areian0511 mingmingmon
+0 점핑머신 목 14:00 15:00 2 areian0511 mingmingmon
+0 점핑머신 목 16:00 17:00 2 areian0511 mingmingmon
+0 점핑머신 목 18:00 19:00 2 areian0511 mingmingmon
+0 에어로빅 화 10:00 12:00 1 sdfpyj4885
+0 에어로빅 화 14:00 16:00 1 sdfpyj4885
+0 에어로빅 화 18:00 20:00 1 sdfpyj4885
+0 에어로빅 목 10:00 12:00 1 sdfpyj4885
+0 에어로빅 목 14:00 16:00 1 sdfpyj4885
+0 에어로빅 목 18:00 20:00 1 sdfpyj4885

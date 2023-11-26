@@ -93,5 +93,4 @@ public class TableSection extends JPanel implements ListSelectionListener {
             }
         }
     }
-}
-*/
+}*/

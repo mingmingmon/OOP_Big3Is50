@@ -10,7 +10,7 @@ public class Program implements Data, UIData {
     static int count = 0;
     int id;
     boolean isPT;
-    String name;
+    public String name;
     String date;
     String startTime;
     String endTime;
