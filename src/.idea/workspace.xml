@@ -5,22 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7f46f911-df66-4c0e-9c30-d6029d9fe5a8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Server/GUI/DetailDialog.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/GUI/TopPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/.name" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/.name" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/GUI/GUIMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/GUI/GUIMain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/GUI/RankingBottomPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/GUI/RankingBottomPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/GUI/RankingCardPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/GUI/RankingCardPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/GUI/RankingPage.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/GUI/TableSection.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/GUI/TableSection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/GenericManager/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/GenericManager/Manager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/Program.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Program.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/data/program-data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Server/data/program-data.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/null" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/GUI/ProgramCardPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/GUI/ProgramCardPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/GUI/ProgramCustomPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/GUI/ProgramCustomPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/GUI/ProgramDetailPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/GUI/ProgramDetailPage.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,18 +31,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/0.git/OOP_Big3Is50/src&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/0.git/OOP_Big3Is50/src",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Client.Main" />
@@ -85,11 +75,22 @@
       <updated>1700783131507</updated>
       <workItem from="1700783132498" duration="4886000" />
       <workItem from="1700789472945" duration="2543000" />
-      <workItem from="1700964301295" duration="10192000" />
+      <workItem from="1700964301295" duration="15727000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

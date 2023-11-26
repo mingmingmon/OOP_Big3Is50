@@ -21,6 +21,19 @@ public class ProgramDetailPage extends JPanel {
                 //showPanel(detailPageName, programCards, programPane);
                 programCards.show(cardPanel, "프로그램 메인화면");
             }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                // 마우스가 패널에 들어왔을 때의 동작
+                ProgramDetailPage.this.setBackground(Color.YELLOW);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                // 마우스가 패널을 벗어났을 때의 동작
+                ProgramDetailPage.this.setBackground(null); // 기본 색상으로 돌아가기
+            }
+
         });
     }
 }

@@ -21,12 +21,26 @@ public class ProgramCustomPage extends JPanel {
         descriptionLabel = new JLabel(description);
         add(descriptionLabel, BorderLayout.LINE_END);
 
+        setPreferredSize(new Dimension(400,200));
+
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 // 클릭되었을 때 다른 화면으로 이동
                 //showPanel(detailPageName, programCards, programPane);
                 programCards.show(cardPanel, detailPageName);
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                // 마우스가 패널에 들어왔을 때의 동작
+                ProgramCustomPage.this.setBackground(Color.YELLOW);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                // 마우스가 패널을 벗어났을 때의 동작
+                ProgramCustomPage.this.setBackground(null); // 기본 색상으로 돌아가기
             }
         });
     }
