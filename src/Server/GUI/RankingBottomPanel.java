@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class RankingBottomPanel extends JPanel {
-    void setUp(CardLayout cards, JPanel rankingPane){
+    void setup(CardLayout cards, JPanel cardPanel){
         JPanel bottomButtonPanel = new JPanel(new GridLayout(1,4));
 
         JButton muscleKingButton = new JButton("득근왕");
@@ -20,15 +20,16 @@ public class RankingBottomPanel extends JPanel {
 
         add(bottomButtonPanel, BorderLayout.PAGE_END);
 
-        muscleKingButton.addActionListener(e -> showPanel("득근왕", cards, rankingPane));
-        big3KingButton.addActionListener(e -> showPanel("3대왕", cards, rankingPane));
-        attendanceKingButton.addActionListener(e -> showPanel("출석왕", cards, rankingPane));
-        slimKingButton.addActionListener(e -> showPanel("멸치왕", cards, rankingPane));
+        muscleKingButton.addActionListener(e -> showPanel("득근왕", cards, cardPanel));
+        big3KingButton.addActionListener(e -> showPanel("3대왕", cards, cardPanel));
+        attendanceKingButton.addActionListener(e -> showPanel("출석왕", cards, cardPanel));
+        slimKingButton.addActionListener(e -> showPanel("멸치왕", cards, cardPanel));
 
     }
 
 
-    private void showPanel(String panelName, CardLayout cardPanel, JPanel rankingPane) {
-        cardPanel.show((Container) rankingPane.getComponent(1), panelName);
+    private void showPanel(String panelName, CardLayout cards, JPanel cardPanel) {
+        //cardPanel.show((Container) rankingPane.getComponent(1), panelName);
+        cards.show(cardPanel, panelName);
     }
 }

@@ -12,7 +12,8 @@ public class Manager <T extends Data> {
     public Manager() {
 
     }
-    public  Manager(String relativePath, Factory<T> factory) {
+
+    public Manager(String relativePath, Factory<T> factory) {
         this.relativePath = relativePath;
         scanAll(relativePath, factory);
     }
@@ -22,6 +23,7 @@ public class Manager <T extends Data> {
         dataList.add(data);
     }
     public void scanAll(String relativePath, Factory<T> factory) {
+        this.relativePath = relativePath;
         Scanner file = ServerComputer.openFile(relativePath);
         while (file.hasNext()) {
             T data = factory.create();

@@ -1,10 +1,7 @@
 0 줌바댄스 월 09:00 11:00 2 areian0511 mingmingmon
-0 요가 월 10:00 12:00 1 parkSeunghyeon
-1 PT김종국 화 18:00 20:00 1 areian0511
 0 요가 월 10:00 12:00 2 parkSeunghyeon sdfpyj4885
 1 PT-김종국 화 18:00 20:00 2 areian0511 kimEgg
 1 PT-김종국 화 20:00 22:00 2 dong82821234 chj990101
 1 PT-박승현 금 18:00 20:00 1 mingmingmon
 1 PT-박승현 금 20:00 22:00 3 kimJongKook jeondog0987 chj990101
 0 싸이클 수 12:00 13:00 10 areian0511 mingmingmon parkSeunghyeon kimJongKook kimEgg sdfpyj4885 jeondog0987 dong82821234 chj990101 hdy930405
-0 싸이클 수 13:00 14:00 0

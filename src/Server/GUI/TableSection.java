@@ -1,3 +1,4 @@
+/*
 package Server.GUI;
 
 import Server.Facade.IDataEngine;
@@ -10,7 +11,6 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.List;
 
 public class TableSection extends JPanel implements ListSelectionListener {
     JTable table;
@@ -19,6 +19,7 @@ public class TableSection extends JPanel implements ListSelectionListener {
     String tableTitle = null;
     IDataEngine<?> dataMgr;  // 엔진 쪽의 데이터를 관리하는 매니저 파사드 인터페이스
     ArrayList<?> dataList;
+    String defaultFilter;
 
     public TableSection() {
         super(new BorderLayout());
@@ -28,7 +29,8 @@ public class TableSection extends JPanel implements ListSelectionListener {
         addComponentsToPane(mgr, "");
     }
     void addComponentsToPane(IDataEngine<?> mgr, String keyword) {
-        init(mgr, keyword);
+        defaultFilter = keyword;
+        init(mgr, defaultFilter);
         JScrollPane center = new JScrollPane(table);
         add(center, BorderLayout.CENTER);
     }
@@ -55,38 +57,41 @@ public class TableSection extends JPanel implements ListSelectionListener {
     }
     // 매니저에서 검색된 객체들을 테이블에 보여준다. kwd가 ""면 모두 출력
     void loadData(String kwd) {
+        if(kwd.contentEquals("") && !defaultFilter.contentEquals(""))
+            kwd = defaultFilter;
+
         dataList = dataMgr.search(kwd); // 매니저에서 검색결과를 가져옴
         tableModel.setRowCount(0);  // 현재 데이터모델의 행을 모두 지운다
         for (Object m : dataList) {     // 한 행씩 추가함
-            System.out.println((Program)m);
             tableModel.addRow(((UIData) m).getSimpleData());
         }
     }
     // 아이템 패널에서 상세보기 버튼을 눌렀을 때 실행되는 메소드
-//    void showDetail() {
-//        if (selectedIndex < 0)
-//            return;
-//
-//        String[] uiData = ((UIData)dataList.get(selectedIndex)).getDetailData();
-//        DetailDialog dlg = new DetailDialog(uiData);
-//        dlg.setup();
-//        dlg.pack();
-//        dlg.setVisible(true);
-//    }
+    void showDetail() {
+        if (selectedIndex < 0)
+            return;
+
+        String[] uiData = ((UIData)dataList.get(selectedIndex)).getDetailData();
+        DetailDialog dlg = new DetailDialog(uiData);
+        dlg.setup();
+        dlg.pack();
+        dlg.setVisible(true);
+    }
     // 선택된 행이 변경되면 그 내용을 편집창으로 보냄
     @Override
     public void valueChanged(ListSelectionEvent e) {
-//        ListSelectionModel lsm = (ListSelectionModel)e.getSource();
-//        if (!lsm.isSelectionEmpty()) {
-//            selectedIndex = lsm.getMinSelectionIndex();
-//            String name = (String)tableModel.getValueAt(selectedIndex, 1);
-//            // 아이템 테이블의 클릭은 텍스트 필드에 값을 보여주고
-//            // 주문 테이블의 클릭은 장바구니의 값을 바꾼다
-//            if (tableTitle.equals("item")) {
-//                GUIMain.getInstance().itemTop.kwdTextField.setText(name);
-//            } else if (tableTitle.equals("order")) {
-//                GUIMain.getInstance().basketTable.loadData(""+selectedIndex);
-//            }
-//        }
+        ListSelectionModel lsm = (ListSelectionModel)e.getSource();
+        if (!lsm.isSelectionEmpty()) {
+            selectedIndex = lsm.getMinSelectionIndex();
+            String name = (String)tableModel.getValueAt(selectedIndex, 0);
+            // 아이템 테이블의 클릭은 텍스트 필드에 값을 보여주고
+            // 주문 테이블의 클릭은 장바구니의 값을 바꾼다
+            if (tableTitle.equals("Program")) {
+                GUIMain.getInstance().programTopPanel.kwdTextField.setText(name);
+            } else if (tableTitle.equals("PT")) {
+                GUIMain.getInstance().trainerTopPanel.kwdTextField.setText(name);
+            }
+        }
     }
 }
+*/

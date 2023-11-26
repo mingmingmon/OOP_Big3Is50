@@ -56,15 +56,18 @@ public class Program implements Data, UIData {
     }
     @Override
     public boolean matches(String keyword) {
-        if(keyword.contentEquals("pt") && isPT)
+        if (keyword.contentEquals("pt") && isPT)
             return true;
+        if (keyword.contentEquals("!pt") && !isPT)
+            return true;
+
         if(String.valueOf(id).contentEquals(keyword))
             return true;
         if(name.contains(keyword))
             return true;
         if(date.contains(keyword))
             return true;
-        if(startTime.compareTo(keyword) >= 0 && endTime.compareTo(keyword) <= 0)
+        if(startTime.compareTo(keyword) <= 0 && endTime.compareTo(keyword) >= 0)
             return true;
         return false;
     }
@@ -83,16 +86,13 @@ public class Program implements Data, UIData {
     }
     @Override
     public String[] getDetailData() {
-        String[] result = new String[6 + n];
-        result[0] = String.valueOf(id);
-        result[1] = isPT ? "PT" : name;
-        result[2] = name;
-        result[3] = date;
-        result[4] = startTime;
-        result[5] = endTime;
+        String[] result = new String[3];
+        result[0] = String.format("프로그램명: %s", name);
+        result[1] = String.format("시간: %s %s ~ %s", date, startTime, endTime);
+        result[2] = "참여자: ";
 
         for (int i = 0; i < n; i++)
-            result[5 + i] = membersManager.dataList.get(i).nickname;
+            result[2] += membersManager.dataList.get(i).nickname + " ";
 
         return result;
     }
