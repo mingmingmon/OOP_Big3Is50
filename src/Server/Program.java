@@ -11,7 +11,7 @@ public class Program implements Data, UIData {
     int id;
     boolean isPT;
     public String name;
-    String date;
+    public String date;
     String startTime;
     String endTime;
     int n;

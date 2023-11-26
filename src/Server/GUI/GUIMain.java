@@ -18,22 +18,12 @@ public class GUIMain {
     public static void startGUI(){
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                //GUIMain.getInstance().createAndShowGUI();
-                GUIMain.getInstance().logIn();
+                GUIMain.getInstance().createAndShowGUI();
             }
         });
     }
 
     static JFrame mainFrame = new JFrame("3대50 헬스장");
-    private JPanel logInPane;
-
-    private void logIn(){
-
-
-        createAndShowGUI();
-    }
-
-
     private void createAndShowGUI() {
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // 탭을 생성하고 home, ranking, program, trainer, myPage 총 5개 패널 추가
@@ -53,20 +43,18 @@ public class GUIMain {
 
         mainFrame.getContentPane().add(topTab);
         mainFrame.pack();
-        mainFrame.setSize(600, 1000);
+        mainFrame.setSize(500, 800);
         //mainFrame.setResizable(false);
         mainFrame.setVisible(true);
     }
 
     private JPanel homePane;
-    private TopBanner topBanner = new TopBanner();
     private void setupHomePane(){
         // 홈화면은 맨 위에 home이라는 글자 있는 배너 (JLabel)
         // 중간에 사진이랑 이름, 운동 몇 일 째 정보 하나의 pane
         // 나의 인바디, 나의 운동기록 임티랑 글씨 하나의 pane
         // 체중, 운동기록, 골격근량, 나의 프로그램, 체지방량, 나의 트레이너 부분 하나의 pane (그리드layout)
-        homePane = new JPanel(new BorderLayout());
-        homePane.add(topBanner, BorderLayout.NORTH);
+        homePane = new JPanel();
     }
 
     private JPanel rankingPane;

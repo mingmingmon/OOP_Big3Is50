@@ -6,27 +6,47 @@ import Server.ServerComputer;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class ProgramCustomPage extends JPanel {
     private JLabel imageLabel;
     private JLabel titleLabel;
     private JLabel descriptionLabel;
+    private JLabel dateLabel;
+
+    static String week = "월화수목금토일";
+    boolean[] isWorking;
+    private StringBuilder workingDate;
+
+    //private JPanel
+
     public ProgramCustomPage(String title, CardLayout programCards, JPanel cardPanel){
         setLayout(new BorderLayout());
+        setPreferredSize(new Dimension(350,150));
+
 
         String imagePath = ServerComputer.getAbsolutePath("data\\program-image\\" + title + ".png");
+        if(!new File(imagePath).exists())
+            imagePath = ServerComputer.getAbsolutePath("data\\program-image\\no image.png");
         Image image = new ImageIcon(imagePath).getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+
         imageLabel = new JLabel();
         imageLabel.setIcon(new ImageIcon(image));
         add(imageLabel, BorderLayout.LINE_START);
 
-        titleLabel = new JLabel(title);
-        add(titleLabel);
+        titleLabel = new JLabel(title, SwingConstants.CENTER);
+        Font titleLabelFont = new Font("맑은 고딕", Font.PLAIN, 30);
+        titleLabel.setFont(titleLabelFont);
+        add(titleLabel, BorderLayout.CENTER);
 
-        descriptionLabel = new JLabel(title + "입니다");
-        add(descriptionLabel, BorderLayout.LINE_END);
+        descriptionLabel = new JLabel(title + "입니다", SwingConstants.SOUTH_EAST);
+        Font descriptionLabelFont = new Font("맑은 고딕", Font.PLAIN, 10);
+        descriptionLabel.setFont(descriptionLabelFont);
+        add(descriptionLabel, BorderLayout.SOUTH);
 
-        setPreferredSize(new Dimension(350,150));
+        dateLabel = new JLabel();
 
         addMouseListener(new MouseAdapter() {
             @Override
@@ -46,11 +66,23 @@ public class ProgramCustomPage extends JPanel {
                 ProgramCustomPage.this.setBackground(null); // 기본 색상으로 돌아가기
             }
         });
+        // addMouseListener((MouseListener) this);
 
+        isWorking = new boolean[7];
+        workingDate = new StringBuilder();
     }
     public void add(Program program) {
-
+        for (int i = 0; i < 7; i++) {
+            if (program.date.contentEquals(week.charAt(i) + "") && !isWorking[i]) {
+                isWorking[i] = true;
+                workingDate.append(week.charAt(i) + " ");
+                break;
+            }
+        }
+        dateLabel.setText(workingDate.toString());
+        Font dateLabelFont = new Font("맑은 고딕", Font.PLAIN, 20);
+        dateLabel.setFont(dateLabelFont);
+        add(dateLabel, BorderLayout.LINE_END);
     }
-
 
 }
