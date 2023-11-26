@@ -20,7 +20,7 @@ public class ProgramCustomPage extends JPanel {
     boolean[] isWorking;
     private StringBuilder workingDate;
 
-    //private JPanel
+    ArrayList<Program> programList;
 
     public ProgramCustomPage(String title, CardLayout programCards, JPanel cardPanel){
         setLayout(new BorderLayout());
@@ -66,12 +66,13 @@ public class ProgramCustomPage extends JPanel {
                 ProgramCustomPage.this.setBackground(null); // 기본 색상으로 돌아가기
             }
         });
-        // addMouseListener((MouseListener) this);
 
+        programList = new ArrayList<>();
         isWorking = new boolean[7];
         workingDate = new StringBuilder();
     }
     public void add(Program program) {
+        programList.add(program);
         for (int i = 0; i < 7; i++) {
             if (program.date.contentEquals(week.charAt(i) + "") && !isWorking[i]) {
                 isWorking[i] = true;
@@ -85,4 +86,7 @@ public class ProgramCustomPage extends JPanel {
         add(dateLabel, BorderLayout.LINE_END);
     }
 
+    public void getStartTime(){
+
+    }
 }

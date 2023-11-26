@@ -7,10 +7,11 @@
     <list default="true" id="7f46f911-df66-4c0e-9c30-d6029d9fe5a8" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/../src.zip" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/my-info.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Client/my-info.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/GUI/GUIMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/GUI/GUIMain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/GUI/ProgramCardPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/GUI/ProgramCardPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/GUI/ProgramCustomPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/GUI/ProgramCustomPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/Program.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Program.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/GUI/ProgramDetailPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/GUI/ProgramDetailPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/GUI/TableSection.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/GUI/TableSection.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +82,7 @@
       <updated>1700783131507</updated>
       <workItem from="1700783132498" duration="4886000" />
       <workItem from="1700789472945" duration="2543000" />
-      <workItem from="1700964301295" duration="26277000" />
+      <workItem from="1700964301295" duration="38358000" />
     </task>
     <servers />
   </component>
