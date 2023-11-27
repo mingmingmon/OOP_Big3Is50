@@ -3,9 +3,7 @@ package Server.GUI;
 import Server.Program;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
+import javax.swing.table.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -106,10 +104,52 @@ public class ProgramDetailPage extends JPanel {
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
         add(scrollPane, BorderLayout.PAGE_START);
+
+        schedule.addMouseListener(new MouseAdapter() {
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int selectedRow = schedule.getSelectedRow();
+                int selectedColumn = schedule.getSelectedColumn();
+
+                DefaultTableCellRenderer renderer = new DefaultTableCellRenderer() {
+                    @Override
+                    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                        Component component = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+
+                        if (isSelected && selectedRow == row && selectedColumn == column) {
+                            isSelected = false;
+                            component.setBackground(Color.RED);
+                        }
+                        else if(!isSelected)
+                            component.setBackground(null);
+
+                        return component;
+                    }
+                };
+
+
+                System.out.println(selectedRow + " " + selectedColumn);
+
+                schedule.setDefaultRenderer(Object.class, renderer);
+                schedule.repaint();
+            }
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                // 마우스가 패널에 들어왔을 때의 동작
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+                // 마우스가 패널을 벗어났을 때의 동작
+            }
+        });
     }
 
     void setupMiddlePanel(String panelName){
         JLabel programNameLabel = new JLabel(panelName + " 프로그램 시간표", SwingConstants.CENTER);
+        programNameLabel.setBackground(Color.DARK_GRAY);
+        programNameLabel.setOpaque(true); // 배경 불투명하게 해야 배경색 보임
+        programNameLabel.setForeground(Color.WHITE); //글씨색 하얀색
         Font programNameLabelFont = new Font("맑은 고딕", Font.PLAIN, 15);
         programNameLabel.setFont(programNameLabelFont);
 
@@ -131,8 +171,15 @@ public class ProgramDetailPage extends JPanel {
     void setupBottomPanel(CardLayout programCards, JPanel cardPanel){
         bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
 
+        Font buttonFont = new Font("맑은 고딕", Font.PLAIN, 15);
         JButton goBackButton = new JButton("뒤로가기");
+        goBackButton.setFont(buttonFont);
+        goBackButton.setBackground(Color.BLACK);
+        goBackButton.setForeground(Color.WHITE);
         JButton applyButton = new JButton("신청하기");
+        applyButton.setFont(buttonFont);
+        applyButton.setBackground(Color.WHITE);
+        applyButton.setForeground(Color.BLACK);
 
         bottomPanel.add(goBackButton);
         bottomPanel.add(applyButton);

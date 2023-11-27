@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import Server.GenericManager.Manager;
 import Server.GenericManager.Data;
+import Server.ServerComputer;
 
 public abstract class DataEngineImpl<T extends Data> extends Manager<T>
 									implements IDataEngine<T> {
@@ -49,5 +50,6 @@ public abstract class DataEngineImpl<T extends Data> extends Manager<T>
 	}
 	public void addElement(T data) {
 		dataList.add(data);
+		ServerComputer.save();
 	}
 }

@@ -22,6 +22,17 @@ public class User implements Data {
 
     HashMap<String, Integer> rankValue = new HashMap<>();
 
+    public void scan(String id, String password, String name, String nickname, String phone, String gender) {
+        this.id = id;
+        this.password = password;
+        this.name = name;
+        this.nickname = nickname;
+        this.phone = phone;
+        this.gender = (gender.contentEquals("남성") ? 0 : 1);
+
+        ServerComputer.userHashMap.put(id, this);
+        ServerComputer.rankingSystem.addUser(this);
+    }
     @Override
     public void scan(Scanner file) {
         id = file.next();
