@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class RankingBottomPanel extends JPanel {
-    void setUp(CardLayout cards, JPanel rankingPane){
+    void setup(CardLayout cards, JPanel rankingPane){
         JPanel bottomButtonPanel = new JPanel(new GridLayout(1,4));
 
         JButton muscleKingButton = new JButton("득근왕");

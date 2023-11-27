@@ -13,7 +13,7 @@ public class ServerComputer {
 
     static String today = LocalDate.now().toString();
 
-    public static HashMap<String, User> userHashMap = new HashMap<>();
+    static HashMap<String, User> userHashMap = new HashMap<>();
     static Ranking rankingSystem = new Ranking();
 
     //Me me = new Me("..\\Client\\my-info.txt");
@@ -81,7 +81,15 @@ public class ServerComputer {
         }
         return file;
     }
-    public void joinIn() {
+    public static int getAccessType(String[] keys) {
+        if(keys.length != 2 || keys[0].contentEquals("") || keys[1].contentEquals(""))
+            return -1;
 
+        User user = userHashMap.get(keys[0]);
+        if(user == null)
+            return 1;
+        if(!user.password.contentEquals(keys[1]))
+            return 2;
+        return 0;
     }
 }

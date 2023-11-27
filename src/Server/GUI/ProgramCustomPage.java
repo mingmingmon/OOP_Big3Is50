@@ -26,6 +26,7 @@ public class ProgramCustomPage extends JPanel {
         setLayout(new BorderLayout());
         setPreferredSize(new Dimension(350,150));
 
+
         String imagePath = ServerComputer.getAbsolutePath("data\\program-image\\" + title + ".png");
         if(!new File(imagePath).exists())
             imagePath = ServerComputer.getAbsolutePath("data\\program-image\\no image.png");
@@ -35,12 +36,17 @@ public class ProgramCustomPage extends JPanel {
         imageLabel.setIcon(new ImageIcon(image));
         add(imageLabel, BorderLayout.LINE_START);
 
-        titleLabel = new JLabel(title);
-        add(titleLabel);
+        titleLabel = new JLabel(title, SwingConstants.CENTER);
+        Font titleLabelFont = new Font("맑은 고딕", Font.PLAIN, 30);
+        titleLabel.setFont(titleLabelFont);
+        add(titleLabel, BorderLayout.CENTER);
 
-        descriptionLabel = new JLabel(title + "입니다");
-        add(descriptionLabel, BorderLayout.LINE_END);
+        descriptionLabel = new JLabel(title + "입니다", SwingConstants.SOUTH_EAST);
+        Font descriptionLabelFont = new Font("맑은 고딕", Font.PLAIN, 10);
+        descriptionLabel.setFont(descriptionLabelFont);
+        add(descriptionLabel, BorderLayout.SOUTH);
 
+        dateLabel = new JLabel();
 
         addMouseListener(new MouseAdapter() {
             @Override
@@ -60,7 +66,6 @@ public class ProgramCustomPage extends JPanel {
                 ProgramCustomPage.this.setBackground(null); // 기본 색상으로 돌아가기
             }
         });
-        // addMouseListener((MouseListener) this);
 
         programList = new ArrayList<>();
         isWorking = new boolean[7];
@@ -68,7 +73,6 @@ public class ProgramCustomPage extends JPanel {
     }
     public void add(Program program) {
         programList.add(program);
-
         for (int i = 0; i < 7; i++) {
             if (program.date.contentEquals(week.charAt(i) + "") && !isWorking[i]) {
                 isWorking[i] = true;
@@ -76,22 +80,13 @@ public class ProgramCustomPage extends JPanel {
                 break;
             }
         }
-        dateLabel = new JLabel(workingDate.toString());
-        add(dateLabel, BorderLayout.SOUTH);
-
-
+        dateLabel.setText(workingDate.toString());
+        Font dateLabelFont = new Font("맑은 고딕", Font.PLAIN, 20);
+        dateLabel.setFont(dateLabelFont);
+        add(dateLabel, BorderLayout.LINE_END);
     }
 
-   /* private class PanelClickListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            // 패널이 클릭되었을 때 수행할 동작을 여기에 작성
-            cardPanel.show((Container) rankingPane.getComponent(1), panelName);
-            //JOptionPane.showMessageDialog(null, "패널이 클릭되었습니다!");
-        }
-    }*/
+    public void getStartTime(){
 
-    private void showPanel(String panelName, CardLayout cardPanel, JPanel rankingPane) {
-        cardPanel.show((Container) rankingPane.getComponent(1), panelName);
     }
 }

@@ -5,6 +5,9 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.concurrent.Flow;
 
 public class GUIMain {
     private static GUIMain guiMain = null;
@@ -18,35 +21,132 @@ public class GUIMain {
     public static void startGUI(){
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                GUIMain.getInstance().createAndShowGUI();
+                GUIMain.getInstance().setupStartPane();
             }
         });
     }
 
-    static JFrame mainFrame = new JFrame("3대50 헬스장");
-    private void createAndShowGUI() {
+    private JPanel startPane;
+    private CardLayout startCards;
+    LogIn loginCard = new LogIn();
+    LogIned loginedCard = new LogIned();
+    private void setupStartPane(){
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        // 탭을 생성하고 home, ranking, program, trainer, myPage 총 5개 패널 추가
-        JTabbedPane topTab = new JTabbedPane();
 
-        setupHomePane();
-        setupRankingPane();
-        setupProgramPane();
-        setupTrainerPane();
-        setupMyPagePane();
+        startPane = new JPanel(new BorderLayout());
+        startCards = new CardLayout();
+        JPanel cardPanel = new JPanel(startCards);
 
-        topTab.add("홈", homePane);
-        topTab.add("랭킹", rankingPane);
-        topTab.add("프로그램", programPane);
-        topTab.add("트레이너", trainerPane);
-        topTab.add("마이페이지", myPagePane);
 
-        mainFrame.getContentPane().add(topTab);
+        loginCard.setupLogInPage(cardPanel, startCards);
+        //cardPanel.add(loginCard, "로그인 페이지");
+
+        loginedCard.createAndShowGUI(cardPanel, startCards);
+        //cardPanel.add(loginedCard, "로그인후 페이지");
+
+        startPane.add(cardPanel, BorderLayout.CENTER);
+
+        //startCards.show(cardPanel, "로그인 페이지");
+
+        //mainFrame.getContentPane().add(logInPane);
+        mainFrame.getContentPane().add(startPane);
         mainFrame.pack();
-        mainFrame.setSize(400, 700);
-        //mainFrame.setResizable(false);
+        mainFrame.setSize(500, 700);
         mainFrame.setVisible(true);
     }
+
+
+    static JFrame mainFrame = new JFrame("3대50 헬스장");
+/*
+* import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class LoginFrame extends JFrame {
+    private JTextField usernameField;
+    private JPasswordField passwordField;
+
+    public LoginFrame() {
+        setTitle("로그인 화면");
+        setSize(300, 150);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        JPanel panel = new JPanel(new GridLayout(3, 2));
+
+        JLabel usernameLabel = new JLabel("사용자명:");
+        usernameField = new JTextField();
+        JLabel passwordLabel = new JLabel("비밀번호:");
+        passwordField = new JPasswordField();
+        JButton loginButton = new JButton("로그인");
+
+        panel.add(usernameLabel);
+        panel.add(usernameField);
+        panel.add(passwordLabel);
+        panel.add(passwordField);
+        panel.add(new JLabel()); // 공백 레이블
+        panel.add(loginButton);
+
+        loginButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String username = usernameField.getText();
+                char[] passwordChars = passwordField.getPassword();
+                String password = new String(passwordChars);
+
+                // 로그인 시도
+                if (attemptLogin(username, password)) {
+                    JOptionPane.showMessageDialog(LoginFrame.this, "로그인 성공!");
+                } else {
+                    JOptionPane.showMessageDialog(LoginFrame.this, "로그인 실패. 다시 시도하세요.");
+                }
+            }
+        });
+
+        add(panel);
+        setLocationRelativeTo(null); // 화면 중앙에 표시
+        setVisible(true);
+    }
+
+    private boolean attemptLogin(String username, String password) {
+        // 실제 로그인 처리를 여기에 구현
+        // 이 예제에서는 간단히 사용자명이 "user"이고 비밀번호가 "password"인 경우에만 로그인 성공으로 처리
+        return username.equals("user") && password.equals("password");
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(LoginFrame::new);
+    }
+}
+*/
+
+    class LogIned extends JPanel{
+        void createAndShowGUI(JPanel cardPanel, CardLayout startCards) {
+
+            // 탭을 생성하고 home, ranking, program, trainer, myPage 총 5개 패널 추가
+            JTabbedPane topTab = new JTabbedPane();
+
+            setupHomePane();
+            setupRankingPane();
+            setupProgramPane();
+            setupTrainerPane();
+            setupMyPagePane();
+
+            topTab.add("홈", homePane);
+            topTab.add("랭킹", rankingPane);
+            topTab.add("프로그램", programPane);
+            topTab.add("트레이너", trainerPane);
+            topTab.add("마이페이지", myPagePane);
+
+            cardPanel.add(topTab, "로그인후 페이지");
+        /*mainFrame.getContentPane().add(topTab);
+        mainFrame.pack();
+        mainFrame.setSize(500, 800);
+        //mainFrame.setResizable(false);
+        mainFrame.setVisible(true);*/
+        }
+    }
+
 
     private JPanel homePane;
     private void setupHomePane(){
@@ -59,7 +159,6 @@ public class GUIMain {
 
     private JPanel rankingPane;
     private CardLayout rankingCards;
-    private CardLayout cards;
     RankingCardPanel rankingCardPanel = new RankingCardPanel();
     RankingBottomPanel rankingBottomPanel = new RankingBottomPanel();
     private void setupRankingPane(){
@@ -68,10 +167,6 @@ public class GUIMain {
         JPanel cardPanel = new JPanel(rankingCards);
         rankingCardPanel.setup(cardPanel);
         rankingBottomPanel.setup(rankingCards, rankingPane);
-        cards = new CardLayout();
-        JPanel cardPanel = new JPanel(cards);
-        rankingCardPanel.setup(cardPanel);
-        rankingBottomPanel.setUp(cards, rankingPane);
 
         rankingPane.add(rankingBottomPanel, BorderLayout.SOUTH);
         rankingPane.add(cardPanel, BorderLayout.CENTER);

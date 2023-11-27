@@ -6,6 +6,29 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.HashMap;
 
+
+/*private JPanel programPane;
+private CardLayout programCards;
+        ProgramCardPanel programCardPanel = new ProgramCardPanel();
+//TableSection programTable = new TableSection();
+//TopPanel programTopPanel = new TopPanel();
+private void setupProgramPane(){
+        //BorderLayout은 화면을 동서남북, 중앙으로 나누고 각 영역에 BorderLayout.NORTH로 컴포넌트를 배치할 수 있음
+        programPane = new JPanel(new BorderLayout());
+        programCards = new CardLayout();
+        JPanel cardPanel = new JPanel(programCards);
+        programCardPanel.setup(cardPanel, programCards, "!pt");
+
+        programPane.add(cardPanel, BorderLayout.CENTER);
+        *//*programTable.tableTitle = "Program";
+        programTable.addComponentsToPane(ProgramGUIManager.getInstance(), "!pt");
+        programPane.add(programTable, BorderLayout.CENTER);
+        programTopPanel.setupTopPane(programTable);
+        programPane.add(programTopPanel, BorderLayout.NORTH);*//*
+        }*/
+
+
+
 public class ProgramCardPanel extends JPanel {
     static HashMap<String, ProgramCustomPage> programHashMap = new HashMap<>();
 
@@ -31,6 +54,7 @@ public class ProgramCardPanel extends JPanel {
     }
 
     private JScrollPane createProgramCustomPage(String panelName) {
+
         Box containerBox = Box.createVerticalBox();
 
         for (ProgramCustomPage programCustomPage : programHashMap.values())
@@ -47,7 +71,7 @@ public class ProgramCardPanel extends JPanel {
         return scrollPane;
     }
     private JPanel createProgramDetailPage(String panelName, CardLayout programCards, JPanel programPane) {
-        JPanel panel = new JPanel(new GridLayout(5,1));
+        JPanel panel = new JPanel(new BorderLayout());
         ProgramDetailPage detailPage = new ProgramDetailPage();
         detailPage.setup(panelName, programHashMap.get(panelName), programCards, programPane);
         panel.add(detailPage);

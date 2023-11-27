@@ -1,3 +1,4 @@
+/*
 package Server.GUI;
 
 import Server.Facade.IDataEngine;
@@ -83,13 +84,14 @@ public class TableSection extends JPanel implements ListSelectionListener {
         if (!lsm.isSelectionEmpty()) {
             selectedIndex = lsm.getMinSelectionIndex();
             String name = (String)tableModel.getValueAt(selectedIndex, 0);
-
-
-            /*if (tableTitle.equals("Program")) {
+            // 아이템 테이블의 클릭은 텍스트 필드에 값을 보여주고
+            // 주문 테이블의 클릭은 장바구니의 값을 바꾼다
+            if (tableTitle.equals("Program")) {
                 GUIMain.getInstance().programTopPanel.kwdTextField.setText(name);
             } else if (tableTitle.equals("PT")) {
                 GUIMain.getInstance().trainerTopPanel.kwdTextField.setText(name);
-            }*/
+            }
         }
     }
 }
+*/
