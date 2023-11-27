@@ -1,6 +1,7 @@
 package Server.GUI;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -43,6 +44,7 @@ public class GUIMain {
         mainFrame.getContentPane().add(topTab);
         mainFrame.pack();
         mainFrame.setSize(400, 700);
+        //mainFrame.setResizable(false);
         mainFrame.setVisible(true);
     }
 
@@ -56,39 +58,51 @@ public class GUIMain {
     }
 
     private JPanel rankingPane;
+    private CardLayout rankingCards;
+    RankingCardPanel rankingCardPanel = new RankingCardPanel();
+    RankingBottomPanel rankingBottomPanel = new RankingBottomPanel();
     private void setupRankingPane(){
         rankingPane = new JPanel(new BorderLayout());
+        rankingCards = new CardLayout();
+        JPanel cardPanel = new JPanel(rankingCards);
+        rankingCardPanel.setup(cardPanel);
+        rankingBottomPanel.setup(rankingCards, rankingPane);
+
+        rankingPane.add(rankingBottomPanel, BorderLayout.SOUTH);
+        rankingPane.add(cardPanel, BorderLayout.CENTER);
     }
 
     private JPanel programPane;
-    TableSection programTable = new TableSection();
-    TopPanel programTopPanel = new TopPanel();
+    private CardLayout programCards;
+    ProgramCardPanel programCardPanel = new ProgramCardPanel();
+    //TableSection programTable = new TableSection();
+    //TopPanel programTopPanel = new TopPanel();
     private void setupProgramPane(){
-        //BorderLayout은 화면을 동서남북, 중아으로 나누고 각 영역에 BorderLayout.NORTH로 컴포넌트를 배치할 수 있음
+        //BorderLayout은 화면을 동서남북, 중앙으로 나누고 각 영역에 BorderLayout.NORTH로 컴포넌트를 배치할 수 있음
         programPane = new JPanel(new BorderLayout());
+        programCards = new CardLayout();
+        JPanel cardPanel = new JPanel(programCards);
+        programCardPanel.setup(cardPanel, programCards, "!pt");
 
-        programTable.tableTitle = "Program";
-
+        programPane.add(cardPanel, BorderLayout.CENTER);
+        /*programTable.tableTitle = "Program";
         programTable.addComponentsToPane(ProgramGUIManager.getInstance(), "!pt");
         programPane.add(programTable, BorderLayout.CENTER);
-
         programTopPanel.setupTopPane(programTable);
-        programPane.add(programTopPanel, BorderLayout.NORTH);
+        programPane.add(programTopPanel, BorderLayout.NORTH);*/
     }
 
     private JPanel trainerPane;
-    TableSection trainerTable = new TableSection();
-    TopPanel trainerTopPanel = new TopPanel();
+    /*TableSection trainerTable = new TableSection();
+    TopPanel trainerTopPanel = new TopPanel();*/
     private void setupTrainerPane(){
         trainerPane = new JPanel(new BorderLayout());
 
-        trainerTable.tableTitle = "PT";
-
+       /* trainerTable.tableTitle = "PT";
         trainerTable.addComponentsToPane(ProgramGUIManager.getInstance(), "pt");
         trainerPane.add(trainerTable, BorderLayout.CENTER);
-
         trainerTopPanel.setupTopPane(trainerTable);
-        trainerPane.add(trainerTopPanel, BorderLayout.NORTH);
+        trainerPane.add(trainerTopPanel, BorderLayout.NORTH);*/
     }
 
     private JPanel myPagePane;
@@ -97,109 +111,3 @@ public class GUIMain {
     }
 }
 
-/* cardLayout = new CardLayout();
-        cardPanel = new JPanel(cardLayout);
-
-        // 홈 화면
-        JPanel homePanel = new JPanel();
-        homePanel.add(new JLabel("홈화면"));
-
-        JButton rankingButton = new JButton("랭킹보기");
-        JButton myPageButton = new JButton("마이페이지");
-        JButton programListButton = new JButton("프로그램 리스트");
-        JButton trainerListButton = new JButton("트레이너 리스트");
-
-        rankingButton.setBounds(30,170,122,30);
-        myPageButton.setBounds(182,170,122,30);
-
-
-        rankingButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cardLayout.show(cardPanel, "랭킹보기");
-            }
-        });
-        myPageButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cardLayout.show(cardPanel, "마이페이지");
-            }
-        });
-        programListButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cardLayout.show(cardPanel, "프로그램 리스트");
-            }
-        });
-        trainerListButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cardLayout.show(cardPanel, "트레이너 리스트");
-            }
-        });
-
-        homePanel.add(rankingButton);
-        homePanel.add(myPageButton);
-        homePanel.add(programListButton);
-        homePanel.add(trainerListButton);
-
-        // 랭킹 화면
-        JPanel rankingPanel = new JPanel();
-        rankingPanel.add(new JLabel("랭킹보기"));
-        JButton switchBackButton = new JButton("홈화면으로 돌아가기");
-        switchBackButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cardLayout.show(cardPanel, "홈화면");
-            }
-        });
-        rankingPanel.add(switchBackButton);
-
-        // 마이페이지 화면
-        JPanel myPagePanel = new JPanel();
-        myPagePanel.add(new JLabel("마이페이지보기"));
-        switchBackButton = new JButton("홈화면으로 돌아가기");
-        switchBackButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cardLayout.show(cardPanel, "홈화면");
-            }
-        });
-        myPagePanel.add(switchBackButton);
-
-        // 프로그램 화면
-        JPanel programListPanel = new JPanel();
-        programListPanel.add(new JLabel("프로그램 리스트"));
-        switchBackButton = new JButton("홈화면으로 돌아가기");
-        switchBackButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cardLayout.show(cardPanel, "홈화면");
-            }
-        });
-        programListPanel.add(switchBackButton);
-
-        // 프로그램 화면
-        JPanel trainerListPanel = new JPanel();
-        trainerListPanel.add(new JLabel("트레이너 리스트"));
-        switchBackButton = new JButton("홈화면으로 돌아가기");
-        switchBackButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cardLayout.show(cardPanel, "홈화면");
-            }
-        });
-        trainerListPanel.add(switchBackButton);
-
-        cardPanel.add(homePanel, "홈화면");
-        cardPanel.add(rankingPanel, "랭킹보기");
-        cardPanel.add(myPagePanel, "마이페이지");
-        cardPanel.add(programListPanel, "프로그램 리스트");
-        cardPanel.add(trainerListPanel, "트레이너 리스트");
-
-        frame.add(cardPanel);
-
-        frame.setSize(400, 700);
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-    }*/

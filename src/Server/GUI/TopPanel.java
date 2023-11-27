@@ -1,3 +1,4 @@
+/*
 package Server.GUI;
 
 import Server.GUI.TableSection;
@@ -38,3 +39,4 @@ public class TopPanel extends JPanel {
         });
     }
 }
+*/

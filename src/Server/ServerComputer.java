@@ -13,7 +13,7 @@ public class ServerComputer {
 
     static String today = LocalDate.now().toString();
 
-    static HashMap<String, User> userHashMap = new HashMap<>();
+    public static HashMap<String, User> userHashMap = new HashMap<>();
     static Ranking rankingSystem = new Ranking();
 
     //Me me = new Me("..\\Client\\my-info.txt");
@@ -80,5 +80,8 @@ public class ServerComputer {
             System.exit(0);
         }
         return file;
+    }
+    public void joinIn() {
+
     }
 }
