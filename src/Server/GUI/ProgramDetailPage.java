@@ -110,6 +110,9 @@ public class ProgramDetailPage extends JPanel {
 
     void setupMiddlePanel(String panelName){
         JLabel programNameLabel = new JLabel(panelName + " 프로그램 시간표", SwingConstants.CENTER);
+        programNameLabel.setBackground(Color.DARK_GRAY);
+        programNameLabel.setOpaque(true); // 배경 불투명하게 해야 배경색 보임
+        programNameLabel.setForeground(Color.WHITE); //글씨색 하얀색
         Font programNameLabelFont = new Font("맑은 고딕", Font.PLAIN, 15);
         programNameLabel.setFont(programNameLabelFont);
 
@@ -131,8 +134,15 @@ public class ProgramDetailPage extends JPanel {
     void setupBottomPanel(CardLayout programCards, JPanel cardPanel){
         bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
 
+        Font buttonFont = new Font("맑은 고딕", Font.PLAIN, 15);
         JButton goBackButton = new JButton("뒤로가기");
+        goBackButton.setFont(buttonFont);
+        goBackButton.setBackground(Color.BLACK);
+        goBackButton.setForeground(Color.WHITE);
         JButton applyButton = new JButton("신청하기");
+        applyButton.setFont(buttonFont);
+        applyButton.setBackground(Color.WHITE);
+        applyButton.setForeground(Color.BLACK);
 
         bottomPanel.add(goBackButton);
         bottomPanel.add(applyButton);

@@ -5,12 +5,14 @@ import java.awt.*;
 
 public class RankingBottomPanel extends JPanel {
     void setup(CardLayout cards, JPanel rankingPane){
+        Font middleFont = new Font("맑은 고딕", Font.BOLD, 10);
         JPanel bottomButtonPanel = new JPanel(new GridLayout(1,4));
 
         JButton muscleKingButton = new JButton("득근왕");
+        muscleKingButton.setPreferredSize(new Dimension(50,30));
         JButton big3KingButton = new JButton("3대왕");
         JButton attendanceKingButton = new JButton("출석왕");
-        JButton slimKingButton = new JButton("멸치왕");
+        JButton slimKingButton = new JButton("연소왕");
 
 
         bottomButtonPanel.add(muscleKingButton);
@@ -23,7 +25,7 @@ public class RankingBottomPanel extends JPanel {
         muscleKingButton.addActionListener(e -> showPanel("득근왕", cards, rankingPane));
         big3KingButton.addActionListener(e -> showPanel("3대왕", cards, rankingPane));
         attendanceKingButton.addActionListener(e -> showPanel("출석왕", cards, rankingPane));
-        slimKingButton.addActionListener(e -> showPanel("멸치왕", cards, rankingPane));
+        slimKingButton.addActionListener(e -> showPanel("연소왕", cards, rankingPane));
     }
 
 

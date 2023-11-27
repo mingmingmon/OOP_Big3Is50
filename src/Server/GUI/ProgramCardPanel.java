@@ -65,7 +65,7 @@ public class ProgramCardPanel extends JPanel {
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         //int visiblePages = 4;
 
-        //이게 스크롤 속도 조절하는 것 같음.
+        //이게 스크롤 속도 조절하는 부분.
         scrollPane.getVerticalScrollBar().setUnitIncrement(containerBox.getComponent(0).getPreferredSize().height / 8);
         //scrollPane.getVerticalScrollBar().setBlockIncrement(visiblePages * containerBox.getComponent(0).getPreferredSize().height);
         return scrollPane;

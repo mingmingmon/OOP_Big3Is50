@@ -42,7 +42,7 @@ public class ProgramCustomPage extends JPanel {
         add(titleLabel, BorderLayout.CENTER);
 
         descriptionLabel = new JLabel(title + "입니다", SwingConstants.SOUTH_EAST);
-        Font descriptionLabelFont = new Font("맑은 고딕", Font.PLAIN, 10);
+        Font descriptionLabelFont = new Font("맑은 고딕", Font.PLAIN, 15);
         descriptionLabel.setFont(descriptionLabelFont);
         add(descriptionLabel, BorderLayout.SOUTH);
 
@@ -58,7 +58,7 @@ public class ProgramCustomPage extends JPanel {
             @Override
             public void mouseEntered(MouseEvent e) {
                 // 마우스가 패널에 들어왔을 때의 동작
-                ProgramCustomPage.this.setBackground(Color.YELLOW);
+                ProgramCustomPage.this.setBackground(Color.GRAY);
             }
             @Override
             public void mouseExited(MouseEvent e) {
@@ -70,6 +70,8 @@ public class ProgramCustomPage extends JPanel {
         programList = new ArrayList<>();
         isWorking = new boolean[7];
         workingDate = new StringBuilder();
+        workingDate.append("요일 : ");
+
     }
     public void add(Program program) {
         programList.add(program);
@@ -81,7 +83,7 @@ public class ProgramCustomPage extends JPanel {
             }
         }
         dateLabel.setText(workingDate.toString());
-        Font dateLabelFont = new Font("맑은 고딕", Font.PLAIN, 20);
+        Font dateLabelFont = new Font("맑은 고딕", Font.PLAIN, 17);
         dateLabel.setFont(dateLabelFont);
         add(dateLabel, BorderLayout.LINE_END);
     }
