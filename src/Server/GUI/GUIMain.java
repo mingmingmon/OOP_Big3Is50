@@ -31,7 +31,7 @@ public class GUIMain {
     private JPanel startPane;
     private CardLayout startCards;
     LogIn loginCard = new LogIn();
-    LogIned loginedCard = new LogIned();
+    static LogIned loginedCard;
     Join joinCard = new Join();
     private void setupStartPane(){
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -42,7 +42,6 @@ public class GUIMain {
 
 
         loginCard.setupLogInPage(cardPanel, startCards);
-        loginedCard.createAndShowGUI(cardPanel/*, startCards*/);
         joinCard.setupJoinPage(cardPanel, startCards);
         startPane.add(cardPanel, BorderLayout.CENTER);
 
@@ -140,4 +139,3 @@ public class GUIMain {
         myPagePane = new JPanel(new BorderLayout());
     }*/
 }
-

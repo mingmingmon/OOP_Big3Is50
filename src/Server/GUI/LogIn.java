@@ -103,6 +103,10 @@ public class LogIn extends JPanel {
         }
         GUIMain.me = ServerComputer.getUser(idField.getText());
         ServerComputer.save();
+
+        GUIMain.loginedCard = new LogIned();
+        GUIMain.loginedCard.createAndShowGUI(cardPanel);
+
         startCards.show(cardPanel, "로그인후 페이지");
     }
 }

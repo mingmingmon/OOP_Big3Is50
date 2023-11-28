@@ -22,14 +22,14 @@ public class ProgramDetailPage extends JPanel {
         setupBottomPanel(programCards, cardPanel);
     }
 
-/*    void setupTopPanel(String panelName){
-        topPanel = new JPanel(new BorderLayout());
-        JLabel programNameLabel = new JLabel(panelName + "프로그램 시간표", SwingConstants.CENTER);
-        Font programNameLabelFont = new Font("맑은 고딕", Font.PLAIN, 15);
-        programNameLabel.setFont(programNameLabelFont);
-        topPanel.add(programNameLabel, BorderLayout.CENTER);
-        add(topPanel, BorderLayout.NORTH);
-    }*/
+    /*    void setupTopPanel(String panelName){
+            topPanel = new JPanel(new BorderLayout());
+            JLabel programNameLabel = new JLabel(panelName + "프로그램 시간표", SwingConstants.CENTER);
+            Font programNameLabelFont = new Font("맑은 고딕", Font.PLAIN, 15);
+            programNameLabel.setFont(programNameLabelFont);
+            topPanel.add(programNameLabel, BorderLayout.CENTER);
+            add(topPanel, BorderLayout.NORTH);
+        }*/
     void setupTable(String panelName, ProgramCustomPage programCustomPage) {
 
         class CustomTableCellRenderer extends DefaultTableCellRenderer {

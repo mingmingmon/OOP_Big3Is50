@@ -82,6 +82,15 @@ public class User implements Data {
         System.out.printf("%s 회원님의 프로그램\n", nickname);
         myProgramManager.printAll();
     }
+    public String getInfo(String need) {
+        if(need.contentEquals("id"))
+            return id;
+        if(need.contentEquals("name"))
+            return name;
+        if(need.contentEquals("nickname"))
+            return nickname;
+        return null;
+    }
 
     public int getBig3() {
         int squat = 0;

@@ -6,9 +6,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class Ranking {
-    ArrayList<Rank> rankList = new ArrayList<>();
-
-    static HashMap<String, Comparator<User>> standHashMap = new HashMap<>();
+    static ArrayList<Rank> rankList = new ArrayList<>();
 
     Ranking() {
         rankList.add(new Rank("3대왕", "3대", "kg 달성",Comparator.comparingInt(User::getBig3).reversed()));
@@ -28,5 +26,29 @@ public class Ranking {
     void print() {
         for (Rank rank : rankList)
             rank.print();
+    }
+
+    public static int getIdxByRankName(String rankName) {
+        for (int i = 0; i < rankList.size(); i++) {
+            if (rankList.get(i).rankName.contentEquals(rankName))
+                return i;
+        }
+        return -1;
+    }
+    public static String getIDByRanker(String rankName, int idx) {
+        int rankIdx = Ranking.getIdxByRankName(rankName);
+        return rankList.get(rankIdx).userRankList.get(idx).id;
+    }
+    public static String getNicknameByRanker(String rankName, int idx) {
+        int rankIdx = Ranking.getIdxByRankName(rankName);
+        return rankList.get(rankIdx).userRankList.get(idx).nickname;
+    }
+    public static String getValueByRanker(String rankName, int idx) {
+        int rankIdx = Ranking.getIdxByRankName(rankName);
+
+        String result = rankList.get(rankIdx).comment1
+                + rankList.get(rankIdx).userRankList.get(idx).rankValue.get(rankName)
+                + rankList.get(rankIdx).comment2;
+        return result;
     }
 }

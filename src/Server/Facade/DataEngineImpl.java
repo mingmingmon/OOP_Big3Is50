@@ -7,7 +7,7 @@ import Server.GenericManager.Data;
 import Server.ServerComputer;
 
 public abstract class DataEngineImpl<T extends Data> extends Manager<T>
-									implements IDataEngine<T> {
+		implements IDataEngine<T> {
 	String[] labels = null;
 
 	public void setLabels(String[] labels) {
@@ -18,12 +18,12 @@ public abstract class DataEngineImpl<T extends Data> extends Manager<T>
 		return labels.length;
 	}
 	// 테이블의 열 제목을 스트링 배열로 돌려줌
-	public String[] getColumnNames() {		
+	public String[] getColumnNames() {
 		return labels;
 	}
 	@Override
 	public void addNewItem(String[] uiTexts) {
-		// TODO Auto-generated method stub	
+		// TODO Auto-generated method stub
 	}
 	@Override
 	public ArrayList<T> search(String keyword) {

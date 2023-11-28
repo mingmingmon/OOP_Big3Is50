@@ -145,10 +145,10 @@ public class Join extends JLabel {
 
     void tryJoinIn(JPanel cardPanel, CardLayout startCards) {
         if (idField.getText().contentEquals("")
-        || passwordField.getText().contentEquals("")
-        || nameField.getText().contentEquals("")
-        || nickNameField.getText().contentEquals("")
-        || phoneNumberField.getText().contentEquals("   -    -    ")) {
+                || passwordField.getText().contentEquals("")
+                || nameField.getText().contentEquals("")
+                || nickNameField.getText().contentEquals("")
+                || phoneNumberField.getText().contentEquals("   -    -    ")) {
             JOptionPane.showMessageDialog(joinPane, "올바른 입력이 아닙니다.");
             return;
         }

@@ -123,4 +123,6 @@ public class ServerComputer {
         InbodyGUIManager.getInstance().saveFile();
         ProgramGUIManager.getInstance().saveFile();
     }
+
+
 }
