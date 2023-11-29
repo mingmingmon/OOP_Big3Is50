@@ -28,4 +28,8 @@ public class UserData implements Data {
     public boolean matches(String keyword) {
         return true;
     }
+
+    public void addUser(User user) {
+        userManager.dataList.add(user);
+    }
 }

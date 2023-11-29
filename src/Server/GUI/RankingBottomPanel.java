@@ -4,13 +4,30 @@ import javax.swing.*;
 import java.awt.*;
 
 public class RankingBottomPanel extends JPanel {
-    void setUp(CardLayout cards, JPanel rankingPane){
+    void setup(CardLayout cards, JPanel rankingPane){
+        Font middleFont = new Font("맑은 고딕", Font.BOLD, 20);
         JPanel bottomButtonPanel = new JPanel(new GridLayout(1,4));
 
         JButton muscleKingButton = new JButton("득근왕");
+        muscleKingButton.setPreferredSize(new Dimension(100,30));
+        muscleKingButton.setFont(middleFont);
+        muscleKingButton.setBackground(Color.pink);
+        muscleKingButton.setForeground(Color.BLACK);
         JButton big3KingButton = new JButton("3대왕");
+        big3KingButton.setPreferredSize(new Dimension(100,30));
+        big3KingButton.setFont(middleFont);
+        big3KingButton.setBackground(Color.pink);
+        big3KingButton.setForeground(Color.BLACK);
         JButton attendanceKingButton = new JButton("출석왕");
-        JButton slimKingButton = new JButton("멸치왕");
+        attendanceKingButton.setPreferredSize(new Dimension(100,30));
+        attendanceKingButton.setFont(middleFont);
+        attendanceKingButton.setBackground(Color.pink);
+        attendanceKingButton.setForeground(Color.BLACK);
+        JButton slimKingButton = new JButton("연소왕");
+        slimKingButton.setPreferredSize(new Dimension(100,30));
+        slimKingButton.setFont(middleFont);
+        slimKingButton.setBackground(Color.pink);
+        slimKingButton.setForeground(Color.BLACK);
 
 
         bottomButtonPanel.add(muscleKingButton);
@@ -23,8 +40,7 @@ public class RankingBottomPanel extends JPanel {
         muscleKingButton.addActionListener(e -> showPanel("득근왕", cards, rankingPane));
         big3KingButton.addActionListener(e -> showPanel("3대왕", cards, rankingPane));
         attendanceKingButton.addActionListener(e -> showPanel("출석왕", cards, rankingPane));
-        slimKingButton.addActionListener(e -> showPanel("멸치왕", cards, rankingPane));
-
+        slimKingButton.addActionListener(e -> showPanel("연소왕", cards, rankingPane));
     }
 
 

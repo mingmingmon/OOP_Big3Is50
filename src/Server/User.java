@@ -22,6 +22,17 @@ public class User implements Data {
 
     HashMap<String, Integer> rankValue = new HashMap<>();
 
+    public void scan(String id, String password, String name, String nickname, String phone, String gender) {
+        this.id = id;
+        this.password = password;
+        this.name = name;
+        this.nickname = nickname;
+        this.phone = phone;
+        this.gender = (gender.contentEquals("남성") ? 0 : 1);
+
+        ServerComputer.userHashMap.put(id, this);
+        ServerComputer.rankingSystem.addUser(this);
+    }
     @Override
     public void scan(Scanner file) {
         id = file.next();
@@ -70,6 +81,15 @@ public class User implements Data {
     public void printMyProgram(){
         System.out.printf("%s 회원님의 프로그램\n", nickname);
         myProgramManager.printAll();
+    }
+    public String getInfo(String need) {
+        if(need.contentEquals("id"))
+            return id;
+        if(need.contentEquals("name"))
+            return name;
+        if(need.contentEquals("nickname"))
+            return nickname;
+        return null;
     }
 
     public int getBig3() {
@@ -151,5 +171,12 @@ public class User implements Data {
         }
         rankValue.put("출석왕", result);
         return result;
+    }
+
+    public void participateProgram(Program program) {
+        myProgramManager.dataList.add(program);
+    }
+    public void cancelProgram(Program program) {
+        myProgramManager.dataList.remove(program);
     }
 }
