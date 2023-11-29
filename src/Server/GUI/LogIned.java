@@ -58,14 +58,18 @@ class LogIned extends JPanel {
         programCardPanel.setup(cardPanel, programCards, "!pt");
 
         programPane.add(cardPanel, BorderLayout.CENTER);
-
     }
 
     private JPanel trainerPane;
-
+    private CardLayout trainerCards;
+    ProgramCardPanel trainerCardPanel = new ProgramCardPanel();
     private void setupTrainerPane(){
         trainerPane = new JPanel(new BorderLayout());
+        trainerCards = new CardLayout();
+        JPanel cardPanel = new JPanel(trainerCards);
+        trainerCardPanel.setup(cardPanel, trainerCards, "pt");
 
+        trainerPane.add(cardPanel, BorderLayout.CENTER);
     }
 
     private JPanel myPagePane;

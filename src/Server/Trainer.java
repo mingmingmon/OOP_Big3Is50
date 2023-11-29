@@ -22,6 +22,8 @@ public class Trainer extends User implements Data {
         for (int i = 0; i < n; i++) {
             awards.add(file.next());
         }
+
+        Program.trainerHashMap.put("PT-" + name, id);
     }
 
     @Override

@@ -1,6 +1,8 @@
 package Server.GUI;
 
 import Server.Program;
+import Server.ServerComputer;
+import Server.User;
 
 import javax.swing.*;
 import javax.swing.table.*;
@@ -15,44 +17,22 @@ public class ProgramDetailPage extends JPanel {
     private JPanel topPanel;
     private JPanel middlePanel;
     private JPanel bottomPanel;
-    void setup(String panelName, ProgramCustomPage programCustomPage, CardLayout programCards, JPanel cardPanel){
+    private ProgramCustomPage programCustomPage;
+    private Program[][] timeTable;
+    private String participants;
+    private JLabel nameLabel;
+    private JButton applyButton;
+    private Program selectedProgram;
+    private boolean isParticipatedProgram;
+
+    void setup(String panelName, ProgramCustomPage programCustomPage, CardLayout programCards, JPanel cardPanel) {
+        this.programCustomPage = programCustomPage;
         //setupTopPanel(panelName);
         setupTable(panelName, programCustomPage);
         setupMiddlePanel(panelName);
         setupBottomPanel(programCards, cardPanel);
     }
-
-    /*    void setupTopPanel(String panelName){
-            topPanel = new JPanel(new BorderLayout());
-            JLabel programNameLabel = new JLabel(panelName + "프로그램 시간표", SwingConstants.CENTER);
-            Font programNameLabelFont = new Font("맑은 고딕", Font.PLAIN, 15);
-            programNameLabel.setFont(programNameLabelFont);
-            topPanel.add(programNameLabel, BorderLayout.CENTER);
-            add(topPanel, BorderLayout.NORTH);
-        }*/
     void setupTable(String panelName, ProgramCustomPage programCustomPage) {
-
-        class CustomTableCellRenderer extends DefaultTableCellRenderer {
-            @Override
-            public Component getTableCellRendererComponent(
-                    JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-
-                Component component = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-
-                //programPage에서 programList로 해당하는 부분 색깔 칠하기..
-                //신청 가능 영역을 클릭하면 참여자가 뜨도록
-
-               /* // 특정 조건에 따라 배경색 설정
-                if (row == 2 && column == 2) {
-                    component.setBackground(Color.RED);
-                } else {
-                    // 기본 배경색
-                    component.setBackground(table.getBackground());
-                }*/
-
-                return component;
-            }
-        }
 
         setLayout(new BorderLayout());
         String[] header = {"시간대", "월", "화", "수", "목", "금", "토", "일"};
@@ -61,6 +41,20 @@ public class ProgramDetailPage extends JPanel {
                 return false;
             }
         };
+
+        timeTable = new Program[12][8];
+        for (Program program : programCustomPage.programList) {
+            int dateIdx = 0;
+            for (int i = 0; !header[i].contentEquals(program.date); i++)
+                dateIdx++;
+
+            int startIdx = Integer.parseInt(program.startTime.substring(0, 2)) - 9;
+            int endIdx = Integer.parseInt(program.endTime.substring(0, 2)) - 9;
+
+            for (int i = startIdx; i < endIdx; i++) {
+                timeTable[i][dateIdx] = program;
+            }
+        }
 
         tableModel.setValueAt("09:00 ~ 10:00", 0, 0);
         tableModel.setValueAt("10:00 ~ 11:00", 1, 0);
@@ -97,6 +91,20 @@ public class ProgramDetailPage extends JPanel {
         schedule.setFillsViewportHeight(true);
         schedule.setCellSelectionEnabled(true);
 
+        class CustomTableCellRenderer extends DefaultTableCellRenderer {
+            @Override
+            public Component getTableCellRendererComponent(
+                    JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+
+                Component component = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+                if(timeTable[row][column] != null)
+                    component.setBackground(Color.CYAN);
+                else
+                    component.setBackground(null);
+                return component;
+            }
+        }
+
         // 셀 렌더러 설정
         schedule.setDefaultRenderer(Object.class, new CustomTableCellRenderer());
 
@@ -117,22 +125,23 @@ public class ProgramDetailPage extends JPanel {
                     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
                         Component component = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 
-                        if (isSelected && selectedRow == row && selectedColumn == column) {
-                            isSelected = false;
+                        if (isSelected && selectedRow == row && selectedColumn == column)
                             component.setBackground(Color.RED);
-                        }
-                        else if(!isSelected)
+                        else if(timeTable[row][column] != null)
+                            component.setBackground(Color.CYAN);
+                        else
                             component.setBackground(null);
-
                         return component;
                     }
                 };
 
-
-                System.out.println(selectedRow + " " + selectedColumn);
-
                 schedule.setDefaultRenderer(Object.class, renderer);
                 schedule.repaint();
+
+                selectedProgram = timeTable[selectedRow][selectedColumn];
+                updateParticipants();
+                isParticipatedProgram = isParticipatedProgram();
+                applyButton.setText(isParticipatedProgram ? "신청취소" : "신청하기");
             }
             @Override
             public void mouseEntered(MouseEvent e) {
@@ -144,7 +153,6 @@ public class ProgramDetailPage extends JPanel {
             }
         });
     }
-
     void setupMiddlePanel(String panelName){
         JLabel programNameLabel = new JLabel(panelName + " 프로그램 시간표", SwingConstants.CENTER);
         programNameLabel.setBackground(Color.DARK_GRAY);
@@ -161,13 +169,12 @@ public class ProgramDetailPage extends JPanel {
         participantsLabel.setFont(participantsFont);
         middlePanel.add(participantsLabel, BorderLayout.LINE_START);
 
-        JLabel nameLabel = new JLabel("mingmingmon", SwingConstants.CENTER);
+        nameLabel = new JLabel(participants, SwingConstants.CENTER);
         Font nameLabelFont = new Font("맑은 고딕", Font.PLAIN, 20);
         nameLabel.setFont(nameLabelFont);
         middlePanel.add(nameLabel, BorderLayout.CENTER);
         add(middlePanel,BorderLayout.CENTER);
     }
-
     void setupBottomPanel(CardLayout programCards, JPanel cardPanel){
         bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
 
@@ -176,7 +183,8 @@ public class ProgramDetailPage extends JPanel {
         goBackButton.setFont(buttonFont);
         goBackButton.setBackground(Color.BLACK);
         goBackButton.setForeground(Color.WHITE);
-        JButton applyButton = new JButton("신청하기");
+
+        applyButton = new JButton("신청하기");
         applyButton.setFont(buttonFont);
         applyButton.setBackground(Color.WHITE);
         applyButton.setForeground(Color.BLACK);
@@ -194,11 +202,51 @@ public class ProgramDetailPage extends JPanel {
         applyButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                JOptionPane.showMessageDialog(bottomPanel, "신청되었습니다!");
+                if (!isParticipatedProgram)
+                    joinProgram();
+                else
+                    cancelProgram();
+
+                updateParticipants();
+                ServerComputer.save();
+
+                isParticipatedProgram = isParticipatedProgram();
+                applyButton.setText(isParticipatedProgram ? "신청취소" : "신청하기");
             }
         });
-
         add(bottomPanel, BorderLayout.SOUTH);
+    }
+    void joinProgram() {
+        selectedProgram.addNewUser(GUIMain.me);
+        GUIMain.me.participateProgram(selectedProgram);
+
+        JOptionPane.showMessageDialog(bottomPanel, "신청되었습니다!");
+    }
+    void cancelProgram() {
+        selectedProgram.deleteUser(GUIMain.me);
+        GUIMain.me.cancelProgram(selectedProgram);
+
+        JOptionPane.showMessageDialog(bottomPanel, "취소되었습니다..");
+    }
+    void updateParticipants() {
+        StringBuilder result = new StringBuilder();
+
+        if (selectedProgram != null) {
+            for (User user : selectedProgram.membersManager.dataList)
+                result.append(user.getInfo("nickname") + " ");
+        }
+        participants = result.toString();
+        nameLabel.setText(participants);
+    }
+    boolean isParticipatedProgram() {
+        if(selectedProgram == null)
+            return false;
+
+        for (User user : selectedProgram.membersManager.dataList) {
+            if(user == GUIMain.me)
+                return true;
+        }
+        return false;
     }
 }
 

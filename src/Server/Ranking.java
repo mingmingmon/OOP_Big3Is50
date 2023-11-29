@@ -36,19 +36,27 @@ public class Ranking {
         return -1;
     }
     public static String getIDByRanker(String rankName, int idx) {
-        int rankIdx = Ranking.getIdxByRankName(rankName);
+        int rankIdx = getIdxByRankName(rankName);
         return rankList.get(rankIdx).userRankList.get(idx).id;
     }
     public static String getNicknameByRanker(String rankName, int idx) {
-        int rankIdx = Ranking.getIdxByRankName(rankName);
+        int rankIdx = getIdxByRankName(rankName);
         return rankList.get(rankIdx).userRankList.get(idx).nickname;
     }
     public static String getValueByRanker(String rankName, int idx) {
-        int rankIdx = Ranking.getIdxByRankName(rankName);
+        int rankIdx = getIdxByRankName(rankName);
 
         String result = rankList.get(rankIdx).comment1
                 + rankList.get(rankIdx).userRankList.get(idx).rankValue.get(rankName)
                 + rankList.get(rankIdx).comment2;
         return result;
+    }
+    public static int getRankByID(String rankName, String userID) {
+        int rankIdx = getIdxByRankName(rankName);
+        for (int i = 0; i < rankList.get(rankIdx).userRankList.size(); i++) {
+            if(rankList.get(rankIdx).userRankList.get(i).id.contentEquals(userID))
+                return i;
+        }
+        return -1;
     }
 }

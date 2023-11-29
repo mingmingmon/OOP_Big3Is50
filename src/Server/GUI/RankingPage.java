@@ -3,6 +3,7 @@ package Server.GUI;
 import Server.Rank;
 import Server.Ranking;
 import Server.ServerComputer;
+import Server.User;
 
 import javax.swing.*;
 import java.awt.*;
@@ -43,12 +44,10 @@ public class RankingPage extends JPanel {
         for (int i = 0; i < Rank.CNT_RANK; i++) {
             JPanel personPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 30,30));
             JLabel personImageLabel = new JLabel();
-            //각 랭킹별로 아이디가 제목인 이미지 파일 불러옴.
-            String personImagePath = ServerComputer.getAbsolutePath("data\\user-image\\" + Ranking.getIDByRanker(rankingName, i) + ".png");
-            if(!new File(personImagePath).exists())
-                personImagePath = ServerComputer.getAbsolutePath("data\\user-image\\no image.png");
 
-            Image personImage = new ImageIcon(personImagePath).getImage().getScaledInstance(100,100,Image.SCALE_SMOOTH);
+            //각 랭킹별로 아이디가 제목인 이미지 파일 불러옴.
+            String relativePath = "data\\user-image\\" + Ranking.getIDByRanker(rankingName, i) + ".png";
+            Image personImage = ServerComputer.getImage(relativePath, true, 100, 100, Image.SCALE_SMOOTH);
             personImageLabel.setIcon(new ImageIcon(personImage));
 
             personPanel.add(personImageLabel);
@@ -67,8 +66,8 @@ public class RankingPage extends JPanel {
 
             //알맞은 그림으로 수정필요.-->지윤님이 이미지 파일 주면 가능.
             JLabel medalImageLabel = new JLabel();
-            String medalImagePath = ServerComputer.getAbsolutePath("data\\ranking-image\\" + (i + 1) + ".png");
-            Image medalImage = new ImageIcon(medalImagePath).getImage().getScaledInstance(70,70,Image.SCALE_SMOOTH);
+            String medalImagePath = "data\\ranking-image\\" + (i + 1) + ".png";
+            Image medalImage = ServerComputer.getImage(medalImagePath, false, 70, 70, Image.SCALE_SMOOTH);
             medalImageLabel.setIcon(new ImageIcon(medalImage));
 
             personPanel.add(medalImageLabel);
@@ -76,32 +75,34 @@ public class RankingPage extends JPanel {
             midPanel.add(personPanel);
         }
 
-        if (GUIMain.me != null) {
-            //내 등수
-            JPanel mePanel = new JPanel(new FlowLayout(FlowLayout.LEFT,30,30));
-            JLabel meImageLabel = new JLabel();
-            String meImagePath = ServerComputer.getAbsolutePath("data\\user-image\\kimJongKook.png");
-            Image meImage = new ImageIcon(meImagePath).getImage().getScaledInstance(100,100,Image.SCALE_SMOOTH);
-            meImageLabel.setIcon(new ImageIcon(meImage));
 
-            mePanel.add(meImageLabel);
+        //내 등수
+        int myRank = Ranking.getRankByID(rankingName, GUIMain.me.getInfo("id"));
 
-            JLabel nickname = new JLabel(GUIMain.me.getInfo("nickname"), SwingConstants.CENTER);
-            nickname.setFont(bigFont);
+        JPanel mePanel = new JPanel(new FlowLayout(FlowLayout.LEFT,30,30));
+        JLabel meImageLabel = new JLabel();
+        String meImagePath = "data\\user-image\\" + Ranking.getIDByRanker(rankingName, myRank) + ".png";
 
-            mePanel.add(nickname);
+        Image meImage = ServerComputer.getImage(meImagePath, true, 100, 100, Image.SCALE_SMOOTH);
+        meImageLabel.setIcon(new ImageIcon(meImage));
 
-            JLabel spec = new JLabel("2kg", SwingConstants.CENTER);
-            spec.setFont(middleFont);
+        mePanel.add(meImageLabel);
 
-            mePanel.add(spec);
+        JLabel nickname = new JLabel(GUIMain.me.getInfo("nickname"), SwingConstants.CENTER);
+        nickname.setFont(bigFont);
 
-            JLabel myRanking = new JLabel("31등");
-            myRanking.setFont(middleFont);
-            mePanel.add(myRanking);
+        mePanel.add(nickname);
 
-            midPanel.add(mePanel);
-        }
+        JLabel spec = new JLabel(Ranking.getValueByRanker(rankingName, myRank), SwingConstants.CENTER);
+        spec.setFont(middleFont);
+
+        mePanel.add(spec);
+
+        JLabel myRanking = new JLabel((myRank + 1) + "등");
+        myRanking.setFont(middleFont);
+        mePanel.add(myRanking);
+
+        midPanel.add(mePanel);
 
 
         topPanel.add(trophyImageLabel);

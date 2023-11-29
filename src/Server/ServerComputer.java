@@ -3,6 +3,8 @@ package Server;
 import Server.GenericManager.Manager;
 import Server.GUI.*;
 
+import javax.swing.*;
+import java.awt.*;
 import java.io.File;
 import java.io.FileWriter;
 import java.time.LocalDate;
@@ -124,5 +126,12 @@ public class ServerComputer {
         ProgramGUIManager.getInstance().saveFile();
     }
 
+    public static Image getImage(String relativePath, boolean isUser, int width, int height, int type) {
+        String absolutePath = getAbsolutePath(relativePath);
+        if (!new File(absolutePath).exists())
+            absolutePath = getAbsolutePath("\\data\\" + (isUser ? "user-image" : "program-image") + "\\no image.png");
+
+        return new ImageIcon(absolutePath).getImage().getScaledInstance(width, height, type);
+    }
 
 }

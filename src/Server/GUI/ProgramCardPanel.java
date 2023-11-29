@@ -30,7 +30,7 @@ private void setupProgramPane(){
 
 
 public class ProgramCardPanel extends JPanel {
-    static HashMap<String, ProgramCustomPage> programHashMap = new HashMap<>();
+    HashMap<String, ProgramCustomPage> programHashMap = new HashMap<>();
 
     void setup(JPanel cardPanel, CardLayout programCards, String keyword) {
         for (Program program : ProgramGUIManager.getInstance().dataList) {
@@ -39,7 +39,7 @@ public class ProgramCardPanel extends JPanel {
 
             if (programHashMap.get(program.name) == null)
                 programHashMap.put(program.name,
-                        new ProgramCustomPage(program.name, programCards, cardPanel)
+                        new ProgramCustomPage(program.name, programCards, cardPanel, keyword)
                 );
             programHashMap.get(program.name).add(program);
         }

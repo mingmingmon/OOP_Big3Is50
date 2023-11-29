@@ -172,4 +172,11 @@ public class User implements Data {
         rankValue.put("출석왕", result);
         return result;
     }
+
+    public void participateProgram(Program program) {
+        myProgramManager.dataList.add(program);
+    }
+    public void cancelProgram(Program program) {
+        myProgramManager.dataList.remove(program);
+    }
 }

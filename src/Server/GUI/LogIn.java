@@ -90,6 +90,12 @@ public class LogIn extends JPanel {
     }
 
     void tryLogIn(JPanel cardPanel, CardLayout startCards) {
+        if (idField.getText().contentEquals("")
+                || passwordField.getText().contentEquals("")) {
+            JOptionPane.showMessageDialog(logInPane, "올바른 입력이 아닙니다.");
+            return;
+        }
+
         int logInType = ServerComputer.getAccessType(new String[]{ idField.getText(),passwordField.getText() });
         if (logInType == -1) {
             JOptionPane.showMessageDialog(logInPane, "등록된 회원이 아닙니다.");
