@@ -67,7 +67,7 @@ public class LogIn extends JPanel {
         logInPane.add(informationEnterPanel, BorderLayout.CENTER);
 
         String impagePath = ServerComputer.getAbsolutePath("data\\icon\\헬스장내부사진.png");
-        Image image = new ImageIcon(impagePath).getImage().getScaledInstance(500,400, Image.SCALE_SMOOTH);
+        Image image = new ImageIcon(impagePath).getImage().getScaledInstance(650,650, Image.SCALE_SMOOTH);
         imageLabel = new JLabel();
         imageLabel.setIcon(new ImageIcon(image));
 
@@ -90,7 +90,13 @@ public class LogIn extends JPanel {
     }
 
     void tryLogIn(JPanel cardPanel, CardLayout startCards) {
-        int logInType = ServerComputer.getAccessType(new String[]{idField.getText(), passwordField.getText()});
+        if (idField.getText().contentEquals("")
+                || passwordField.getText().contentEquals("")) {
+            JOptionPane.showMessageDialog(logInPane, "올바른 입력이 아닙니다.");
+            return;
+        }
+
+        int logInType = ServerComputer.getAccessType(new String[]{ idField.getText(),passwordField.getText() });
         if (logInType == -1) {
             JOptionPane.showMessageDialog(logInPane, "등록된 회원이 아닙니다.");
             return;
@@ -101,7 +107,12 @@ public class LogIn extends JPanel {
             JOptionPane.showMessageDialog(logInPane, "비밀번호가 맞지 않습니다.");
             return;
         }
-            startCards.show(cardPanel, "로그인후 페이지");
-    }
+        GUIMain.me = ServerComputer.getUser(idField.getText());
+        ServerComputer.save();
 
+        GUIMain.loginedCard = new LogIned();
+        GUIMain.loginedCard.createAndShowGUI(cardPanel);
+
+        startCards.show(cardPanel, "로그인후 페이지");
+    }
 }

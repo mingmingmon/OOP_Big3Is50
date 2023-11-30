@@ -7,16 +7,18 @@ import Server.GenericManager.Manager;
 import java.util.*;
 
 public class Program implements Data, UIData {
+    public static HashMap<String, String> trainerHashMap = new HashMap<>();
+
     static int count = 0;
     int id;
     boolean isPT;
     public String name;
     public String date;
-    String startTime;
-    String endTime;
+    public String startTime;
+    public String endTime;
     int n;
 
-    Manager<User> membersManager = new Manager<>();
+    public Manager<User> membersManager = new Manager<>();
 
     @Override
     public void scan(Scanner file) {
@@ -95,5 +97,14 @@ public class Program implements Data, UIData {
             result[2] += membersManager.dataList.get(i).nickname + " ";
 
         return result;
+    }
+
+    public void addNewUser(User user) {
+        n++;
+        membersManager.dataList.add(user);
+    }
+    public void deleteUser(User user) {
+        membersManager.dataList.remove(user);
+        n--;
     }
 }

@@ -5,7 +5,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 
 public class Rank {
-    final int CNT_RANK = 5;
+    public static final int CNT_RANK = 5;
 
     String rankName;
     String comment1;

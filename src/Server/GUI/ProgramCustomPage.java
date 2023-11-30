@@ -22,15 +22,14 @@ public class ProgramCustomPage extends JPanel {
 
     ArrayList<Program> programList;
 
-    public ProgramCustomPage(String title, CardLayout programCards, JPanel cardPanel){
+    public ProgramCustomPage(String title, CardLayout programCards, JPanel cardPanel, String keyword){
         setLayout(new BorderLayout());
         setPreferredSize(new Dimension(350,150));
 
-
-        String imagePath = ServerComputer.getAbsolutePath("data\\program-image\\" + title + ".png");
-        if(!new File(imagePath).exists())
-            imagePath = ServerComputer.getAbsolutePath("data\\program-image\\no image.png");
-        Image image = new ImageIcon(imagePath).getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+        String imagePath = "data\\program-image\\" + title + ".png";
+        if(keyword.contentEquals("pt"))
+            imagePath = "data\\user-image\\" + Program.trainerHashMap.get(title) + ".png";
+        Image image = ServerComputer.getImage(imagePath, false, 100, 100, Image.SCALE_SMOOTH);
 
         imageLabel = new JLabel();
         imageLabel.setIcon(new ImageIcon(image));

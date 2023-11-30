@@ -1,6 +1,9 @@
 package Server.GUI;
 
+import Server.Normal;
 import Server.ServerComputer;
+import Server.User;
+import Server.UserData;
 
 import javax.swing.*;
 import javax.swing.text.MaskFormatter;
@@ -100,11 +103,7 @@ public class Join extends JLabel {
         joinInButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                JOptionPane.showMessageDialog(joinPane, "회원가입이 성공적으로 되었습니다!\n 득 근 득 근!");
-                startCards.show(cardPanel, "로그인 페이지");
-                // 버튼 누르면 user-data.txt에 기록되게...
-                // 이때 하나라도 비어있으면 경고 뜨우기..
-                // 그리고 가능하다면 Client쪽 my-data에 아이디, 비번 넣어서 로그인 화면에 입력 바로 되게
+                tryJoinIn(cardPanel, startCards);
             }
         });
 
@@ -142,5 +141,39 @@ public class Join extends JLabel {
 
         cardPanel.add(joinPane, "회원가입 페이지");
 
+    }
+
+    void tryJoinIn(JPanel cardPanel, CardLayout startCards) {
+        if (idField.getText().contentEquals("")
+                || passwordField.getText().contentEquals("")
+                || nameField.getText().contentEquals("")
+                || nickNameField.getText().contentEquals("")
+                || phoneNumberField.getText().contentEquals("   -    -    ")) {
+            JOptionPane.showMessageDialog(joinPane, "올바른 입력이 아닙니다.");
+            return;
+        }
+
+        User user = ServerComputer.getUser(idField.getText());
+        if (user != null) {
+            JOptionPane.showMessageDialog(joinPane, "이미 존재하는 아이디입니다.");
+            return;
+        }
+        if (ServerComputer.isExistedUserNickname(nickNameField.getText())) {
+            JOptionPane.showMessageDialog(joinPane, "이미 존재하는 닉네임입니다.");
+            return;
+        }
+        User newUser = new Normal();
+        newUser.scan(idField.getText(), passwordField.getText(),
+                nameField.getText(),nickNameField.getText(),phoneNumberField.getText(),(String)genderComboBox.getSelectedItem());
+
+        UserData userData = new UserData();
+        userData.addUser(newUser);
+        UserDataGUIManager.getInstance().addElement(userData);
+
+        JOptionPane.showMessageDialog(joinPane, "회원가입이 성공적으로 되었습니다!\n 득 근 득 근!");
+        startCards.show(cardPanel, "로그인 페이지");
+        // 버튼 누르면 user-data.txt에 기록되게...
+        // 이때 하나라도 비어있으면 경고 뜨우기..
+        // 그리고 가능하다면 Client쪽 my-data에 아이디, 비번 넣어서 로그인 화면에 입력 바로 되게
     }
 }

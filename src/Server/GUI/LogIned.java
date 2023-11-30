@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 class LogIned extends JPanel {
-    void createAndShowGUI(JPanel cardPanel) {
+    void createAndShowGUI(JPanel cardPanel/*, CardLayout startCards*/) {
         // 탭을 생성하고 home, ranking, program, trainer, myPage 총 5개 패널 추가
         JTabbedPane topTab = new JTabbedPane();
 
@@ -42,6 +42,7 @@ class LogIned extends JPanel {
         JPanel cardPanel = new JPanel(rankingCards);
         rankingCardPanel.setup(cardPanel);
         rankingBottomPanel.setup(rankingCards, rankingPane);
+
         rankingPane.add(rankingBottomPanel, BorderLayout.SOUTH);
         rankingPane.add(cardPanel, BorderLayout.CENTER);
     }
@@ -57,14 +58,18 @@ class LogIned extends JPanel {
         programCardPanel.setup(cardPanel, programCards, "!pt");
 
         programPane.add(cardPanel, BorderLayout.CENTER);
-
     }
 
     private JPanel trainerPane;
-
+    private CardLayout trainerCards;
+    ProgramCardPanel trainerCardPanel = new ProgramCardPanel();
     private void setupTrainerPane(){
         trainerPane = new JPanel(new BorderLayout());
+        trainerCards = new CardLayout();
+        JPanel cardPanel = new JPanel(trainerCards);
+        trainerCardPanel.setup(cardPanel, trainerCards, "pt");
 
+        trainerPane.add(cardPanel, BorderLayout.CENTER);
     }
 
     private JPanel myPagePane;

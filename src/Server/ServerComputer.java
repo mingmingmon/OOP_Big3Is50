@@ -3,7 +3,10 @@ package Server;
 import Server.GenericManager.Manager;
 import Server.GUI.*;
 
+import javax.swing.*;
+import java.awt.*;
 import java.io.File;
+import java.io.FileWriter;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -53,10 +56,7 @@ public class ServerComputer {
         }*/
     }
     void finishProgram() {
-        UserDataGUIManager.getInstance().saveFile();
-        ExerciseLogGUIManager.getInstance().saveFile();
-        InbodyGUIManager.getInstance().saveFile();
-        ProgramGUIManager.getInstance().saveFile();
+        save();
     }
 
     static String input(String comment) {
@@ -93,4 +93,45 @@ public class ServerComputer {
             return 2;
         return 0;
     }
+
+    public static User getUser(String id) {
+        return userHashMap.get(id);
+    }
+    public static boolean isExistedUserNickname(String nickname) {
+        for (User user : userHashMap.values()) {
+            if(user.nickname.contentEquals(nickname))
+                return true;
+        }
+        return false;
+    }
+    public static void save() {
+        rankingSystem.sort();
+
+        if (GUIMain.me != null) {
+            String absolutePath = ServerComputer.getAbsolutePath("..\\Client\\my-info.txt");
+            FileWriter fileWriter = null;
+            try {
+                fileWriter = new FileWriter(absolutePath);
+                fileWriter.write(GUIMain.me.id + "\n" + GUIMain.me.password);
+                fileWriter.close();
+            } catch (Exception e) {
+                System.out.printf("파일 오픈 실패: %s\n", absolutePath);
+                System.exit(0);
+            }
+        }
+
+        UserDataGUIManager.getInstance().saveFile();
+        ExerciseLogGUIManager.getInstance().saveFile();
+        InbodyGUIManager.getInstance().saveFile();
+        ProgramGUIManager.getInstance().saveFile();
+    }
+
+    public static Image getImage(String relativePath, boolean isUser, int width, int height, int type) {
+        String absolutePath = getAbsolutePath(relativePath);
+        if (!new File(absolutePath).exists())
+            absolutePath = getAbsolutePath("\\data\\" + (isUser ? "user-image" : "program-image") + "\\no image.png");
+
+        return new ImageIcon(absolutePath).getImage().getScaledInstance(width, height, type);
+    }
+
 }
