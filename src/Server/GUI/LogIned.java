@@ -24,12 +24,13 @@ class LogIned extends JPanel {
     }
 
     private JPanel homePane;
+    private CardLayout honeCards;
+    private HomePage homePage;
     private void setupHomePane(){
-        // 홈화면은 맨 위에 home이라는 글자 있는 배너 (JLabel)
-        // 중간에 사진이랑 이름, 운동 몇 일 째 정보 하나의 pane
-        // 나의 인바디, 나의 운동기록 임티랑 글씨 하나의 pane
-        // 체중, 운동기록, 골격근량, 나의 프로그램, 체지방량, 나의 트레이너 부분 하나의 pane (그리드layout)
         homePane = new JPanel();
+        homePage = new HomePage();
+        homePage.setup();
+        homePane.add(homePage);
     }
 
     private JPanel rankingPane;

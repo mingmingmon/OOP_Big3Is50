@@ -22,7 +22,7 @@ public class LogIn extends JPanel {
         TopBanner topBanner = new TopBanner();
         logInPane.add(topBanner, BorderLayout.NORTH);
 
-        JPanel informationEnterPanel = new JPanel();
+        JPanel informationEnterPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 30, 30));
 
         JPanel idPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
         JLabel idLabel = new JLabel("아이디 : ");
@@ -67,7 +67,7 @@ public class LogIn extends JPanel {
         logInPane.add(informationEnterPanel, BorderLayout.CENTER);
 
         String impagePath = ServerComputer.getAbsolutePath("data\\icon\\헬스장내부사진.png");
-        Image image = new ImageIcon(impagePath).getImage().getScaledInstance(650,650, Image.SCALE_SMOOTH);
+        Image image = new ImageIcon(impagePath).getImage().getScaledInstance(650,600, Image.SCALE_SMOOTH);
         imageLabel = new JLabel();
         imageLabel.setIcon(new ImageIcon(image));
 

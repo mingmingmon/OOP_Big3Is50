@@ -32,7 +32,7 @@ public class RankingPage extends JPanel {
         trophyImageLabel.setIcon(new ImageIcon(trophyImage));
 
         rankingLabel = new JLabel(rankingName, SwingConstants.CENTER);
-        rankingLabel.setPreferredSize(new Dimension(400,50));
+        rankingLabel.setPreferredSize(new Dimension(500,50));
         rankingLabel.setOpaque(true); // 배경 불투명하게 해야 배경색 보임
         rankingLabel.setBackground(Color.ORANGE);
         rankingLabel.setForeground(Color.BLACK);

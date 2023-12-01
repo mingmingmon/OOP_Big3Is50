@@ -7,29 +7,10 @@
     <list default="true" id="7f46f911-df66-4c0e-9c30-d6029d9fe5a8" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/../src.zip" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/my-info.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Client/my-info.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/Facade/DataEngineImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Facade/DataEngineImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/GUI/GUIMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/GUI/GUIMain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/GUI/Join.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/GUI/Join.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/GUI/LogIn.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/GUI/LogIn.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/GUI/LogIned.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/GUI/LogIned.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/GUI/ProgramCardPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/GUI/ProgramCardPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/GUI/ProgramCustomPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/GUI/ProgramCustomPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/GUI/ProgramDetailPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/GUI/ProgramDetailPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/GUI/RankingPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/GUI/RankingPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/Normal.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Normal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/Program.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Program.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/Rank.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Rank.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/Ranking.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Ranking.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/ServerComputer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/ServerComputer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/Trainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Trainer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/UserData.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/UserData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/data/program-data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Server/data/program-data.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/data/ranking-image/1.png" beforeDir="false" afterPath="$PROJECT_DIR$/Server/data/ranking-image/1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/data/user-exercise-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Server/data/user-exercise-log.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/data/user-image/parkSeunghyeon.png" beforeDir="false" afterPath="$PROJECT_DIR$/Server/data/user-image/parkSeunghyeon.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/data/user-inbody.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Server/data/user-inbody.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,7 +89,8 @@
       <workItem from="1701127152322" duration="4898000" />
       <workItem from="1701215547415" duration="1703000" />
       <workItem from="1701364312896" duration="151000" />
-      <workItem from="1701364498118" duration="1590000" />
+      <workItem from="1701364498118" duration="2605000" />
+      <workItem from="1701384204119" duration="4315000" />
     </task>
     <servers />
   </component>

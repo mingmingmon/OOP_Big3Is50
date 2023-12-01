@@ -49,7 +49,7 @@ public class GUIMain {
 
         mainFrame.getContentPane().add(startPane);
         mainFrame.pack();
-        mainFrame.setSize(550, 1000);
+        mainFrame.setSize(650, 1000);
         mainFrame.setVisible(true);
     }
 }
