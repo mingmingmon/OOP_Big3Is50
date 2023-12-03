@@ -13,11 +13,13 @@ import java.awt.event.MouseEvent;
 // 나의 인바디, 나의 운동기록 임티랑 글씨 하나의 pane
 // 체중, 운동기록, 골격근량, 나의 프로그램, 체지방량, 나의 트레이너 부분 하나의 pane (그리드layout)
 public class HomePage extends JPanel {
-    public void setup(){
+    public void setup(JPanel cardPanel, CardLayout homeCards){
         Font font = new Font("맑은 고딕", Font.PLAIN, 15);
         Font middleFont = new Font("맑은 고딕", Font.BOLD, 20);
         Font bigFont = new Font("맑은 고딕", Font.BOLD, 25);
         setLayout(new BorderLayout());
+
+
         JLabel homeTopLabel = new JLabel("3대50 헬스장 홈 화면", SwingConstants.CENTER);
         homeTopLabel.setPreferredSize(new Dimension(650,50));
         homeTopLabel.setOpaque(true);
@@ -63,39 +65,19 @@ public class HomePage extends JPanel {
 
         //인바디(골격근량, 체지방, 체중), 운동기록, 프로그램, 트레이너
         JPanel homeBottomPane = new JPanel(new GridLayout(3,2));
-    /*    JLabel one = new JLabel("1");
-        JLabel two = new JLabel("2");
-        JLabel three = new JLabel("3");
-        JLabel four = new JLabel("4");
-        JLabel five = new JLabel("5");
 
-        homeBottomPane.add(one);
-        homeBottomPane.add(two);
-        homeBottomPane.add(three);
-        homeBottomPane.add(four);
-        homeBottomPane.add(five);
-*/
-
-
-
-        /*
-        * JPanel homeMiddlePane = new JPanel(new FlowLayout(FlowLayout.LEFT, 30, 30));
-        JLabel imageLabel = new JLabel();
-        String imagePath = ServerComputer.getAbsolutePath("data\\user-image\\" + "no image" + ".png");
-        Image image = new ImageIcon(imagePath).getImage().getScaledInstance(200,200,Image.SCALE_SMOOTH);
-        imageLabel.setIcon(new ImageIcon(image));
-
-        homeMiddlePane.add(imageLabel);
-        * */
         JPanel weightPart = new JPanel(new BorderLayout());
         JLabel weightLabel = new JLabel("내 체중", SwingConstants.CENTER);
-        weightLabel.setFont(middleFont);
+        weightLabel.setFont(bigFont);
+        weightLabel.setOpaque(true);
+        weightLabel.setBackground(Color.BLACK);
+        weightLabel.setForeground(Color.WHITE);
         weightPart.add(weightLabel, BorderLayout.NORTH);
 
         JPanel weightImagePane = new JPanel();
         JLabel weightImageLabel = new JLabel();
         String weightImagePath = ServerComputer.getAbsolutePath("data\\home-image\\" + "체중기록" + ".png");
-        Image weightImage = new ImageIcon(weightImagePath).getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH);
+        Image weightImage = new ImageIcon(weightImagePath).getImage().getScaledInstance(120,120,Image.SCALE_SMOOTH);
         weightImageLabel.setIcon(new ImageIcon(weightImage));
         weightImagePane.add(weightImageLabel);
         weightPart.add(weightImagePane, BorderLayout.CENTER);
@@ -112,6 +94,10 @@ public class HomePage extends JPanel {
             }
 
             @Override
+            public void mouseClicked(MouseEvent e) {
+                showPanel("내 체중", homeCards, cardPanel);
+            }
+            @Override
             public void mouseExited(MouseEvent e) {
                 weightPart.setBackground(null);
             }
@@ -121,13 +107,16 @@ public class HomePage extends JPanel {
 
         JPanel musclePart = new JPanel(new BorderLayout());
         JLabel muscleLabel = new JLabel("내 골격근량", SwingConstants.CENTER);
-        muscleLabel.setFont(middleFont);
+        muscleLabel.setFont(bigFont);
+        muscleLabel.setOpaque(true);
+        muscleLabel.setBackground(Color.BLACK);
+        muscleLabel.setForeground(Color.WHITE);
         musclePart.add(muscleLabel, BorderLayout.NORTH);
 
         JPanel muscleImagePane = new JPanel();
         JLabel muscleImageLabel = new JLabel();
         String muscleImagePath = ServerComputer.getAbsolutePath("data\\home-image\\" + "근력운동" + ".png");
-        Image muscleImage = new ImageIcon(muscleImagePath).getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH);
+        Image muscleImage = new ImageIcon(muscleImagePath).getImage().getScaledInstance(120,120,Image.SCALE_SMOOTH);
         muscleImageLabel.setIcon(new ImageIcon(muscleImage));
         muscleImagePane.add(muscleImageLabel);
         musclePart.add(muscleImagePane, BorderLayout.CENTER);
@@ -143,6 +132,10 @@ public class HomePage extends JPanel {
             }
 
             @Override
+            public void mouseClicked(MouseEvent e) {
+                showPanel("내 골격근량", homeCards, cardPanel);
+            }
+            @Override
             public void mouseExited(MouseEvent e) {
                 musclePart.setBackground(null);
             }
@@ -151,13 +144,16 @@ public class HomePage extends JPanel {
 
         JPanel fatPart = new JPanel(new BorderLayout());
         JLabel fatLabel = new JLabel("내 지방량", SwingConstants.CENTER);
-        fatLabel.setFont(middleFont);
+        fatLabel.setFont(bigFont);
+        fatLabel.setOpaque(true);
+        fatLabel.setBackground(Color.BLACK);
+        fatLabel.setForeground(Color.WHITE);
         fatPart.add(fatLabel, BorderLayout.NORTH);
 
         JPanel fatImagePane = new JPanel();
         JLabel fatImageLabel = new JLabel();
         String fatImagePath = ServerComputer.getAbsolutePath("data\\home-image\\" + "인바디기록" + ".png");
-        Image fatImage = new ImageIcon(fatImagePath).getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH);
+        Image fatImage = new ImageIcon(fatImagePath).getImage().getScaledInstance(120,120,Image.SCALE_SMOOTH);
         fatImageLabel.setIcon(new ImageIcon(fatImage));
         fatImagePane.add(fatImageLabel);
         fatPart.add(fatImagePane, BorderLayout.CENTER);
@@ -173,6 +169,10 @@ public class HomePage extends JPanel {
             }
 
             @Override
+            public void mouseClicked(MouseEvent e) {
+                showPanel("내 지방량", homeCards, cardPanel);
+            }
+            @Override
             public void mouseExited(MouseEvent e) {
                 fatPart.setBackground(null);
             }
@@ -181,13 +181,16 @@ public class HomePage extends JPanel {
 
         JPanel exercisePart = new JPanel(new BorderLayout());
         JLabel exerciseLabel = new JLabel("내 운동기록", SwingConstants.CENTER);
-        exerciseLabel.setFont(middleFont);
+        exerciseLabel.setFont(bigFont);
+        exerciseLabel.setOpaque(true);
+        exerciseLabel.setBackground(Color.BLACK);
+        exerciseLabel.setForeground(Color.WHITE);
         exercisePart.add(exerciseLabel, BorderLayout.NORTH);
 
         JPanel exerciseImagePane = new JPanel();
         JLabel exerciseImageLabel = new JLabel();
         String exerciseImagePath = ServerComputer.getAbsolutePath("data\\home-image\\" + "운동기록" + ".png");
-        Image exerciseImage = new ImageIcon(exerciseImagePath).getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH);
+        Image exerciseImage = new ImageIcon(exerciseImagePath).getImage().getScaledInstance(120,120,Image.SCALE_SMOOTH);
         exerciseImageLabel.setIcon(new ImageIcon(exerciseImage));
         exerciseImagePane.add(exerciseImageLabel);
         exercisePart.add(exerciseImagePane, BorderLayout.CENTER);
@@ -203,6 +206,11 @@ public class HomePage extends JPanel {
             }
 
             @Override
+            public void mouseClicked(MouseEvent e) {
+                showPanel("내 운동기록", homeCards, cardPanel);
+            }
+
+            @Override
             public void mouseExited(MouseEvent e) {
                 exercisePart.setBackground(null);
             }
@@ -211,13 +219,16 @@ public class HomePage extends JPanel {
 
         JPanel programPart = new JPanel(new BorderLayout());
         JLabel programLabel = new JLabel("내 프로그램", SwingConstants.CENTER);
-        programLabel.setFont(middleFont);
+        programLabel.setFont(bigFont);
+        programLabel.setOpaque(true);
+        programLabel.setBackground(Color.BLACK);
+        programLabel.setForeground(Color.WHITE);
         programPart.add(programLabel, BorderLayout.NORTH);
 
         JPanel programImagePane = new JPanel();
         JLabel programImageLabel = new JLabel();
         String programImagePath = ServerComputer.getAbsolutePath("data\\program-image\\" + "줌바댄스" + ".png");
-        Image programImage = new ImageIcon(programImagePath).getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH);
+        Image programImage = new ImageIcon(programImagePath).getImage().getScaledInstance(120,120,Image.SCALE_SMOOTH);
         programImageLabel.setIcon(new ImageIcon(programImage));
         programImagePane.add(programImageLabel);
         programPart.add(programImagePane, BorderLayout.CENTER);
@@ -233,6 +244,11 @@ public class HomePage extends JPanel {
             }
 
             @Override
+            public void mouseClicked(MouseEvent e) {
+                showPanel("내 프로그램", homeCards, cardPanel);
+            }
+
+            @Override
             public void mouseExited(MouseEvent e) {
                 programPart.setBackground(null);
             }
@@ -242,13 +258,16 @@ public class HomePage extends JPanel {
 
         JPanel trainerPart = new JPanel(new BorderLayout());
         JLabel trainerLabel = new JLabel("내 트레이너", SwingConstants.CENTER);
-        trainerLabel.setFont(middleFont);
+        trainerLabel.setFont(bigFont);
+        trainerLabel.setOpaque(true);
+        trainerLabel.setBackground(Color.BLACK);
+        trainerLabel.setForeground(Color.WHITE);
         trainerPart.add(trainerLabel, BorderLayout.NORTH);
 
         JPanel trainerImagePane = new JPanel();
         JLabel trainerImageLabel = new JLabel();
         String trainerImagePath = ServerComputer.getAbsolutePath("data\\user-image\\" + "kimJongKook" + ".png");
-        Image trainerImage = new ImageIcon(trainerImagePath).getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH);
+        Image trainerImage = new ImageIcon(trainerImagePath).getImage().getScaledInstance(120,120,Image.SCALE_SMOOTH);
         trainerImageLabel.setIcon(new ImageIcon(trainerImage));
         trainerImagePane.add(trainerImageLabel);
         trainerPart.add(trainerImagePane, BorderLayout.CENTER);
@@ -261,6 +280,11 @@ public class HomePage extends JPanel {
             @Override
             public void mouseEntered(MouseEvent e) {
                 trainerPart.setBackground(Color.LIGHT_GRAY);
+            }
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                showPanel("내 트레이너", homeCards, cardPanel);
             }
 
             @Override
@@ -283,6 +307,12 @@ public class HomePage extends JPanel {
         add(homeTopLabel, BorderLayout.NORTH);
         add(homeMiddlePane, BorderLayout.CENTER);
         add(homeBottomPane, BorderLayout.SOUTH);
+
+        cardPanel.add(this, "홈 화면");
+    }
+
+    private void showPanel(String cardName, CardLayout homeCards, JPanel cardPanel){
+        homeCards.show(cardPanel, cardName);
     }
 
 }

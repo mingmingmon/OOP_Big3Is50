@@ -70,3 +70,4 @@
 1 movie_buff filmasetpgsd 최영화 MovieBuff 010-6541-9870 0
 1 science_geek labasefu 김과학 ScienceGeek 010-7835-1095 0
 1 cooking_enthusiast chedfasdtfoj 이요리 CookingEnthusiast 010-6549-1159 1
+1 ZZ ZZ ZZ ZZ 123-1231-2312 0

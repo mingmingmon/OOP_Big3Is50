@@ -155,10 +155,11 @@ public class ProgramDetailPage extends JPanel {
     }
     void setupMiddlePanel(String panelName){
         JLabel programNameLabel = new JLabel(panelName + " 프로그램 시간표", SwingConstants.CENTER);
+        programNameLabel.setPreferredSize(new Dimension(650,50));
         programNameLabel.setBackground(Color.DARK_GRAY);
         programNameLabel.setOpaque(true); // 배경 불투명하게 해야 배경색 보임
         programNameLabel.setForeground(Color.WHITE); //글씨색 하얀색
-        Font programNameLabelFont = new Font("맑은 고딕", Font.PLAIN, 15);
+        Font programNameLabelFont = new Font("맑은 고딕", Font.PLAIN, 25);
         programNameLabel.setFont(programNameLabelFont);
 
         middlePanel = new JPanel(new BorderLayout());

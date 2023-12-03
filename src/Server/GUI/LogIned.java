@@ -24,13 +24,18 @@ class LogIned extends JPanel {
     }
 
     private JPanel homePane;
-    private CardLayout honeCards;
-    private HomePage homePage;
+    private CardLayout homeCards;
+    HomePage homePage = new HomePage();
+    HomeCardPanel homeCardPanel = new HomeCardPanel();
     private void setupHomePane(){
-        homePane = new JPanel();
-        homePage = new HomePage();
-        homePage.setup();
-        homePane.add(homePage);
+        homePane = new JPanel(new BorderLayout());
+        homeCards = new CardLayout();
+        JPanel cardPanel = new JPanel(homeCards);
+
+        //"홈 화면" , "내 운동기록", "내 골격근량", "내 체지방", "내 체중", "내 트레이너", "내 프로그램"
+        homePage.setup(cardPanel, homeCards);
+        homeCardPanel.setup(cardPanel, homeCards);
+        homePane.add(cardPanel, BorderLayout.CENTER);
     }
 
     private JPanel rankingPane;
@@ -42,7 +47,7 @@ class LogIned extends JPanel {
         rankingCards = new CardLayout();
         JPanel cardPanel = new JPanel(rankingCards);
         rankingCardPanel.setup(cardPanel);
-        rankingBottomPanel.setup(rankingCards, rankingPane);
+        rankingBottomPanel.setup(rankingCards, cardPanel);
 
         rankingPane.add(rankingBottomPanel, BorderLayout.SOUTH);
         rankingPane.add(cardPanel, BorderLayout.CENTER);
