@@ -27,7 +27,7 @@ public class Join extends JLabel {
         joinPane = new JPanel(new BorderLayout());
         Font font = new Font("맑은 고딕", Font.PLAIN, 15);
         Font middleFont = new Font("맑은 고딕", Font.BOLD, 20);
-        Font bigFont = new Font("맑은 고딕", Font.PLAIN, 25);
+        Font bigFont = new Font("맑은 고딕", Font.BOLD, 25);
 
         TopBanner topBanner = new TopBanner();
         joinPane.add(topBanner, BorderLayout.NORTH);
@@ -35,7 +35,7 @@ public class Join extends JLabel {
         JPanel enterPanel = new JPanel();
 
         JLabel joinLabel = new JLabel("3대 50 헬스장 회원가입 페이지", SwingConstants.CENTER);
-        joinLabel.setPreferredSize(new Dimension(400, 50));
+        //joinLabel.setPreferredSize(new Dimension(400, 50));
         joinLabel.setBackground(Color.BLACK);
         joinLabel.setFont(bigFont);
         joinLabel.setForeground(Color.WHITE);
@@ -44,7 +44,7 @@ public class Join extends JLabel {
 
         JPanel idPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
         JLabel idLabel = new JLabel("아이디 : ");
-        idLabel.setFont(font);
+        idLabel.setFont(middleFont);
         idField = new JTextField();
         idField.setColumns(30);
         idPanel.add(idLabel);
@@ -52,7 +52,7 @@ public class Join extends JLabel {
 
         JPanel passwordPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
         JLabel passwordLabel = new JLabel("비밀번호 : ");
-        passwordLabel.setFont(font);
+        passwordLabel.setFont(middleFont);
         passwordField = new JPasswordField();
         passwordField.setColumns(30);
         passwordPanel.add(passwordLabel);
@@ -60,7 +60,7 @@ public class Join extends JLabel {
 
         JPanel namePanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
         JLabel nameLabel = new JLabel("성명 : ");
-        nameLabel.setFont(font);
+        nameLabel.setFont(middleFont);
         nameField = new JTextField();
         nameField.setColumns(30);
         namePanel.add(nameLabel);
@@ -68,7 +68,7 @@ public class Join extends JLabel {
 
         JPanel nickNamePanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
         JLabel nickNameLabel = new JLabel("닉네임 : ");
-        nickNameLabel.setFont(font);
+        nickNameLabel.setFont(middleFont);
         nickNameField = new JTextField();
         nickNameField.setColumns(30);
         nickNamePanel.add(nickNameLabel);
@@ -76,7 +76,7 @@ public class Join extends JLabel {
 
         JPanel phoneNumberPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
         JLabel phoneNumberLabel = new JLabel("전화번호 : ");
-        phoneNumberLabel.setFont(font);
+        phoneNumberLabel.setFont(middleFont);
         try{
             MaskFormatter phoneFormatter = new MaskFormatter("###-####-####");
             phoneNumberField = new JFormattedTextField(phoneFormatter);
@@ -89,7 +89,7 @@ public class Join extends JLabel {
 
         JPanel genderPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
         JLabel genderLabel = new JLabel("성별 : ");
-        genderLabel.setFont(font);
+        genderLabel.setFont(middleFont);
         String[] genderOptions = {"남성", "여성"};
         genderComboBox = new JComboBox<>(genderOptions);
         genderPanel.add(genderLabel);

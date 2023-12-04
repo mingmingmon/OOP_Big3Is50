@@ -2,6 +2,7 @@ package Server.GUI;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Enumeration;
 
 public class RankingCardPanel extends JPanel{
     void setup(JPanel cardPanel){
@@ -22,4 +23,17 @@ public class RankingCardPanel extends JPanel{
         rankingpage.setup(rankingName);
         return rankingpage;
     }
+
+    /*void update(JPanel rcard, CardLayout rankingCards){
+        CardLayout cardLayout = (CardLayout) rcard.getLayout();
+
+        Enumeration<Component> components = rankingCards.getLayoutComponents(rcard);
+        while (components.hasMoreElements()) {
+            Component component = components.nextElement();
+            // 각 컴포넌트에 대한 작업 수행
+            if (component instanceof JPanel) {
+                // JPanel에 대한 작업 수행
+            }
+        }
+    }*/
 }

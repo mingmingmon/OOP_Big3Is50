@@ -35,5 +35,10 @@ public class UserData implements Data {
 
     public void addUser(User user) {
         userManager.dataList.add(user);
+
+    }
+    @Override
+    public Object clone() {
+        return null;
     }
 }

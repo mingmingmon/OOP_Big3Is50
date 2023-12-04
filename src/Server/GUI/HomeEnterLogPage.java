@@ -1,11 +1,15 @@
 package Server.GUI;
 
+import Server.*;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
-public class HomeEnterLogPage extends JPanel{
+public class HomeEnterLogPage extends JPanel {
+    JButton saveButton;
     void setup(String cardName,JPanel cardPanel, CardLayout homeCards){
         Font middleFont = new Font("맑은 고딕", Font.BOLD, 30);
         Font bigFont = new Font("맑은 고딕", Font.BOLD, 40);
@@ -18,6 +22,12 @@ public class HomeEnterLogPage extends JPanel{
         cardNameLabel.setFont(bigFont);
 
         JPanel middlePane = new JPanel();
+
+        saveButton = new JButton("저장하기");
+        saveButton.setFont(middleFont);
+        saveButton.setPreferredSize(new Dimension(200,70));
+        saveButton.setBackground(Color.BLACK);
+        saveButton.setForeground(Color.WHITE);
 
         if(cardName.equals("운동기록 추가"))
             middlePane = setupExerciseMid();
@@ -38,17 +48,7 @@ public class HomeEnterLogPage extends JPanel{
             }
         });
 
-        JButton saveButton = new JButton("저장하기");
-        saveButton.setFont(middleFont);
-        saveButton.setPreferredSize(new Dimension(200,70));
-        saveButton.setBackground(Color.BLACK);
-        saveButton.setForeground(Color.WHITE);
-        saveButton.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                //파일에 저장하는 코드
-            }
-        });
+
 
         buttonPanel.add(goBackButton);
         buttonPanel.add(saveButton);
@@ -92,11 +92,30 @@ public class HomeEnterLogPage extends JPanel{
         fatPanel.add(fatLabel);
         fatPanel.add(fatField);
 
-
         inbodyMidPanel.add(weightPanel);
         inbodyMidPanel.add(musclePanel);
         inbodyMidPanel.add(fatPanel);
 
+        JPanel pane = new JPanel();
+        saveButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (weightField.getText().contentEquals("")
+                        || muscleField.getText().contentEquals("")
+                        || fatField.getText().contentEquals("")) {
+                    JOptionPane.showMessageDialog(pane, "입력이 잘못되었습니다."); // 팝업 띄우기용으로 그냥 아무 pane 만듦;
+                    return;
+                }
+
+                Inbody inbody = new Inbody();
+                inbody.set(Integer.parseInt(weightField.getText()), Integer.parseInt(muscleField.getText()), Integer.parseInt(fatField.getText()));
+                GUIMain.me.getInbodyManager().dataList.add(inbody);
+                InbodyGUIManager.getInstance().addElement(inbody);
+
+                //파일에 저장하는 코드
+                GUIMain.getInstance().updateCard();
+            }
+        });
         return inbodyMidPanel;
     }
 
@@ -156,7 +175,7 @@ public class HomeEnterLogPage extends JPanel{
                 "스쿼트",
                 "카프레이즈",
                 "레그프레스",
-                "크런치)",
+                "크런치",
                 "윗몸일으키기",
                 "스컬크러셔",
                 "트라이셉스푸시다운",
@@ -213,6 +232,20 @@ public class HomeEnterLogPage extends JPanel{
         enterPane.add(timePanel);
         enterPane.add(cntPanel);
 
+        ExerciseLog exerciseLog = new ExerciseLog();
+        saveButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                exerciseLog.setLog();
+                ExerciseLog cloneExerciseLog = (ExerciseLog)exerciseLog.clone();
+
+                GUIMain.me.getExerciseLogManager().dataList.add(exerciseLog);
+                ExerciseLogGUIManager.getInstance().addElement(cloneExerciseLog);
+
+                //파일에 저장하는 코드
+            }
+        });
+
         //moseClick을 위해 먼저 선언
         JPanel logPane = new JPanel();
         //추가버튼
@@ -223,13 +256,23 @@ public class HomeEnterLogPage extends JPanel{
         addCardioButton.setPreferredSize(new Dimension(200,70));
         addCardioButton.setBackground(Color.GRAY);
         addCardioButton.setForeground(Color.BLACK);
+
         addCardioButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 JPanel unitPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
                 unitPanel.setPreferredSize(new Dimension(630,50));
 
-                JLabel label = new JLabel("asdf", SwingConstants.CENTER);
+                if (speedField.getText().contentEquals("") || speedField.getText().contentEquals("")) {
+                    JOptionPane.showMessageDialog(logPane, "입력이 잘못되었습니다.");
+                    return;
+                }
+
+                Cardio exercise = new Cardio();
+                exercise.input((String)cardioExerciseComboBox.getSelectedItem(), Integer.parseInt(speedField.getText()), Integer.parseInt(timeField.getText()));
+                exerciseLog.addExercise(exercise);
+
+                JLabel label = new JLabel(exercise.toGUIString(), SwingConstants.CENTER);
                 label.setAlignmentX(Component.LEFT_ALIGNMENT);
                 unitPanel.add(label);
 
@@ -241,13 +284,15 @@ public class HomeEnterLogPage extends JPanel{
                         logPane.remove(unitPanel);
                         logPane.revalidate();
                         logPane.repaint();
+
+                        exerciseLog.deleteExercise(exercise);
                     }
                 });
                 unitPanel.add(deleteButton);
 
                 logPane.add(unitPanel);
                 logPane.revalidate();
-                logPane.repaint();
+                //logPane.repaint();
             }
         });
 
@@ -260,7 +305,39 @@ public class HomeEnterLogPage extends JPanel{
         addAnaerobicButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                //아래쪽 칸에 추가하는 내용 보여주기
+                JPanel unitPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
+                unitPanel.setPreferredSize(new Dimension(630,50));
+
+                if (weightField.getText().contentEquals("") || weightField.getText().contentEquals("")) {
+                    JOptionPane.showMessageDialog(logPane, "입력이 잘못되었습니다.");
+                    return;
+                }
+
+                Anaerobic exercise = new Anaerobic();
+                exercise.input((String)anaerobicExerciseComboBox.getSelectedItem(), Integer.parseInt(weightField.getText()), Integer.parseInt(cntField.getText()));
+                exerciseLog.addExercise(exercise);
+
+                JLabel label = new JLabel(exercise.toGUIString(), SwingConstants.CENTER);
+                label.setAlignmentX(Component.LEFT_ALIGNMENT);
+                unitPanel.add(label);
+
+                JButton deleteButton = new JButton("삭제하기");
+                deleteButton.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        //해당 unitPanel 삭제하기
+                        logPane.remove(unitPanel);
+                        logPane.revalidate();
+                        logPane.repaint();
+
+                        exerciseLog.deleteExercise(exercise);
+                    }
+                });
+                unitPanel.add(deleteButton);
+
+                logPane.add(unitPanel);
+                logPane.revalidate();
+                //logPane.repaint();
             }
         });
 

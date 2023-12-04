@@ -6,7 +6,7 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Manager <T extends Data> {
+public class Manager <T extends Data> implements Cloneable {
     public ArrayList<T> dataList = new ArrayList<>();
     String relativePath;
     public Manager() {
@@ -73,5 +73,14 @@ public class Manager <T extends Data> {
             System.out.printf("파일 오픈 실패: %s\n", absolutePath);
             System.exit(0);
         }
+    }
+    @Override
+    public Object clone() {
+        Manager<T> cloneManager = new Manager<>();
+        for (T data : dataList) {
+            T cloneData = (T)data.clone();
+            cloneManager.dataList.add(cloneData);
+        }
+        return cloneManager;
     }
 }

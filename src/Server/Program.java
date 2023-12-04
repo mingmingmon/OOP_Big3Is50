@@ -134,4 +134,20 @@ public class Program implements Data, UIData, Comparable {
     public boolean isPT() {
         return isPT;
     }
+
+    @Override
+    public Object clone() {
+        Program cloneProgram = new Program();
+        cloneProgram.id = id;
+        cloneProgram.isPT = isPT;
+        cloneProgram.name = name;
+        cloneProgram.date = date;
+        cloneProgram.startTime = startTime;
+        cloneProgram.endTime = endTime;
+        cloneProgram.n = n;
+
+        cloneProgram.membersManager = (Manager<User>)membersManager.clone();
+
+        return cloneProgram;
+    }
 }

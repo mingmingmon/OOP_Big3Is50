@@ -76,11 +76,9 @@ public class HomeCardPage extends JPanel {
                     dataList.add(program);
             }
         } else if (cardName.contentEquals("내 인바디")) {
-            for (Inbody inbody : GUIMain.me.getInbodyManager().dataList)
-                dataList.add(inbody);
+            dataList.addAll(GUIMain.me.getInbodyManager().dataList);
         } else if (cardName.contentEquals("내 운동기록")) {
-            for (ExerciseLog exerciseLog : GUIMain.me.getExerciseLogManager().dataList)
-                dataList.add(exerciseLog);
+            dataList.addAll(GUIMain.me.getExerciseLogManager().dataList);
         }
         return dataList;
     }

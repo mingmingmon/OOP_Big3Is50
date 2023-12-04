@@ -3,84 +3,126 @@ package Server.GUI;
 import javax.swing.*;
 import java.awt.*;
 
-class LogIned extends JPanel {
-    void createAndShowGUI(JPanel cardPanel/*, CardLayout startCards*/) {
-        // 탭을 생성하고 home, ranking, program, trainer, myPage 총 5개 패널 추가
-        JTabbedPane topTab = new JTabbedPane();
+public class LogIned extends JPanel {
+    private static LogIned logIned = null;
+    public static LogIned getInstance(){
+        if(logIned == null)
+            logIned = new LogIned();
+        return logIned;
+    }
+
+    public void updateCard(JPanel cardPanel){
+        this.removeAll();
+        topTab.removeAll();
+        hcard.removeAll();
+        rcard.removeAll();
+        pcard.removeAll();
+        tcard.removeAll();
+        //
+        homeCards = new CardLayout();
+        rankingCards = new CardLayout();
+        programCards = new CardLayout();
+        trainerCards = new CardLayout();
+        //
+        createAndShowGUI(cardPanel);
+        hcard.revalidate();
+        hcard.repaint();
+        rcard.revalidate();
+        rcard.repaint();
+        pcard.revalidate();
+        pcard.repaint();
+        tcard.revalidate();
+        tcard.repaint();
+        topTab.revalidate();
+        topTab.repaint();
+        this.revalidate();
+        this.repaint();
+    }
+
+    JTabbedPane topTab;
+    void createAndShowGUI(JPanel cardPanel) {
+        // 탭을 생성하고 home, ranking, program, trainer
+        topTab = new JTabbedPane();
 
         setupHomePane();
         setupRankingPane();
         setupProgramPane();
         setupTrainerPane();
-        setupMyPagePane();
 
         topTab.add("홈", homePane);
         topTab.add("랭킹", rankingPane);
         topTab.add("프로그램", programPane);
         topTab.add("트레이너", trainerPane);
-        topTab.add("마이페이지", myPagePane);
 
         cardPanel.add(topTab, "로그인후 페이지");
     }
 
     private JPanel homePane;
     private CardLayout homeCards;
-    HomePage homePage = new HomePage();
-    HomeCardPanel homeCardPanel = new HomeCardPanel();
+    private JPanel hcard;
+    HomePage homePage;
+    HomeCardPanel homeCardPanel;
     private void setupHomePane(){
         homePane = new JPanel(new BorderLayout());
         homeCards = new CardLayout();
-        JPanel cardPanel = new JPanel(homeCards);
+        hcard = new JPanel(homeCards);
 
+        homeCardPanel = new HomeCardPanel();
+        homePage = new HomePage();
         //"홈 화면" , "내 운동기록", "내 골격근량", "내 체지방", "내 체중", "내 트레이너", "내 프로그램"
-        homePage.setup(cardPanel, homeCards);
-        homeCardPanel.setup(cardPanel, homeCards);
-        homePane.add(cardPanel, BorderLayout.CENTER);
+        homePage.setup(hcard, homeCards);
+        homeCardPanel.setup(hcard, homeCards);
+        homePane.add(hcard, BorderLayout.CENTER);
     }
 
     private JPanel rankingPane;
     private CardLayout rankingCards;
-    RankingCardPanel rankingCardPanel = new RankingCardPanel();
-    RankingBottomPanel rankingBottomPanel = new RankingBottomPanel();
+    private JPanel rcard;
+    RankingCardPanel rankingCardPanel;
+    RankingBottomPanel rankingBottomPanel;
     private void setupRankingPane(){
         rankingPane = new JPanel(new BorderLayout());
         rankingCards = new CardLayout();
-        JPanel cardPanel = new JPanel(rankingCards);
-        rankingCardPanel.setup(cardPanel);
-        rankingBottomPanel.setup(rankingCards, cardPanel);
+        rankingCardPanel = new RankingCardPanel();
+        rankingBottomPanel = new RankingBottomPanel();
+        rcard = new JPanel(rankingCards);
+        rankingCardPanel.setup(rcard);
+        rankingBottomPanel.setup(rankingCards, rcard);
 
         rankingPane.add(rankingBottomPanel, BorderLayout.SOUTH);
-        rankingPane.add(cardPanel, BorderLayout.CENTER);
+        rankingPane.add(rcard, BorderLayout.CENTER);
     }
 
     private JPanel programPane;
     private CardLayout programCards;
-    ProgramCardPanel programCardPanel = new ProgramCardPanel();
+    private JPanel pcard;
+    ProgramCardPanel programCardPanel;
 
     private void setupProgramPane(){
         programPane = new JPanel(new BorderLayout());
         programCards = new CardLayout();
-        JPanel cardPanel = new JPanel(programCards);
-        programCardPanel.setup(cardPanel, programCards, "!pt");
+        programCardPanel = new ProgramCardPanel();
+        pcard = new JPanel(programCards);
 
-        programPane.add(cardPanel, BorderLayout.CENTER);
+        programCardPanel.setup(pcard, programCards, "!pt");
+
+        programPane.add(pcard, BorderLayout.CENTER);
     }
 
     private JPanel trainerPane;
     private CardLayout trainerCards;
-    ProgramCardPanel trainerCardPanel = new ProgramCardPanel();
+    private JPanel tcard;
+    ProgramCardPanel trainerCardPanel;
     private void setupTrainerPane(){
         trainerPane = new JPanel(new BorderLayout());
         trainerCards = new CardLayout();
-        JPanel cardPanel = new JPanel(trainerCards);
-        trainerCardPanel.setup(cardPanel, trainerCards, "pt");
+        tcard = new JPanel(trainerCards);
+        trainerCardPanel = new ProgramCardPanel();
+        trainerCardPanel.setup(tcard, trainerCards, "pt");
 
-        trainerPane.add(cardPanel, BorderLayout.CENTER);
+        trainerPane.add(tcard, BorderLayout.CENTER);
     }
-
-    private JPanel myPagePane;
-    private void setupMyPagePane(){
-        myPagePane = new JPanel(new BorderLayout());
+    public void reRankUp() {
+        setupRankingPane();
     }
-
 }

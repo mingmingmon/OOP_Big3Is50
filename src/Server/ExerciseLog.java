@@ -1,12 +1,14 @@
 package Server;
 
+import Server.GUI.GUIMain;
 import Server.GenericManager.Data;
 import Server.GenericManager.Manager;
 
 import javax.swing.text.html.HTML;
+import java.time.LocalDateTime;
 import java.util.Scanner;
 
-public class ExerciseLog implements Data {
+public class ExerciseLog implements Data, Cloneable {
     String logDate;
     String logTime;
     String userID;
@@ -60,5 +62,34 @@ public class ExerciseLog implements Data {
 
         User user = ServerComputer.userHashMap.get(userID);
         return user.matches(keyword);
+    }
+
+    public void addExercise(Exercise exercise) {
+        exerciseManager.dataList.add(exercise);
+        n++;
+    }
+    public void deleteExercise(Exercise exercise) {
+        exerciseManager.dataList.remove(exercise);
+        n--;
+    }
+    public void setLog() {
+        LocalDateTime now = LocalDateTime.now();
+        logDate = now.toLocalDate().toString();
+        logTime = now.toLocalTime().toString().substring(0, 8);
+        userID = GUIMain.me.id;
+    }
+    @Override
+    public Object clone() {
+        try {
+            ExerciseLog cloneExerciseLog = new ExerciseLog();
+            cloneExerciseLog.logDate = logDate;
+            cloneExerciseLog.logTime = logTime;
+            cloneExerciseLog.userID = userID;
+            cloneExerciseLog.exerciseManager = (Manager<Exercise>) exerciseManager.clone();
+            cloneExerciseLog.n = n;
+            return cloneExerciseLog;
+        } catch (Exception e) {
+            return null;
+        }
     }
 }

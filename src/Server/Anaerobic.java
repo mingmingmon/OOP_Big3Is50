@@ -6,6 +6,9 @@ public class Anaerobic extends Exercise {
     int kg;
     int count;
 
+    public Anaerobic() {
+        exerciseType = 2;
+    }
     @Override
     public void scan(Scanner file) {
         super.scan(file);
@@ -30,4 +33,25 @@ public class Anaerobic extends Exercise {
         result.append(super.toGUIString() + String.format("%dkg * %d번", kg, count));
         return result.toString();
     }
+
+    public void input(String name, int kg, int count) {
+        this.name = name;
+        this.kg = kg;
+        this.count = count;
+    }
+    @Override
+    public Object clone() {
+        try {
+            Anaerobic cloneAnaerobic = new Anaerobic();
+            cloneAnaerobic.name = name;
+            cloneAnaerobic.exerciseType = exerciseType;
+            cloneAnaerobic.kg = kg;
+            cloneAnaerobic.count = count;
+
+            return cloneAnaerobic;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
 }

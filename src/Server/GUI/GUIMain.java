@@ -32,6 +32,7 @@ public class GUIMain {
 
     private JPanel startPane;
     private CardLayout startCards;
+    JPanel cardPanel;
     LogIn loginCard = new LogIn();
     static LogIned loginedCard;
     Join joinCard = new Join();
@@ -40,7 +41,7 @@ public class GUIMain {
 
         startPane = new JPanel(new BorderLayout());
         startCards = new CardLayout();
-        JPanel cardPanel = new JPanel(startCards);
+        cardPanel = new JPanel(startCards);
 
 
         loginCard.setupLogInPage(cardPanel, startCards);
@@ -51,5 +52,14 @@ public class GUIMain {
         mainFrame.pack();
         mainFrame.setSize(650, 1000);
         mainFrame.setVisible(true);
+    }
+
+    public void updateCard(){
+        if (GUIMain.me != null) {
+            cardPanel.removeAll();
+            GUIMain.loginedCard.updateCard(cardPanel);
+            cardPanel.revalidate();
+            cardPanel.repaint();
+        }
     }
 }

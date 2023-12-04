@@ -159,13 +159,13 @@ public class HomePage extends JPanel {
 
         JPanel programImagePane = new JPanel();
         JLabel programImageLabel = new JLabel();
-        String programImagePath = "data\\program-image\\" + nextProgram.name + ".png";
+        String programImagePath = "data\\program-image\\" + (nextProgram != null ? nextProgram.name : "no image") + ".png";
         Image programImage = ServerComputer.getImage(programImagePath, false, 120, 120, Image.SCALE_SMOOTH);
         programImageLabel.setIcon(new ImageIcon(programImage));
         programImagePane.add(programImageLabel);
         programPart.add(programImagePane, BorderLayout.CENTER);
 
-        String programMent = String.format("%s %s~%s %s", nextProgram.date, nextProgram.startTime, nextProgram.endTime, nextProgram.name);
+        String programMent = (nextProgram != null ? String.format("%s %s~%s %s", nextProgram.date, nextProgram.startTime, nextProgram.endTime, nextProgram.name) : "등록된 프로그램 없음");
         JLabel program = new JLabel(programMent, SwingConstants.CENTER);
         program.setFont(bigFont);
         programPart.add(program, BorderLayout.SOUTH);
@@ -201,13 +201,13 @@ public class HomePage extends JPanel {
 
         JPanel trainerImagePane = new JPanel();
         JLabel trainerImageLabel = new JLabel();
-        String trainerImagePath = "data\\user-image\\" + Program.trainerHashMap.get(nextPT.name) + ".png";
+        String trainerImagePath = "data\\user-image\\" + (nextPT != null ? Program.trainerHashMap.get(nextPT.name) : "no image") + ".png";
         Image trainerImage = ServerComputer.getImage(trainerImagePath, true, 120, 120, Image.SCALE_SMOOTH);
         trainerImageLabel.setIcon(new ImageIcon(trainerImage));
         trainerImagePane.add(trainerImageLabel);
         trainerPart.add(trainerImagePane, BorderLayout.CENTER);
 
-        String ptMent = String.format("%s %s~%s %s", nextPT.date, nextPT.startTime, nextPT.endTime, nextPT.name);
+        String ptMent = (nextPT != null ? String.format("%s %s~%s %s", nextPT.date, nextPT.startTime, nextPT.endTime, nextPT.name) : "등록된 PT 없음");
         JLabel trainer = new JLabel(ptMent, SwingConstants.CENTER);
         trainer.setFont(bigFont);
         trainerPart.add(trainer, BorderLayout.SOUTH);

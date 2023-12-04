@@ -1,7 +1,9 @@
 package Server;
 
+import Server.GUI.GUIMain;
 import Server.GenericManager.Data;
 
+import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class Inbody implements Data {
@@ -46,5 +48,21 @@ public class Inbody implements Data {
 
         User user = ServerComputer.userHashMap.get(userID);
         return user.matches(keyword);
+    }
+    @Override
+    public Object clone() {
+        return null;
+    }
+
+    public void set(int weight, int muscle, int fat) {
+        LocalDateTime now = LocalDateTime.now();
+        date = now.toLocalDate().toString();
+        time = now.toLocalTime().toString().substring(0, 8);
+
+        userID = GUIMain.me.id;
+
+        this.weight = weight;
+        this.muscle = muscle;
+        this.fat = fat;
     }
 }

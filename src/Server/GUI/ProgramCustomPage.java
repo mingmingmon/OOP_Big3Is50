@@ -36,12 +36,12 @@ public class ProgramCustomPage extends JPanel {
         add(imageLabel, BorderLayout.LINE_START);
 
         titleLabel = new JLabel(title, SwingConstants.CENTER);
-        Font titleLabelFont = new Font("맑은 고딕", Font.PLAIN, 30);
+        Font titleLabelFont = new Font("맑은 고딕", Font.BOLD, 50);
         titleLabel.setFont(titleLabelFont);
         add(titleLabel, BorderLayout.CENTER);
 
         descriptionLabel = new JLabel(title + "입니다", SwingConstants.SOUTH_EAST);
-        Font descriptionLabelFont = new Font("맑은 고딕", Font.PLAIN, 15);
+        Font descriptionLabelFont = new Font("맑은 고딕", Font.BOLD, 15);
         descriptionLabel.setFont(descriptionLabelFont);
         add(descriptionLabel, BorderLayout.SOUTH);
 
@@ -82,7 +82,7 @@ public class ProgramCustomPage extends JPanel {
             }
         }
         dateLabel.setText(workingDate.toString());
-        Font dateLabelFont = new Font("맑은 고딕", Font.PLAIN, 17);
+        Font dateLabelFont = new Font("맑은 고딕", Font.BOLD, 20);
         dateLabel.setFont(dateLabelFont);
         add(dateLabel, BorderLayout.LINE_END);
     }

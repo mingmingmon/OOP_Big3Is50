@@ -38,9 +38,10 @@ public class RankingPage extends JPanel {
         rankingLabel.setForeground(Color.BLACK);
         rankingLabel.setFont(bigFont);
 
+        //update
         JPanel midPanel = new JPanel(new GridLayout(6,1));
-
         //1등~5등
+
         for (int i = 0; i < Rank.CNT_RANK; i++) {
             JPanel personPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 30,30));
             JLabel personImageLabel = new JLabel();
@@ -93,17 +94,18 @@ public class RankingPage extends JPanel {
 
         mePanel.add(nickname);
 
+        // update
         JLabel spec = new JLabel(Ranking.getValueByRanker(rankingName, myRank), SwingConstants.CENTER);
         spec.setFont(middleFont);
 
         mePanel.add(spec);
 
+        // update
         JLabel myRanking = new JLabel((myRank + 1) + "등");
         myRanking.setFont(middleFont);
         mePanel.add(myRanking);
 
         midPanel.add(mePanel);
-
 
         topPanel.add(trophyImageLabel);
         topPanel.add(rankingLabel);

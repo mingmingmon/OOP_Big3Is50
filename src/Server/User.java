@@ -230,4 +230,9 @@ public class User implements Data {
     public Manager<Program> getProgramManager() {
         return myProgramManager;
     }
+
+    @Override
+    public Object clone() {
+        return null;
+    }
 }
