@@ -19,13 +19,14 @@ public class HomePage extends JPanel {
         Font bigFont = new Font("맑은 고딕", Font.BOLD, 25);
         setLayout(new BorderLayout());
 
+        JPanel homeTopPane = new JPanel(new BorderLayout());
 
-        JLabel homeTopLabel = new JLabel("3대50 헬스장 홈 화면", SwingConstants.CENTER);
-        homeTopLabel.setPreferredSize(new Dimension(650,50));
-        homeTopLabel.setOpaque(true);
-        homeTopLabel.setBackground(Color.BLACK);
-        homeTopLabel.setFont(bigFont);
-        homeTopLabel.setForeground(Color.white);
+        JLabel homeLabel = new JLabel("3대50 헬스장 홈 화면", SwingConstants.CENTER);
+        homeLabel.setPreferredSize(new Dimension(650,50));
+        homeLabel.setOpaque(true);
+        homeLabel.setBackground(Color.BLACK);
+        homeLabel.setFont(bigFont);
+        homeLabel.setForeground(Color.white);
 
         //사진, 이름, 출석현황
         //로그인 한 유저 프로필 사진으로 바꾸기
@@ -62,119 +63,46 @@ public class HomePage extends JPanel {
         informationPane.add(attendencePart, BorderLayout.CENTER);
 
         homeMiddlePane.add(informationPane);
+        homeTopPane.add(homeLabel, BorderLayout.NORTH);
+        homeTopPane.add(homeMiddlePane, BorderLayout.CENTER);
 
         //인바디(골격근량, 체지방, 체중), 운동기록, 프로그램, 트레이너
         JPanel homeBottomPane = new JPanel(new GridLayout(3,2));
 
-        JPanel weightPart = new JPanel(new BorderLayout());
-        JLabel weightLabel = new JLabel("내 체중", SwingConstants.CENTER);
-        weightLabel.setFont(bigFont);
-        weightLabel.setOpaque(true);
-        weightLabel.setBackground(Color.BLACK);
-        weightLabel.setForeground(Color.WHITE);
-        weightPart.add(weightLabel, BorderLayout.NORTH);
+        JPanel inbodyPart = new JPanel(new BorderLayout());
+        JLabel inbodyLabel = new JLabel("내 인바디", SwingConstants.CENTER);
+        inbodyLabel.setFont(bigFont);
+        inbodyLabel.setOpaque(true);
+        inbodyLabel.setBackground(Color.BLACK);
+        inbodyLabel.setForeground(Color.WHITE);
+        inbodyPart.add(inbodyLabel, BorderLayout.NORTH);
 
-        JPanel weightImagePane = new JPanel();
-        JLabel weightImageLabel = new JLabel();
-        String weightImagePath = ServerComputer.getAbsolutePath("data\\home-image\\" + "체중기록" + ".png");
-        Image weightImage = new ImageIcon(weightImagePath).getImage().getScaledInstance(120,120,Image.SCALE_SMOOTH);
-        weightImageLabel.setIcon(new ImageIcon(weightImage));
-        weightImagePane.add(weightImageLabel);
-        weightPart.add(weightImagePane, BorderLayout.CENTER);
+        JPanel inbodyImagePane = new JPanel();
+        JLabel inbodyImageLabel = new JLabel();
+        String inbodyImagePath = ServerComputer.getAbsolutePath("data\\home-image\\" + "체중기록" + ".png");
+        Image inbodyImage = new ImageIcon(inbodyImagePath).getImage().getScaledInstance(120,120,Image.SCALE_SMOOTH);
+        inbodyImageLabel.setIcon(new ImageIcon(inbodyImage));
+        inbodyImagePane.add(inbodyImageLabel);
+        inbodyPart.add(inbodyImagePane, BorderLayout.CENTER);
 
 
-        JLabel weight = new JLabel("76kg", SwingConstants.CENTER);
-        weight.setFont(bigFont);
-        weightPart.add(weight, BorderLayout.SOUTH);
+        JLabel inbody = new JLabel("76kg", SwingConstants.CENTER);
+        inbody.setFont(bigFont);
+        inbodyPart.add(inbody, BorderLayout.SOUTH);
 
-        weightPart.addMouseListener(new MouseAdapter() {
+        inbodyPart.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                weightPart.setBackground(Color.LIGHT_GRAY);
+                inbodyPart.setBackground(Color.LIGHT_GRAY);
             }
 
             @Override
             public void mouseClicked(MouseEvent e) {
-                showPanel("내 체중", homeCards, cardPanel);
+                showPanel("내 인바디", homeCards, cardPanel);
             }
             @Override
             public void mouseExited(MouseEvent e) {
-                weightPart.setBackground(null);
-            }
-        });
-
-
-
-        JPanel musclePart = new JPanel(new BorderLayout());
-        JLabel muscleLabel = new JLabel("내 골격근량", SwingConstants.CENTER);
-        muscleLabel.setFont(bigFont);
-        muscleLabel.setOpaque(true);
-        muscleLabel.setBackground(Color.BLACK);
-        muscleLabel.setForeground(Color.WHITE);
-        musclePart.add(muscleLabel, BorderLayout.NORTH);
-
-        JPanel muscleImagePane = new JPanel();
-        JLabel muscleImageLabel = new JLabel();
-        String muscleImagePath = ServerComputer.getAbsolutePath("data\\home-image\\" + "근력운동" + ".png");
-        Image muscleImage = new ImageIcon(muscleImagePath).getImage().getScaledInstance(120,120,Image.SCALE_SMOOTH);
-        muscleImageLabel.setIcon(new ImageIcon(muscleImage));
-        muscleImagePane.add(muscleImageLabel);
-        musclePart.add(muscleImagePane, BorderLayout.CENTER);
-
-        JLabel muscle = new JLabel("23kg", SwingConstants.CENTER);
-        muscle.setFont(bigFont);
-        musclePart.add(muscle, BorderLayout.SOUTH);
-
-        musclePart.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                musclePart.setBackground(Color.LIGHT_GRAY);
-            }
-
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                showPanel("내 골격근량", homeCards, cardPanel);
-            }
-            @Override
-            public void mouseExited(MouseEvent e) {
-                musclePart.setBackground(null);
-            }
-        });
-
-
-        JPanel fatPart = new JPanel(new BorderLayout());
-        JLabel fatLabel = new JLabel("내 지방량", SwingConstants.CENTER);
-        fatLabel.setFont(bigFont);
-        fatLabel.setOpaque(true);
-        fatLabel.setBackground(Color.BLACK);
-        fatLabel.setForeground(Color.WHITE);
-        fatPart.add(fatLabel, BorderLayout.NORTH);
-
-        JPanel fatImagePane = new JPanel();
-        JLabel fatImageLabel = new JLabel();
-        String fatImagePath = ServerComputer.getAbsolutePath("data\\home-image\\" + "인바디기록" + ".png");
-        Image fatImage = new ImageIcon(fatImagePath).getImage().getScaledInstance(120,120,Image.SCALE_SMOOTH);
-        fatImageLabel.setIcon(new ImageIcon(fatImage));
-        fatImagePane.add(fatImageLabel);
-        fatPart.add(fatImagePane, BorderLayout.CENTER);
-
-        JLabel fat = new JLabel("15kg", SwingConstants.CENTER);
-        fat.setFont(bigFont);
-        fatPart.add(fat, BorderLayout.SOUTH);
-
-        fatPart.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                fatPart.setBackground(Color.LIGHT_GRAY);
-            }
-
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                showPanel("내 지방량", homeCards, cardPanel);
-            }
-            @Override
-            public void mouseExited(MouseEvent e) {
-                fatPart.setBackground(null);
+                inbodyPart.setBackground(null);
             }
         });
 
@@ -293,20 +221,45 @@ public class HomePage extends JPanel {
             }
         });
 
-
-
-        homeBottomPane.add(weightPart);
+        homeBottomPane.add(programPart);
+        homeBottomPane.add(trainerPart);
+        homeBottomPane.add(inbodyPart);
         homeBottomPane.add(exercisePart);
 
-        homeBottomPane.add(musclePart);
-        homeBottomPane.add(programPart);
+        JPanel homeButtonPane = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 20));
 
-        homeBottomPane.add(fatPart);
-        homeBottomPane.add(trainerPart);
+        JButton enterInbody = new JButton("인바디 기록 입력하기");
+        enterInbody.setPreferredSize(new Dimension(250,50));
+        enterInbody.setBackground(Color.BLACK);
+        enterInbody.setForeground(Color.WHITE);
+        enterInbody.setFont(middleFont);
+        enterInbody.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
 
-        add(homeTopLabel, BorderLayout.NORTH);
-        add(homeMiddlePane, BorderLayout.CENTER);
-        add(homeBottomPane, BorderLayout.SOUTH);
+            }
+
+        });
+
+        JButton enterExerciseLog = new JButton("운동 기록 입력하기");
+        enterExerciseLog.setPreferredSize(new Dimension(250,50));
+        enterExerciseLog.setBackground(Color.BLACK);
+        enterExerciseLog.setForeground(Color.WHITE);
+        enterExerciseLog.setFont(middleFont);
+        enterExerciseLog.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                String name = JOptionPane.showInputDialog("Enter your name:");
+            }
+
+        });
+
+        homeButtonPane.add(enterInbody);
+        homeButtonPane.add(enterExerciseLog);
+
+        add(homeTopPane, BorderLayout.NORTH);
+        add(homeBottomPane, BorderLayout.CENTER);
+        add(homeButtonPane, BorderLayout.SOUTH);
 
         cardPanel.add(this, "홈 화면");
     }
