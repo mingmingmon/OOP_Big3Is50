@@ -3,6 +3,7 @@ package Server;
 import Server.GenericManager.Data;
 import Server.GenericManager.Manager;
 
+import javax.swing.text.html.HTML;
 import java.util.Scanner;
 
 public class ExerciseLog implements Data {
@@ -40,6 +41,16 @@ public class ExerciseLog implements Data {
         for (Exercise exercise : exerciseManager.dataList)
             result.append(exercise + " ");
         result.deleteCharAt(result.length() - 1);
+        return result.toString();
+    }
+    @Override
+    public String toGUIString() {
+        StringBuilder result = new StringBuilder();
+        result.append(String.format("<html>[%s] %s<br>", logDate, logTime));
+        for (Exercise exercise : exerciseManager.dataList) {
+            result.append(exercise.toGUIString() + "<br>");
+        }
+        result.append("<br></html>");
         return result.toString();
     }
     @Override

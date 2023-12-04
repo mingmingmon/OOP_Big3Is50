@@ -1,13 +1,19 @@
 package Server.GUI;
 
+import Server.ExerciseLog;
+import Server.GenericManager.Data;
+import Server.Inbody;
+import Server.Program;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 public class HomeCardPage extends JPanel {
     void setup(String cardName,JPanel cardPanel, CardLayout homeCards){
-        Font middleFont = new Font("맑은 고딕", Font.BOLD, 25);
+        Font middleFont = new Font("맑은 고딕", Font.BOLD, 30);
         Font bigFont = new Font("맑은 고딕", Font.BOLD, 40);
         setLayout(new BorderLayout());
         JLabel cardNameLabel = new JLabel(cardName, SwingConstants.CENTER);
@@ -18,16 +24,15 @@ public class HomeCardPage extends JPanel {
         cardNameLabel.setFont(bigFont);
 
         JPanel dataPanel = new JPanel();
-        //테이블 만들어서 거기 안에 정보 넣어주기 + 검색 가능하게.
 
         dataPanel.setLayout(new BoxLayout(dataPanel, BoxLayout.Y_AXIS));
-        //dataPanel.setPreferredSize(new Dimension(650, 200 * 10));
 
-        for (int i = 1; i <= 20; i++) {
-            JLabel label = new JLabel("Asdf", SwingConstants.CENTER);
-            //label.setPreferredSize(new Dimension(400,50));
-            label.setFont(bigFont);
-            label.setAlignmentX(Component.CENTER_ALIGNMENT);//이거 없으면 boxlayout때문에 가운데 정렬이 안돼.
+        ArrayList<Data> dataList = getDataList(cardName);
+
+        for (Data data : dataList) {
+            JLabel label = new JLabel(data.toGUIString(), SwingConstants.LEFT);
+            label.setFont(middleFont);
+            label.setAlignmentX(Component.LEFT_ALIGNMENT);//이거 없으면 boxlayout때문에 가운데 정렬이 안돼.
             dataPanel.add(label);
         }
 
@@ -40,7 +45,7 @@ public class HomeCardPage extends JPanel {
 
         JButton goBackButton = new JButton("뒤로가기");
         goBackButton.setFont(middleFont);
-        goBackButton.setPreferredSize(new Dimension(150,70));
+        goBackButton.setPreferredSize(new Dimension(200,70));
         goBackButton.setBackground(Color.BLACK);
         goBackButton.setForeground(Color.WHITE);
         goBackButton.addMouseListener(new MouseAdapter() {
@@ -55,5 +60,28 @@ public class HomeCardPage extends JPanel {
         // Jtable 만들어서 add
         add(buttonPanel, BorderLayout.SOUTH);
         add(scrollPane, BorderLayout.CENTER);
+    }
+
+    ArrayList<Data> getDataList(String cardName) {
+        ArrayList<Data> dataList = new ArrayList<>();
+        if (cardName.contentEquals("내 프로그램")) {
+            for (Program program : GUIMain.me.getProgramManager().dataList) {
+                if (!program.isPT()) {
+                    dataList.add(program);
+                }
+            }
+        } else if (cardName.contentEquals("내 PT")) {
+            for (Program program : GUIMain.me.getProgramManager().dataList) {
+                if(program.isPT())
+                    dataList.add(program);
+            }
+        } else if (cardName.contentEquals("내 인바디")) {
+            for (Inbody inbody : GUIMain.me.getInbodyManager().dataList)
+                dataList.add(inbody);
+        } else if (cardName.contentEquals("내 운동기록")) {
+            for (ExerciseLog exerciseLog : GUIMain.me.getExerciseLogManager().dataList)
+                dataList.add(exerciseLog);
+        }
+        return dataList;
     }
 }

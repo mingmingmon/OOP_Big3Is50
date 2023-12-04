@@ -24,4 +24,10 @@ public class Anaerobic extends Exercise {
         result.append(super.toString() + " " + String.format("%d %d", kg, count));
         return result.toString();
     }
+    @Override
+    public String toGUIString() {
+        StringBuilder result = new StringBuilder();
+        result.append(super.toGUIString() + String.format("%dkg * %d번", kg, count));
+        return result.toString();
+    }
 }

@@ -7,7 +7,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.FileWriter;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.Month;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -36,6 +39,7 @@ public class ServerComputer {
         InbodyGUIManager.getInstance().scanAll("data\\user-inbody.txt", () -> new Inbody());
         ProgramGUIManager.getInstance().scanAll("data\\program-data.txt", () -> new Program());
         rankingSystem.sort();
+        userProgramSort();
     }
     void runProgram() {
         boolean isRunning = true;
@@ -133,5 +137,32 @@ public class ServerComputer {
 
         return new ImageIcon(absolutePath).getImage().getScaledInstance(width, height, type);
     }
+    static public String convertDate(String engDate) {
+        String korDate = "월화수목금토일";
+        for (int i = 0; i < 7; i++) {
+            if (engDate.contentEquals(DayOfWeek.values()[i].toString())) {
+                return "" + korDate.charAt(i);
+            }
+        }
+        return null;
+    }
 
+    static public int compareDate(String a, String b) {
+        String korDate = "월화수목금토일";
+        HashMap<Character, Integer> dateValue = new HashMap<>();
+        for (int i = 0; i < 7; i++) {
+            dateValue.put(korDate.charAt(i), i);
+        }
+
+        if(a.charAt(0) != b.charAt(0))
+            return dateValue.get(a.charAt(0)) - dateValue.get(b.charAt(0));
+
+        return a.substring(1, a.length()).compareTo(b.substring(1, b.length()));
+    }
+    void userProgramSort() {
+        for (UserData userData : UserDataGUIManager.getInstance().dataList) {
+            for (User user : userData.userManager.dataList)
+                user.sortProgram();
+        }
+    }
 }

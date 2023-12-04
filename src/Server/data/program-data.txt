@@ -1,4 +1,4 @@
-0 줌바댄스 월 09:00 11:00 3 areian0511 sdfpyj4885 mingmingmon
+0 줌바댄스 월 09:00 11:00 3 sdfpyj4885 mingmingmon areian0511
 0 줌바댄스 월 13:00 15:00 5 jeondog0987 dong82821234 chj990101 hdy930405 areian0511
 0 줌바댄스 월 19:00 21:00 4 1598753isk kmj9917 hwy009813 fhiw16548
 0 줌바댄스 수 09:00 11:00 3 bcd921146 ninehari38 silvert19
@@ -27,10 +27,11 @@
 0 에어로빅 화 18:00 20:00 4 music_guru travel_bug coffee_addict coding_ninja
 0 에어로빅 목 10:00 12:00 4 bookworm21 fashionista soccer_fanatic beach_lover
 0 에어로빅 목 18:00 20:00 4 gaming_guru movie_buff science_geek cooking_enthusiast
-1 PT-박승현 월 18:00 20:00 1 areian0511
+1 PT-박승현 월 10:00 12:00 1 areian0511
 1 PT-박승현 월 12:00 14:00 1 mingmingmon
 1 PT-박승현 화 12:00 14:00 1 8hyunu8
 1 PT-박승현 화 18:00 20:00 1 onecar1
+1 PT-박승현 수 18:00 20:00 1 areian0511
 1 PT-박승현 목 12:00 14:00 1 silvert19
 1 PT-박승현 목 18:00 20:00 1 bcd921146
 1 PT-박승현 금 12:00 14:00 1 hdy930405

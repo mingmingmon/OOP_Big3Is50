@@ -22,8 +22,13 @@ public class Exercise implements Data {
         return String.format("%d %s", exerciseType, name);
     }
     @Override
+    public String toGUIString() {
+        return String.format("[%s산소] %s: ", (exerciseType == 1 ? "유" : "무"), name);
+    }
+    @Override
     public boolean matches(String keyword) {
-        if((exerciseType == 1 ? "유산소" : "무산소").contains(keyword))
+
+        if ((exerciseType == 1 ? "유산소" : "무산소").contains(keyword))
             return true;
         return name.contains(keyword);
     }

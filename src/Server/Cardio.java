@@ -23,4 +23,10 @@ public class Cardio extends Exercise {
         result.append(super.toString() + " " + String.format("%d %d", speed, time));
         return result.toString();
     }
+    @Override
+    public String toGUIString() {
+        StringBuilder result = new StringBuilder();
+        result.append(super.toGUIString() + String.format("%dkm/h * %d분", speed, time));
+        return result.toString();
+    }
 }

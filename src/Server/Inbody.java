@@ -28,12 +28,16 @@ public class Inbody implements Data {
     }
     @Override
     public void print() {
-        System.out.printf("[%s] %s %s 체중(%dkg) 골격근량(%dkg) 체지방량(%dkg)\n",
+        System.out.printf("[%s] %s %s체중(%dkg) 골격근량(%dkg) 체지방량(%dkg)\n",
                 date, time, userID, weight, muscle, fat);
     }
     @Override
     public String toString() {
         return String.format("%s %s %s %d %d %d", date, time, userID, weight, muscle, fat);
+    }
+    @Override
+    public String toGUIString() {
+        return String.format("<html>[%s] %s<br>체중: %dkg<br>골격근량: %dkg<br>체지방량: %dkg<br><br></html>", date, time, weight, muscle, fat);
     }
     @Override
     public boolean matches(String keyword) {

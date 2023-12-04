@@ -6,7 +6,7 @@ import Server.GenericManager.Manager;
 
 import java.util.*;
 
-public class Program implements Data, UIData {
+public class Program implements Data, UIData, Comparable {
     public static HashMap<String, String> trainerHashMap = new HashMap<>();
 
     static int count = 0;
@@ -54,6 +54,16 @@ public class Program implements Data, UIData {
         for(User user : membersManager.dataList)
             result.append(user.id + " ");
         result.deleteCharAt(result.length() - 1);
+        return result.toString();
+    }
+    @Override
+    public String toGUIString() {
+        StringBuilder result = new StringBuilder();
+        result.append(String.format("<html>%s %s %s~%s<br>", name, date, startTime, endTime));
+        for (User user : membersManager.dataList) {
+            result.append("&nbsp;- " + user.nickname + "<br>");
+        }
+        result.append("<br></html>");
         return result.toString();
     }
     @Override
@@ -106,5 +116,22 @@ public class Program implements Data, UIData {
     public void deleteUser(User user) {
         membersManager.dataList.remove(user);
         n--;
+    }
+    public String getStartDate()
+    {
+        return date + startTime;
+    }
+    public String getEndDate() {
+        return date + endTime;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        Program program = (Program)o;
+
+        return ServerComputer.compareDate(getStartDate(), program.getStartDate());
+    }
+    public boolean isPT() {
+        return isPT;
     }
 }

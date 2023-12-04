@@ -1,5 +1,6 @@
 package Server.GUI;
 
+import Server.Program;
 import Server.ServerComputer;
 
 import javax.swing.*;
@@ -32,8 +33,8 @@ public class HomePage extends JPanel {
         //로그인 한 유저 프로필 사진으로 바꾸기
         JPanel homeMiddlePane = new JPanel(new FlowLayout(FlowLayout.LEFT, 30, 30));
         JLabel imageLabel = new JLabel();
-        String imagePath = ServerComputer.getAbsolutePath("data\\user-image\\" + "no image" + ".png");
-        Image image = new ImageIcon(imagePath).getImage().getScaledInstance(200,200,Image.SCALE_SMOOTH);
+        String imagePath = "data\\user-image\\" + GUIMain.me.getInfo("id") + ".png";
+        Image image = ServerComputer.getImage(imagePath, true, 200, 200, Image.SCALE_SMOOTH);
         imageLabel.setIcon(new ImageIcon(image));
 
         homeMiddlePane.add(imageLabel);
@@ -42,7 +43,7 @@ public class HomePage extends JPanel {
         JPanel informationPane = new JPanel(new BorderLayout());
 
         JPanel namePart = new JPanel(new FlowLayout(FlowLayout.LEFT, 30, 30));
-        JLabel name = new JLabel("전민주");
+        JLabel name = new JLabel(String.format("%s(%s)", GUIMain.me.getInfo("name"), GUIMain.me.getInfo("nickname")));
         name.setFont(bigFont);
         JLabel nameMent = new JLabel("회원");
         nameMent.setFont(middleFont);
@@ -55,7 +56,7 @@ public class HomePage extends JPanel {
         JPanel attendencePart = new JPanel(new FlowLayout(FlowLayout.LEFT, 30, 30));
         JLabel attendenceMent = new JLabel("출석");
         attendenceMent.setFont(middleFont);
-        JLabel attendence = new JLabel("1일째");
+        JLabel attendence = new JLabel(GUIMain.me.rankValue.get("출석왕") + "일째");
         attendence.setFont(bigFont);
         attendencePart.add(attendenceMent);
         attendencePart.add(attendence);
@@ -79,14 +80,15 @@ public class HomePage extends JPanel {
 
         JPanel inbodyImagePane = new JPanel();
         JLabel inbodyImageLabel = new JLabel();
-        String inbodyImagePath = ServerComputer.getAbsolutePath("data\\home-image\\" + "체중기록" + ".png");
-        Image inbodyImage = new ImageIcon(inbodyImagePath).getImage().getScaledInstance(120,120,Image.SCALE_SMOOTH);
+        String inbodyImagePath = "data\\home-image\\" + "체중기록" + ".png";
+        Image inbodyImage = ServerComputer.getImage(inbodyImagePath, false, 120, 120, Image.SCALE_SMOOTH);
         inbodyImageLabel.setIcon(new ImageIcon(inbodyImage));
         inbodyImagePane.add(inbodyImageLabel);
         inbodyPart.add(inbodyImagePane, BorderLayout.CENTER);
 
-
-        JLabel inbody = new JLabel("76kg", SwingConstants.CENTER);
+        int weight = GUIMain.me.getLastWeight();
+        String kg = (weight != -1 ? weight + "kg" : "인바디 기록 없음");
+        JLabel inbody = new JLabel(kg, SwingConstants.CENTER);
         inbody.setFont(bigFont);
         inbodyPart.add(inbody, BorderLayout.SOUTH);
 
@@ -117,8 +119,8 @@ public class HomePage extends JPanel {
 
         JPanel exerciseImagePane = new JPanel();
         JLabel exerciseImageLabel = new JLabel();
-        String exerciseImagePath = ServerComputer.getAbsolutePath("data\\home-image\\" + "운동기록" + ".png");
-        Image exerciseImage = new ImageIcon(exerciseImagePath).getImage().getScaledInstance(120,120,Image.SCALE_SMOOTH);
+        String exerciseImagePath = "data\\home-image\\" + "운동기록" + ".png";
+        Image exerciseImage = ServerComputer.getImage(exerciseImagePath, false, 120, 120, Image.SCALE_SMOOTH);
         exerciseImageLabel.setIcon(new ImageIcon(exerciseImage));
         exerciseImagePane.add(exerciseImageLabel);
         exercisePart.add(exerciseImagePane, BorderLayout.CENTER);
@@ -153,15 +155,18 @@ public class HomePage extends JPanel {
         programLabel.setForeground(Color.WHITE);
         programPart.add(programLabel, BorderLayout.NORTH);
 
+        Program nextProgram = GUIMain.me.getNextProgram(false);
+
         JPanel programImagePane = new JPanel();
         JLabel programImageLabel = new JLabel();
-        String programImagePath = ServerComputer.getAbsolutePath("data\\program-image\\" + "줌바댄스" + ".png");
-        Image programImage = new ImageIcon(programImagePath).getImage().getScaledInstance(120,120,Image.SCALE_SMOOTH);
+        String programImagePath = "data\\program-image\\" + nextProgram.name + ".png";
+        Image programImage = ServerComputer.getImage(programImagePath, false, 120, 120, Image.SCALE_SMOOTH);
         programImageLabel.setIcon(new ImageIcon(programImage));
         programImagePane.add(programImageLabel);
         programPart.add(programImagePane, BorderLayout.CENTER);
 
-        JLabel program = new JLabel("화 12:00 줌바댄스", SwingConstants.CENTER);
+        String programMent = String.format("%s %s~%s %s", nextProgram.date, nextProgram.startTime, nextProgram.endTime, nextProgram.name);
+        JLabel program = new JLabel(programMent, SwingConstants.CENTER);
         program.setFont(bigFont);
         programPart.add(program, BorderLayout.SOUTH);
 
@@ -185,22 +190,25 @@ public class HomePage extends JPanel {
 
 
         JPanel trainerPart = new JPanel(new BorderLayout());
-        JLabel trainerLabel = new JLabel("내 트레이너", SwingConstants.CENTER);
+        JLabel trainerLabel = new JLabel("내 PT", SwingConstants.CENTER);
         trainerLabel.setFont(bigFont);
         trainerLabel.setOpaque(true);
         trainerLabel.setBackground(Color.BLACK);
         trainerLabel.setForeground(Color.WHITE);
         trainerPart.add(trainerLabel, BorderLayout.NORTH);
 
+        Program nextPT = GUIMain.me.getNextProgram(true);
+
         JPanel trainerImagePane = new JPanel();
         JLabel trainerImageLabel = new JLabel();
-        String trainerImagePath = ServerComputer.getAbsolutePath("data\\user-image\\" + "kimJongKook" + ".png");
-        Image trainerImage = new ImageIcon(trainerImagePath).getImage().getScaledInstance(120,120,Image.SCALE_SMOOTH);
+        String trainerImagePath = "data\\user-image\\" + Program.trainerHashMap.get(nextPT.name) + ".png";
+        Image trainerImage = ServerComputer.getImage(trainerImagePath, true, 120, 120, Image.SCALE_SMOOTH);
         trainerImageLabel.setIcon(new ImageIcon(trainerImage));
         trainerImagePane.add(trainerImageLabel);
         trainerPart.add(trainerImagePane, BorderLayout.CENTER);
 
-        JLabel trainer = new JLabel("수 09:00 PT-김종국", SwingConstants.CENTER);
+        String ptMent = String.format("%s %s~%s %s", nextPT.date, nextPT.startTime, nextPT.endTime, nextPT.name);
+        JLabel trainer = new JLabel(ptMent, SwingConstants.CENTER);
         trainer.setFont(bigFont);
         trainerPart.add(trainer, BorderLayout.SOUTH);
 
@@ -212,7 +220,7 @@ public class HomePage extends JPanel {
 
             @Override
             public void mouseClicked(MouseEvent e) {
-                showPanel("내 트레이너", homeCards, cardPanel);
+                showPanel("내 PT", homeCards, cardPanel);
             }
 
             @Override
@@ -236,7 +244,7 @@ public class HomePage extends JPanel {
         enterInbody.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-
+                showPanel("인바디기록 추가", homeCards, cardPanel);
             }
 
         });
@@ -249,7 +257,7 @@ public class HomePage extends JPanel {
         enterExerciseLog.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                String name = JOptionPane.showInputDialog("Enter your name:");
+                showPanel("운동기록 추가", homeCards, cardPanel);
             }
 
         });

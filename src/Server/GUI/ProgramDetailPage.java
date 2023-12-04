@@ -213,6 +213,7 @@ public class ProgramDetailPage extends JPanel {
 
                 isParticipatedProgram = isParticipatedProgram();
                 applyButton.setText(isParticipatedProgram ? "신청취소" : "신청하기");
+                GUIMain.me.sortProgram();
             }
         });
         add(bottomPanel, BorderLayout.SOUTH);

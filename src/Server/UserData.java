@@ -25,6 +25,10 @@ public class UserData implements Data {
         return result.toString();
     }
     @Override
+    public String toGUIString() {
+        return String.format("");
+    }
+    @Override
     public boolean matches(String keyword) {
         return true;
     }
