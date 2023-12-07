@@ -203,17 +203,26 @@ public class ProgramDetailPage extends JPanel {
         applyButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (!isParticipatedProgram)
-                    joinProgram();
-                else
+                if (!isParticipatedProgram) {
+                    if (GUIMain.me.isAbleToParticipateProgram(selectedProgram)) {
+                        joinProgram();
+                    } else {
+                        Program overlappedProgram = GUIMain.me.overlappedProgram(selectedProgram);
+                        String programInfo = String.format("%s(%s%s~%s)", overlappedProgram.name, overlappedProgram.date, overlappedProgram.startTime, overlappedProgram.endTime);
+                        JOptionPane.showMessageDialog(bottomPanel,programInfo + "와 시간이 겹쳐 신청이 불가능합니다.");
+                        return;
+                    }
+                } else {
                     cancelProgram();
+                }
 
                 updateParticipants();
-                ServerComputer.save();
 
                 isParticipatedProgram = isParticipatedProgram();
                 applyButton.setText(isParticipatedProgram ? "신청취소" : "신청하기");
                 GUIMain.me.sortProgram();
+
+                ServerComputer.save();
             }
         });
         add(bottomPanel, BorderLayout.SOUTH);

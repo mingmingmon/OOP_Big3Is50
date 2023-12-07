@@ -37,8 +37,5 @@ public class UserData implements Data {
         userManager.dataList.add(user);
 
     }
-    @Override
-    public Object clone() {
-        return null;
-    }
+
 }

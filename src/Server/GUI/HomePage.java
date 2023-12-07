@@ -1,5 +1,6 @@
 package Server.GUI;
 
+import Server.ExerciseLog;
 import Server.Program;
 import Server.ServerComputer;
 
@@ -8,6 +9,7 @@ import java.awt.*;
 import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.time.LocalDate;
 
 // 홈화면은 맨 위에 home이라는 글자 있는 배너 (JLabel)
 // 중간에 사진이랑 이름, 운동 몇 일 째 정보 하나의 pane
@@ -87,7 +89,7 @@ public class HomePage extends JPanel {
         inbodyPart.add(inbodyImagePane, BorderLayout.CENTER);
 
         int weight = GUIMain.me.getLastWeight();
-        String kg = (weight != -1 ? weight + "kg" : "인바디 기록 없음");
+        String kg = (weight != -1 ? "현재 " + weight + "kg" : "인바디 기록 없음");
         JLabel inbody = new JLabel(kg, SwingConstants.CENTER);
         inbody.setFont(bigFont);
         inbodyPart.add(inbody, BorderLayout.SOUTH);
@@ -117,6 +119,9 @@ public class HomePage extends JPanel {
         exerciseLabel.setForeground(Color.WHITE);
         exercisePart.add(exerciseLabel, BorderLayout.NORTH);
 
+        ExerciseLog exerciseLog = GUIMain.me.getLastExerciseLog();
+        String exerciseLogMent = (exerciseLog != null ? ("마지막 운동: " + (LocalDate.now().toString().contentEquals(exerciseLog.getDate()) ? "오늘" : exerciseLog.getDate())) : "운동 기록 없음");
+
         JPanel exerciseImagePane = new JPanel();
         JLabel exerciseImageLabel = new JLabel();
         String exerciseImagePath = "data\\home-image\\" + "운동기록" + ".png";
@@ -125,7 +130,9 @@ public class HomePage extends JPanel {
         exerciseImagePane.add(exerciseImageLabel);
         exercisePart.add(exerciseImagePane, BorderLayout.CENTER);
 
-        JLabel exercise = new JLabel("무산소 1시간\n유산소 1시간", SwingConstants.CENTER);
+
+
+        JLabel exercise = new JLabel(exerciseLogMent, SwingConstants.CENTER);
         exercise.setFont(bigFont);
         exercisePart.add(exercise, BorderLayout.SOUTH);
 

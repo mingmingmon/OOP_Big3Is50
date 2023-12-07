@@ -3,40 +3,16 @@ package Server.GUI;
 import javax.swing.*;
 import java.awt.*;
 
-public class LogIned extends JPanel {
-    private static LogIned logIned = null;
-    public static LogIned getInstance(){
-        if(logIned == null)
-            logIned = new LogIned();
-        return logIned;
+public class LogedIn extends JPanel {
+    private static LogedIn logedIn = null;
+    public static LogedIn getInstance(){
+        if(logedIn == null)
+            logedIn = new LogedIn();
+        return logedIn;
     }
 
     public void updateCard(JPanel cardPanel){
-        this.removeAll();
-        topTab.removeAll();
-        hcard.removeAll();
-        rcard.removeAll();
-        pcard.removeAll();
-        tcard.removeAll();
-        //
-        homeCards = new CardLayout();
-        rankingCards = new CardLayout();
-        programCards = new CardLayout();
-        trainerCards = new CardLayout();
-        //
         createAndShowGUI(cardPanel);
-        hcard.revalidate();
-        hcard.repaint();
-        rcard.revalidate();
-        rcard.repaint();
-        pcard.revalidate();
-        pcard.repaint();
-        tcard.revalidate();
-        tcard.repaint();
-        topTab.revalidate();
-        topTab.repaint();
-        this.revalidate();
-        this.repaint();
     }
 
     JTabbedPane topTab;
@@ -59,7 +35,7 @@ public class LogIned extends JPanel {
 
     private JPanel homePane;
     private CardLayout homeCards;
-    private JPanel hcard;
+    JPanel hcard;
     HomePage homePage;
     HomeCardPanel homeCardPanel;
     private void setupHomePane(){
@@ -121,8 +97,5 @@ public class LogIned extends JPanel {
         trainerCardPanel.setup(tcard, trainerCards, "pt");
 
         trainerPane.add(tcard, BorderLayout.CENTER);
-    }
-    public void reRankUp() {
-        setupRankingPane();
     }
 }

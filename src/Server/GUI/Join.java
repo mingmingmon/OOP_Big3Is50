@@ -27,26 +27,28 @@ public class Join extends JLabel {
         joinPane = new JPanel(new BorderLayout());
         Font font = new Font("맑은 고딕", Font.PLAIN, 15);
         Font middleFont = new Font("맑은 고딕", Font.BOLD, 20);
-        Font bigFont = new Font("맑은 고딕", Font.BOLD, 25);
+        Font bigFont = new Font("맑은 고딕", Font.BOLD, 30);
 
         TopBanner topBanner = new TopBanner();
         joinPane.add(topBanner, BorderLayout.NORTH);
 
         JPanel enterPanel = new JPanel();
 
+        JPanel joinLabelPane = new JPanel();
         JLabel joinLabel = new JLabel("3대 50 헬스장 회원가입 페이지", SwingConstants.CENTER);
         //joinLabel.setPreferredSize(new Dimension(400, 50));
         joinLabel.setBackground(Color.BLACK);
         joinLabel.setFont(bigFont);
         joinLabel.setForeground(Color.WHITE);
         joinLabel.setOpaque(true); // 배경 불투명하게 해야 배경색 보임
-
+        joinLabelPane.add(joinLabel);
 
         JPanel idPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
         JLabel idLabel = new JLabel("아이디 : ");
         idLabel.setFont(middleFont);
         idField = new JTextField();
-        idField.setColumns(30);
+        idField.setColumns(20);
+        idField.setFont(middleFont);
         idPanel.add(idLabel);
         idPanel.add(idField);
 
@@ -54,7 +56,8 @@ public class Join extends JLabel {
         JLabel passwordLabel = new JLabel("비밀번호 : ");
         passwordLabel.setFont(middleFont);
         passwordField = new JPasswordField();
-        passwordField.setColumns(30);
+        passwordField.setFont(middleFont);
+        passwordField.setColumns(20);
         passwordPanel.add(passwordLabel);
         passwordPanel.add(passwordField);
 
@@ -62,7 +65,8 @@ public class Join extends JLabel {
         JLabel nameLabel = new JLabel("성명 : ");
         nameLabel.setFont(middleFont);
         nameField = new JTextField();
-        nameField.setColumns(30);
+        nameField.setColumns(20);
+        nameField.setFont(middleFont);
         namePanel.add(nameLabel);
         namePanel.add(nameField);
 
@@ -70,7 +74,8 @@ public class Join extends JLabel {
         JLabel nickNameLabel = new JLabel("닉네임 : ");
         nickNameLabel.setFont(middleFont);
         nickNameField = new JTextField();
-        nickNameField.setColumns(30);
+        nickNameField.setColumns(20);
+        nickNameField.setFont(middleFont);
         nickNamePanel.add(nickNameLabel);
         nickNamePanel.add(nickNameField);
 
@@ -84,6 +89,7 @@ public class Join extends JLabel {
             e.printStackTrace();
         }
         phoneNumberField.setColumns(11);
+        phoneNumberField.setFont(middleFont);
         phoneNumberPanel.add(phoneNumberLabel);
         phoneNumberPanel.add(phoneNumberField);
 
@@ -92,20 +98,34 @@ public class Join extends JLabel {
         genderLabel.setFont(middleFont);
         String[] genderOptions = {"남성", "여성"};
         genderComboBox = new JComboBox<>(genderOptions);
+        genderComboBox.setFont(middleFont);
         genderPanel.add(genderLabel);
         genderPanel.add(genderComboBox);
 
         joinInButton = new JButton("회원가입");
-        joinInButton.setPreferredSize(new Dimension(150,50));
+        joinInButton.setPreferredSize(new Dimension(250,70));
         joinInButton.setBackground(Color.PINK);
         joinInButton.setForeground(Color.BLACK);
-        joinInButton.setFont(middleFont);
+        joinInButton.setFont(bigFont);
         joinInButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 tryJoinIn(cardPanel, startCards);
             }
         });
+
+        JButton goBackButton = new JButton("뒤로가기");
+        goBackButton.setPreferredSize(new Dimension(250, 70));
+        goBackButton.setBackground(Color.BLACK);
+        goBackButton.setForeground(Color.WHITE);
+        goBackButton.setFont(bigFont);
+        goBackButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                startCards.show(cardPanel, "로그인 페이지");
+            }
+        });
+
 
         JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         JLabel imageLabel = new JLabel();
@@ -126,18 +146,18 @@ public class Join extends JLabel {
         bottomPanel.add(imageLabel);
         bottomPanel.add(imageLabel2);
 
-        enterPanel.add(joinLabel);
+        enterPanel.add(joinLabelPane);
         enterPanel.add(idPanel);
         enterPanel.add(passwordPanel);
         enterPanel.add(namePanel);
         enterPanel.add(nickNamePanel);
         enterPanel.add(phoneNumberPanel);
         enterPanel.add(genderPanel);
+        enterPanel.add(goBackButton);
         enterPanel.add(joinInButton);
-        enterPanel.add(bottomPanel);
 
         joinPane.add(enterPanel, BorderLayout.CENTER);
-
+        joinPane.add(bottomPanel, BorderLayout.SOUTH);
 
         cardPanel.add(joinPane, "회원가입 페이지");
 

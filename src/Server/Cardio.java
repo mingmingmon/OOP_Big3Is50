@@ -45,7 +45,7 @@ public class Cardio extends Exercise {
         this.time = time;
     }
 
-    @Override
+    /*@Override
     public Object clone() {
         try {
             Cardio cloneCardio = new Cardio();
@@ -58,5 +58,5 @@ public class Cardio extends Exercise {
         } catch (Exception e) {
             return null;
         }
-    }
+    }*/
 }

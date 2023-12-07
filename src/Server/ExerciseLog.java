@@ -8,7 +8,7 @@ import javax.swing.text.html.HTML;
 import java.time.LocalDateTime;
 import java.util.Scanner;
 
-public class ExerciseLog implements Data, Cloneable {
+public class ExerciseLog implements Data{
     String logDate;
     String logTime;
     String userID;
@@ -78,7 +78,7 @@ public class ExerciseLog implements Data, Cloneable {
         logTime = now.toLocalTime().toString().substring(0, 8);
         userID = GUIMain.me.id;
     }
-    @Override
+    /*@Override
     public Object clone() {
         try {
             ExerciseLog cloneExerciseLog = new ExerciseLog();
@@ -91,5 +91,8 @@ public class ExerciseLog implements Data, Cloneable {
         } catch (Exception e) {
             return null;
         }
+    }*/
+    public String getDate() {
+        return logDate;
     }
 }

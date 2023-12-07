@@ -107,13 +107,14 @@ public class HomeEnterLogPage extends JPanel {
                     return;
                 }
 
+                JOptionPane.showMessageDialog(pane, "저장되었습니다.");
+
                 Inbody inbody = new Inbody();
                 inbody.set(Integer.parseInt(weightField.getText()), Integer.parseInt(muscleField.getText()), Integer.parseInt(fatField.getText()));
                 GUIMain.me.getInbodyManager().dataList.add(inbody);
                 InbodyGUIManager.getInstance().addElement(inbody);
 
                 //파일에 저장하는 코드
-                GUIMain.getInstance().updateCard();
             }
         });
         return inbodyMidPanel;
@@ -236,11 +237,14 @@ public class HomeEnterLogPage extends JPanel {
         saveButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+
+                JOptionPane.showMessageDialog(new JPanel(), "저장되었습니다.");
+
                 exerciseLog.setLog();
-                ExerciseLog cloneExerciseLog = (ExerciseLog)exerciseLog.clone();
+                //ExerciseLog cloneExerciseLog = (ExerciseLog)exerciseLog.clone();
 
                 GUIMain.me.getExerciseLogManager().dataList.add(exerciseLog);
-                ExerciseLogGUIManager.getInstance().addElement(cloneExerciseLog);
+                //ExerciseLogGUIManager.getInstance().addElement(cloneExerciseLog);
 
                 //파일에 저장하는 코드
             }
@@ -366,20 +370,6 @@ public class HomeEnterLogPage extends JPanel {
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER); // 가로 스크롤 비활성화
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
-
-        //textPane.add(scrollPane);
-        /*JLabel currLog = new JLabel("ㅁㄴㅇㄻㄴㅇㄻㅇㄹ", SwingConstants.CENTER);
-        currLog.setFont(middleFont);*/
-
-        /*JPanel buttonPane = new JPanel();
-        JButton refreshButton = new JButton("기록 초기화");
-        refreshButton.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                //currLog 초기화
-            }
-        });
-        buttonPane.add(refreshButton);*/
 
         textPane.add(currLogLabel, BorderLayout.NORTH);
         textPane.add(scrollPane, BorderLayout.CENTER);

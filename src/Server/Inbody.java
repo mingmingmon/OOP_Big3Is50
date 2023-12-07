@@ -49,10 +49,7 @@ public class Inbody implements Data {
         User user = ServerComputer.userHashMap.get(userID);
         return user.matches(keyword);
     }
-    @Override
-    public Object clone() {
-        return null;
-    }
+
 
     public void set(int weight, int muscle, int fat) {
         LocalDateTime now = LocalDateTime.now();

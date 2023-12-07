@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Enumeration;
 
-public class RankingCardPanel extends JPanel{
+public class RankingCardPanel{
     void setup(JPanel cardPanel){
         JPanel muscleKingPanel = createRankingPanel("득근왕");
         JPanel big3KingPanel = createRankingPanel("3대왕");
@@ -24,16 +24,4 @@ public class RankingCardPanel extends JPanel{
         return rankingpage;
     }
 
-    /*void update(JPanel rcard, CardLayout rankingCards){
-        CardLayout cardLayout = (CardLayout) rcard.getLayout();
-
-        Enumeration<Component> components = rankingCards.getLayoutComponents(rcard);
-        while (components.hasMoreElements()) {
-            Component component = components.nextElement();
-            // 각 컴포넌트에 대한 작업 수행
-            if (component instanceof JPanel) {
-                // JPanel에 대한 작업 수행
-            }
-        }
-    }*/
 }

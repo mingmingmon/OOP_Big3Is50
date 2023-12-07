@@ -32,8 +32,5 @@ public class Exercise implements Data {
             return true;
         return name.contains(keyword);
     }
-    @Override
-    public Object clone() {
-        return new Exercise();
-    }
+
 }

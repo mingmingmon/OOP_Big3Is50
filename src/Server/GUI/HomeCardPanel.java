@@ -3,7 +3,7 @@ package Server.GUI;
 import javax.swing.*;
 import java.awt.*;
 
-public class HomeCardPanel extends JPanel {
+public class HomeCardPanel{
     void setup(JPanel cardPanel, CardLayout homeCards){
         JPanel myInbody = createCard("내 인바디", cardPanel, homeCards);
         JPanel myExerciseLog = createCard("내 운동기록", cardPanel, homeCards);

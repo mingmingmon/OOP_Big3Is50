@@ -39,7 +39,7 @@ public class Anaerobic extends Exercise {
         this.kg = kg;
         this.count = count;
     }
-    @Override
+ /*   @Override
     public Object clone() {
         try {
             Anaerobic cloneAnaerobic = new Anaerobic();
@@ -52,6 +52,6 @@ public class Anaerobic extends Exercise {
         } catch (Exception e) {
             return null;
         }
-    }
+    }*/
 
 }

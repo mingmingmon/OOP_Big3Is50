@@ -210,6 +210,9 @@ public class User implements Data {
         }
         return null; // 등록한 프로그램이 없다.
     }
+    public ExerciseLog getLastExerciseLog() {
+        return (myExerciseLogManager.dataList.size() != 0 ? myExerciseLogManager.dataList.get(myExerciseLogManager.dataList.size() - 1) : null);
+    }
 
     public void participateProgram(Program program) {
         myProgramManager.dataList.add(program);
@@ -219,6 +222,30 @@ public class User implements Data {
     }
     public void sortProgram() {
         Collections.sort(myProgramManager.dataList);
+    }
+    public boolean isAbleToParticipateProgram(Program program) {
+        for (Program myProgram : myProgramManager.dataList) {
+            if(ServerComputer.compareDate(myProgram.getStartDate(), program.getStartDate()) <= 0
+                    && ServerComputer.compareDate(program.getStartDate(), myProgram.getEndDate()) < 0)
+                return false;
+
+            if(ServerComputer.compareDate(myProgram.getStartDate(), program.getEndDate()) < 0
+                    && ServerComputer.compareDate(program.getEndDate(), myProgram.getEndDate()) <= 0)
+                return false;
+        }
+        return true;
+    }
+    public Program overlappedProgram(Program program) {
+        for (Program myProgram : myProgramManager.dataList) {
+            if(ServerComputer.compareDate(myProgram.getStartDate(), program.getStartDate()) <= 0
+                    && ServerComputer.compareDate(program.getStartDate(), myProgram.getEndDate()) < 0)
+                return myProgram;
+
+            if(ServerComputer.compareDate(myProgram.getStartDate(), program.getEndDate()) < 0
+                    && ServerComputer.compareDate(program.getEndDate(), myProgram.getEndDate()) <= 0)
+                return myProgram;
+        }
+        return null;
     }
 
     public Manager<ExerciseLog> getExerciseLogManager() {
@@ -231,8 +258,5 @@ public class User implements Data {
         return myProgramManager;
     }
 
-    @Override
-    public Object clone() {
-        return null;
-    }
+
 }

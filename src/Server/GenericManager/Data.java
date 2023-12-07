@@ -10,5 +10,5 @@ public interface Data {
     public String toGUIString(); // 얘는 GUI리스트에 예쁘게 찍기 위함이다.
     public boolean matches(String keyword);
 
-    public Object clone();
+    //public Object clone();
 }

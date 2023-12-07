@@ -1,13 +1,9 @@
 package Server.GUI;
 
-import Server.ServerComputer;
 import Server.User;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
-import java.awt.event.*;
-import java.util.concurrent.Flow;
 
 public class GUIMain {
     static public User me;
@@ -32,9 +28,9 @@ public class GUIMain {
 
     private JPanel startPane;
     private CardLayout startCards;
-    JPanel cardPanel;
+    static JPanel cardPanel;
     LogIn loginCard = new LogIn();
-    static LogIned loginedCard;
+    static LogedIn logedInCard;
     Join joinCard = new Join();
     private void setupStartPane(){
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -52,14 +48,15 @@ public class GUIMain {
         mainFrame.pack();
         mainFrame.setSize(650, 1000);
         mainFrame.setVisible(true);
+        mainFrame.setResizable(false);
     }
 
     public void updateCard(){
-        if (GUIMain.me != null) {
-            cardPanel.removeAll();
-            GUIMain.loginedCard.updateCard(cardPanel);
-            cardPanel.revalidate();
-            cardPanel.repaint();
+        if (logedInCard != null) {
+            cardPanel.remove(logedInCard.topTab);
+            logedInCard.updateCard(cardPanel);
         }
+        cardPanel.revalidate();
+        cardPanel.repaint();
     }
 }

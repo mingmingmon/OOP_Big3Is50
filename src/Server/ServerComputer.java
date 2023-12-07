@@ -128,6 +128,8 @@ public class ServerComputer {
         ExerciseLogGUIManager.getInstance().saveFile();
         InbodyGUIManager.getInstance().saveFile();
         ProgramGUIManager.getInstance().saveFile();
+
+        GUIMain.getInstance().updateCard();
     }
 
     public static Image getImage(String relativePath, boolean isUser, int width, int height, int type) {

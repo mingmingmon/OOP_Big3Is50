@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -22,7 +23,7 @@ public class ProgramCustomPage extends JPanel {
 
     ArrayList<Program> programList;
 
-    public ProgramCustomPage(String title, CardLayout programCards, JPanel cardPanel, String keyword){
+    public ProgramCustomPage(String title, CardLayout programCards, JPanel cardPanel, String keyword, int price){
         setLayout(new BorderLayout());
         setPreferredSize(new Dimension(350,150));
 
@@ -40,7 +41,7 @@ public class ProgramCustomPage extends JPanel {
         titleLabel.setFont(titleLabelFont);
         add(titleLabel, BorderLayout.CENTER);
 
-        descriptionLabel = new JLabel(title + "입니다", SwingConstants.SOUTH_EAST);
+        descriptionLabel = new JLabel("회당 " + new DecimalFormat("###,###").format(price) + "원", SwingConstants.SOUTH_EAST);
         Font descriptionLabelFont = new Font("맑은 고딕", Font.BOLD, 15);
         descriptionLabel.setFont(descriptionLabelFont);
         add(descriptionLabel, BorderLayout.SOUTH);
@@ -51,7 +52,6 @@ public class ProgramCustomPage extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 // 클릭되었을 때 다른 화면으로 이동
-                //showPanel(detailPageName, programCards, programPane);
                 programCards.show(cardPanel, title);
             }
             @Override
@@ -87,7 +87,4 @@ public class ProgramCustomPage extends JPanel {
         add(dateLabel, BorderLayout.LINE_END);
     }
 
-    public void getStartTime(){
-
-    }
 }
